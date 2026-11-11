@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>VN Arcade — オンライン・ビジュアルノベル 5作品</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ ポータル（作品選択） ============ -->
+<section id="portal" class="screen">
+  <div class="portal-bg"><img id="portalBgA" alt=""><img id="portalBgB" alt=""></div>
+  <div class="portal-shade"></div>
+  <header class="portal-head">
+    <div class="logo-type"><span class="logo-main">VN Arcade</span><span class="logo-sub">オンライン・ビジュアルノベル</span></div>
+    <div class="portal-tools">
+      <button id="portalConfigBtn" class="tool-btn" type="button">⚙ コンフィグ</button>
+    </div>
+  </header>
+  <p class="portal-note">ブラウザでそのまま遊べる、5つの物語。セーブデータはこの端末に保存されます。</p>
+  <p class="portal-warn">※ R18作品は文章のみの表現です。18歳未満の方はプレイできません。</p>
+  <div id="cards" class="cards"></div>
+  <footer class="portal-foot">VN Arcade — 全作品オリジナル／画像は後から差し替え可能な設計です</footer>
+</section>
+
+<!-- ============ 年齢確認 ============ -->
+<div id="gate" class="modal-wrap" hidden>
+  <div class="modal-card">
+    <div class="modal-orn">❦</div>
+    <h2>年齢確認</h2>
+    <p>この作品には成人向けの文章表現が含まれます。<br>あなたは18歳以上ですか？</p>
+    <div class="modal-btns">
+      <button id="gateYes" class="btn primary" type="button">はい、18歳以上です</button>
+      <button id="gateNo" class="btn" type="button">いいえ</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 作品タイトル ============ -->
+<section id="titleScr" class="screen" hidden>
+  <div class="stage" id="titleStage">
+    <img class="ts-bg" id="tsBg" alt="">
+    <div class="ts-grad"></div>
+    <img class="ts-char" id="tsChar" alt="">
+    <div class="particles" id="tsParticles"></div>
+    <div class="ts-frame"></div>
+    <div class="ts-content">
+      <div class="ts-logo">
+        <div class="ts-logo-sub" id="tsLogoSub"></div>
+        <h1 class="ts-logo-main" id="tsLogoMain"></h1>
+        <div class="ts-logo-line"><span></span><i>✦</i><span></span></div>
+        <div class="ts-heroine" id="tsHeroine"></div>
+      </div>
+      <nav class="ts-menu" id="tsMenu">
+        <button type="button" data-act="start">START<span>はじめから</span></button>
+        <button type="button" data-act="continue">CONTINUE<span>つづきから</span></button>
+        <button type="button" data-act="load">LOAD<span>セーブデータ</span></button>
+        <button type="button" data-act="config">CONFIG<span>設定</span></button>
+        <button type="button" data-act="extra">EXTRA<span>ギャラリー・分岐図</span></button>
+        <button type="button" data-act="back">WORKS<span>作品選択へ</span></button>
+      </nav>
+    </div>
+    <div class="ts-foot" id="tsFoot"></div>
+  </div>
+</section>
+
+<!-- ============ 本編 ============ -->
+<section id="game" class="screen" hidden>
+  <div class="stage" id="stage">
+    <div class="bg-grad" id="bgGrad"></div>
+    <img class="bg-img" id="bgA" alt="">
+    <img class="bg-img" id="bgB" alt="">
+    <img class="char-img" id="charImg" alt="">
+    <div class="particles" id="gameParticles"></div>
+    <div id="r18badge">R18 — 文章のみのシーンです</div>
+    <div id="replayBadge" hidden>回想モード</div>
+
+    <div id="msgwin">
+      <div id="namebox"></div>
+      <div id="textbox">
+        <div id="text"></div>
+        <div id="nextInd">▼</div>
+      </div>
+      <div id="quickbar">
+        <button type="button" data-q="qsave">Q.SAVE</button>
+        <button type="button" data-q="save">SAVE</button>
+        <button type="button" data-q="load">LOAD</button>
+        <button type="button" data-q="auto">AUTO</button>
+        <button type="button" data-q="skip">SKIP</button>
+        <button type="button" data-q="log">LOG</button>
+        <button type="button" data-q="config">CONFIG</button>
+        <button type="button" data-q="hide">HIDE</button>
+        <button type="button" data-q="title">TITLE</button>
+      </div>
+    </div>
+
+    <div id="choices" hidden></div>
+
+    <!-- バックログ -->
+    <div id="backlog" class="panel" hidden>
+      <div class="panel-head">
+        <h3>バックログ</h3><span class="panel-hint">行をタップすると、その場面に戻れます</span>
+        <button class="btn small" id="logClose" type="button">閉じる</button>
+      </div>
+      <div id="logLines" class="panel-body"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ セーブ/ロード ============ -->
+<div id="saveScr" class="modal-wrap top" hidden>
+  <div class="sheet">
+    <div class="sheet-head">
+      <h2 id="saveTitle">セーブ</h2>
+      <div class="sheet-tools">
+        <span id="saveLegacy"></span>
+        <button class="btn small" id="saveClose" type="button">閉じる</button>
+      </div>
+    </div>
+    <div class="slot-quick" id="slotQuick"></div>
+    <div class="pager">
+      <button class="btn small" id="pagePrev" type="button">◀ 前のページ</button>
+      <span id="pageInfo"></span>
+      <button class="btn small" id="pageNext" type="button">次のページ ▶</button>
+    </div>
+    <div id="slots" class="slots"></div>
+  </div>
+</div>
+
+<!-- ============ コンフィグ ============ -->
+<div id="configScr" class="modal-wrap top" hidden>
+  <div class="sheet narrow">
+    <div class="sheet-head">
+      <h2>コンフィグ</h2>
+      <button class="btn small" id="configClose" type="button">閉じる</button>
+    </div>
+    <div class="cfg-body">
+      <label class="cfg-row"><span>文章表示速度</span>
+        <input type="range" id="cfgSpeed" min="0" max="80" step="5">
+        <em id="cfgSpeedVal"></em></label>
+      <label class="cfg-row"><span>オートモード待機</span>
+        <input type="range" id="cfgAuto" min="400" max="5000" step="200">
+        <em id="cfgAutoVal"></em></label>
+      <label class="cfg-row"><span>文字サイズ</span>
+        <select id="cfgFontSize">
+          <option value="2.05">小</option>
+          <option value="2.35">中</option>
+          <option value="2.7">大</option>
+        </select></label>
+      <label class="cfg-row"><span>スキップ対象</span>
+        <select id="cfgSkipMode">
+          <option value="read">既読のみ</option>
+          <option value="all">すべて</option>
+        </select></label>
+      <label class="cfg-row chk"><span>既読テキストを色分け</span>
+        <input type="checkbox" id="cfgReadColorOn">
+        <input type="color" id="cfgReadColor" value="#a8c6fa"></label>
+      <label class="cfg-row chk"><span>画面エフェクト（フェード／パーティクル）</span>
+        <input type="checkbox" id="cfgFx"></label>
+      <label class="cfg-row chk"><span>ボスキー（Backspace）有効</span>
+        <input type="checkbox" id="cfgBoss"></label>
+      <div class="cfg-row"><span>表示</span>
+        <button class="btn small" id="cfgFullscreen" type="button">フルスクリーン切替</button></div>
+      <div class="cfg-keys">
+        <h4>キーボードショートカット</h4>
+        <ul>
+          <li><b>クリック / Enter / Space</b> 文章を進める</li>
+          <li><b>Ctrl（押している間）</b> スキップ</li>
+          <li><b>↑ / ホイール上</b> バックログ</li>
+          <li><b>Backspace</b> ボスキー（偽装画面）</li>
+          <li><b>Esc</b> 開いている画面を閉じる</li>
+        </ul>
+      </div>
+      <div class="cfg-log">
+        <h4>開発者ログ</h4>
+        <pre id="devLog">（エラーはありません）</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ EXTRA ============ -->
+<div id="extraScr" class="modal-wrap top" hidden>
+  <div class="sheet wide">
+    <div class="sheet-head">
+      <h2 id="extraTitle">EXTRA</h2>
+      <button class="btn small" id="extraClose" type="button">閉じる</button>
+    </div>
+    <div class="extra-tabs">
+      <button type="button" data-tab="flow" class="on">フローチャート</button>
+      <button type="button" data-tab="gallery">ギャラリー</button>
+      <button type="button" data-tab="ends">エンディング</button>
+    </div>
+    <div id="extraBody" class="extra-body"></div>
+  </div>
+</div>
+
+<!-- ============ 確認ダイアログ ============ -->
+<div id="confirmScr" class="modal-wrap confirm" hidden>
+  <div class="modal-card">
+    <p id="confirmMsg"></p>
+    <div class="modal-btns">
+      <button id="confirmYes" class="btn primary" type="button">はい</button>
+      <button id="confirmNo" class="btn" type="button">キャンセル</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ボスキー偽装画面 ============ -->
+<div id="bossScr" hidden>
+  <div class="boss-doc">
+    <div class="boss-bar">売上集計表_第3四半期.xlsx — スプレッドシート</div>
+    <table>
+      <tr><th>月</th><th>売上（千円）</th><th>前年比</th><th>備考</th></tr>
+      <tr><td>4月</td><td>12,480</td><td>103.2%</td><td></td></tr>
+      <tr><td>5月</td><td>11,930</td><td>98.4%</td><td>GW要因</td></tr>
+      <tr><td>6月</td><td>13,205</td><td>107.1%</td><td></td></tr>
+      <tr><td>7月</td><td>12,764</td><td>101.9%</td><td></td></tr>
+      <tr><td>8月</td><td>—</td><td>—</td><td>集計中</td></tr>
+    </table>
+    <p class="boss-note">※ Backspaceキーでもう一度押すと元の画面に戻ります</p>
+  </div>
+</div>
+
+<div id="toast" hidden></div>
+
+<script src="data.js"></script>
+<script src="engine.js"></script>
+</body>
+</html>
