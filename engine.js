@@ -58,17 +58,29 @@ const LOGO_SUB = { sakura: "SAKURA SIGNAL", misaki: "MIDNIGHT CONVENIENCE", rin:
 yuna: "LIBRARY AFTER CLOSE", serena: "SERENA MANOR"};
 
 const ASSET_OVERRIDES = {
-sakura: { kv: "assets/sakura_kv.jpg", bg: { station: "assets/sakura_station.jpg", park: "assets/sakura_park.jpg", room: "assets/sakura_room.jpg" }, faces: { smile: "assets/sakura_face_smile.png", shy: "assets/sakura_face_shy.png" } },
-misaki: { kv: "assets/misaki_kv.jpg", bg: { store: "assets/misaki_store.jpg", street: "assets/misaki_street.jpg", room: "assets/misaki_room.jpg" } },
-rin: { kv: "assets/rin_kv.jpg", bg: { lab: "assets/rin_lab.jpg", campus: "assets/rin_campus.jpg", room: "assets/rin_room.jpg" } },
-yuna: { kv: "assets/yuna_kv.jpg", bg: { library: "assets/yuna_library.jpg", stacks: "assets/yuna_stacks.jpg", room: "assets/yuna_room.jpg" } },
-serena: { kv: "assets/serena_kv.jpg", bg: { mansion: "assets/serena_mansion.jpg", garden: "assets/serena_garden.jpg", room: "assets/serena_room.jpg" } }
+sakura: { kv: "assets/sakura_kv.jpg", bg: { station: "assets/sakura_station.jpg", park: "assets/sakura_park.jpg", room: "assets/sakura_room.jpg" }, faces: { smile: "assets/sakura_face_smile.png", laugh: "assets/sakura_face_laugh.png", shy: "assets/sakura_face_shy.png", surprise: "assets/sakura_face_surprise.png", wink: "assets/sakura_face_wink.png", sad: "assets/sakura_face_sad.png", cry: "assets/sakura_face_cry.png", angry: "assets/sakura_face_angry.png", serious: "assets/sakura_face_serious.png", confused: "assets/sakura_face_confused.png", love: "assets/sakura_face_love.png", sleepy: "assets/sakura_face_sleepy.png", pleasure: "assets/sakura_face_pleasure.png", ecstasy: "assets/sakura_face_ecstasy.png" } },
+misaki: { kv: "assets/misaki_kv.jpg", bg: { store: "assets/misaki_store.jpg", street: "assets/misaki_street.jpg", room: "assets/misaki_room.jpg" }, faces: { smile: "assets/misaki_face_smile.png", laugh: "assets/misaki_face_laugh.png", shy: "assets/misaki_face_shy.png", surprise: "assets/misaki_face_surprise.png", wink: "assets/misaki_face_wink.png", sad: "assets/misaki_face_sad.png", cry: "assets/misaki_face_cry.png", angry: "assets/misaki_face_angry.png", serious: "assets/misaki_face_serious.png", confused: "assets/misaki_face_confused.png", love: "assets/misaki_face_love.png", sleepy: "assets/misaki_face_sleepy.png", pleasure: "assets/misaki_face_pleasure.png", ecstasy: "assets/misaki_face_ecstasy.png" } },
+rin: { kv: "assets/rin_kv.jpg", bg: { lab: "assets/rin_lab.jpg", campus: "assets/rin_campus.jpg", room: "assets/rin_room.jpg" }, faces: { smile: "assets/rin_face_smile.png", laugh: "assets/rin_face_laugh.png", shy: "assets/rin_face_shy.png", surprise: "assets/rin_face_surprise.png", wink: "assets/rin_face_wink.png", sad: "assets/rin_face_sad.png", cry: "assets/rin_face_cry.png", angry: "assets/rin_face_angry.png", serious: "assets/rin_face_serious.png", confused: "assets/rin_face_confused.png", love: "assets/rin_face_love.png", sleepy: "assets/rin_face_sleepy.png", pleasure: "assets/rin_face_pleasure.png", ecstasy: "assets/rin_face_ecstasy.png" } },
+yuna: { kv: "assets/yuna_kv.jpg", bg: { library: "assets/yuna_library.jpg", stacks: "assets/yuna_stacks.jpg", room: "assets/yuna_room.jpg" }, faces: { smile: "assets/yuna_face_smile.png", laugh: "assets/yuna_face_laugh.png", shy: "assets/yuna_face_shy.png", surprise: "assets/yuna_face_surprise.png", wink: "assets/yuna_face_wink.png", sad: "assets/yuna_face_sad.png", cry: "assets/yuna_face_cry.png", angry: "assets/yuna_face_angry.png", serious: "assets/yuna_face_serious.png", confused: "assets/yuna_face_confused.png", love: "assets/yuna_face_love.png", sleepy: "assets/yuna_face_sleepy.png", pleasure: "assets/yuna_face_pleasure.png", ecstasy: "assets/yuna_face_ecstasy.png" } },
+serena: { kv: "assets/serena_kv.jpg", bg: { mansion: "assets/serena_mansion.jpg", garden: "assets/serena_garden.jpg", room: "assets/serena_room.jpg" }, faces: { smile: "assets/serena_face_smile.png", laugh: "assets/serena_face_laugh.png", shy: "assets/serena_face_shy.png", surprise: "assets/serena_face_surprise.png", wink: "assets/serena_face_wink.png", sad: "assets/serena_face_sad.png", cry: "assets/serena_face_cry.png", angry: "assets/serena_face_angry.png", serious: "assets/serena_face_serious.png", confused: "assets/serena_face_confused.png", love: "assets/serena_face_love.png", sleepy: "assets/serena_face_sleepy.png", pleasure: "assets/serena_face_pleasure.png", ecstasy: "assets/serena_face_ecstasy.png" } }
 };
 function kvOf(g) { const o = ASSET_OVERRIDES[g.id]; return (o && o.kv) || g.kv || g.cover; }
 function bgOf(g, key) { const o = ASSET_OVERRIDES[g.id]; return (o && o.bg && o.bg[key]) || g.images[key]; }
 const FACE_CUES = [
-{ face: "shy", words: ["恥ずかし", "照れ", "赤くな", "ドキドキ", "顔が熱"] },
-{ face: "smile", words: ["ふふ", "笑", "嬉しい", "やった", "ありがとう"] }
+{ face: "ecstasy", r18: true, words: ["イッく", "イッちゃ", "おかしくなる", "もうだめ", "ダメッ", "イキ"] },
+{ face: "pleasure", r18: true, words: ["気持ちいい", "ああっ", "あっ", "んっ", "はぁ", "すごいっ"] },
+{ face: "cry", words: ["涙", "泣い", "うぅ", "ぐす"] },
+{ face: "sad", words: ["ごめん", "寂しい", "つらい", "悲し", "残念"] },
+{ face: "angry", words: ["怒", "むかつく", "ふざけ", "バカ", "ばか", "許さない"] },
+{ face: "surprise", words: ["えっ", "まさか", "びっくり", "なんで", "本当？"] },
+{ face: "serious", words: ["真剣", "大事な話", "約束", "聞いて", "お願いがある"] },
+{ face: "love", words: ["大好き", "愛して", "好きだよ", "ずっと一緒", "愛しい", "抱きしめ"] },
+{ face: "laugh", words: ["あはは", "わはは", "うはは"] },
+{ face: "shy", words: ["恥ずかし", "照れ", "赤くな", "ドキドキ", "顔が熱", "赤く"] },
+{ face: "smile", words: ["ふふ", "笑", "嬉しい", "やった", "ありがとう", "うふふ", "えへへ"] },
+{ face: "wink", words: ["任せて", "内緒", "秘密", "内緒だよ"] },
+{ face: "confused", words: ["どうしよう", "困っ", "ええと", "わからない", "迷っ"] },
+{ face: "sleepy", words: ["眠い", "おやすみ", "ふわぁ", "眠く", "眠"] }
 ];
 let curFaceSrc = null;
 function facesOf(g) { const o = ASSET_OVERRIDES[g.id]; return (o && o.faces) || null; }
@@ -77,7 +89,7 @@ const faces = facesOf(g); if (!faces) return g.images.char;
 if (n.face && faces[n.face]) return faces[n.face];
 const heroName = (g.heroine || "").split("（")[0];
 if (n.name && n.name === heroName && n.text) {
-for (const cue of FACE_CUES) { if (faces[cue.face] && cue.words.some((w) => n.text.includes(w))) return faces[cue.face]; }
+for (const cue of FACE_CUES) { if (cue.r18 && !n.r18) continue; if (faces[cue.face] && cue.words.some((w) => n.text.includes(w))) return faces[cue.face]; }
 }
 return g.images.char;
 }
@@ -138,7 +150,7 @@ card.className = "card"; card.type = "button"; card.dataset.theme = g.id;
 card.innerHTML =
 `<img src="${g.cover}" alt="" loading="lazy">` +
 `<div class="body"><h2>${g.title}</h2><div class="hero">${g.heroine}</div><p>${g.desc}</p>` +
-`<div class="meta">${g.r18? '<span class="chip r18">R18（文章のみ）</span>': ""}` +
+`<div class="meta">${g.r18? '<span class="chip r18">R18</span>': ""}` +
 (got? `<span class="chip done">END ${got}/${total} 達成</span>`: "") +
 (rate? `<span class="chip rate">既読 ${rate}%</span>`: "") +
 `<span class="chip">全${g.scenes.length}シーン</span></div></div>`;
@@ -178,7 +190,7 @@ return { list: out, legacy};
 function openTitle(g) {
 G = g;
 el.portal.hidden = true; el.game.hidden = true; el.titleScr.hidden = false;
-startBgm(g.id);
+startBgm(g.id, "main");
 el.titleScr.dataset.theme = g.id;
 document.body.dataset.theme = g.id;
 el.tsBg.src = kvOf(g);
@@ -277,18 +289,26 @@ el.charImg.classList.add("on"); markSeen(G.id, "char");
 else el.charImg.classList.remove("on");
 }
 
-let bgmAudio = null, bgmGameId = null;
-function startBgm(id) {
+let bgmAudio = null, bgmGameId = null, bgmMood = null;
+function moodOf(n) {
+if (!n) return "main";
+if (n.r18) return "love";
+if (["room", "library", "stacks", "lab"].includes(n.bg)) return "calm";
+return "main";
+}
+function startBgm(id, mood) {
 if (!id) return;
-if (bgmGameId === id && bgmAudio) { const p = bgmAudio.play(); if (p && p.catch) p.catch(() => {}); return; }
+mood = mood || "main";
+if (bgmGameId === id && bgmMood === mood && bgmAudio) { const p = bgmAudio.play(); if (p && p.catch) p.catch(() => {}); return; }
 stopBgm();
-bgmGameId = id;
-bgmAudio = new Audio("audio/bgm_" + id + ".mp3");
+bgmGameId = id; bgmMood = mood;
+bgmAudio = new Audio("audio/bgm/" + id + "_" + mood + ".mp3");
 bgmAudio.loop = true;
 bgmAudio.volume = (cfg.bgmVol ?? 50) / 100;
+bgmAudio.onerror = () => { if (bgmAudio && !bgmAudio.dataset.fb) { bgmAudio.dataset.fb = "1"; bgmAudio.src = "audio/bgm_" + id + ".mp3"; const q = bgmAudio.play(); if (q && q.catch) q.catch(() => {}); } };
 const p = bgmAudio.play(); if (p && p.catch) p.catch(() => {});
 }
-function stopBgm() { if (bgmAudio) { try { bgmAudio.pause(); } catch (err) {} bgmAudio = null; } bgmGameId = null; }
+function stopBgm() { if (bgmAudio) { try { bgmAudio.pause(); } catch (err) {} bgmAudio = null; } bgmGameId = null; bgmMood = null; }
 function playSe(name) {
 if ((cfg.seVol ?? 70) <= 0) return;
 const a = new Audio("audio/se_" + name + ".mp3");
@@ -310,12 +330,12 @@ function showNode(n) {
 if (n.set) applySet(n.set);
 stopAuto();
 el.game.classList.toggle("r18mode",!!n.r18);
-if (!n.r18) {
 if (n.bg) setBg(n.bg);
+else if (n.r18) setBg("room");
 if (n.char) setChar(true, n);
 else if (n.char === false) setChar(false);
 else if (!n.name) setChar(false);
-}
+else if (n.r18) setChar(true, n);
 el.namebox.textContent = n.name || "";
 el.namebox.style.visibility = n.name? "visible": "hidden";
 const wasRead = readSet(G.id).has(n.id);
@@ -327,6 +347,7 @@ ended =!!n.end;
 el.text.classList.toggle("read", wasRead && cfg.readColorOn);
 typeText(n.text || "");
 playVoiceFor(n);
+{ const m = moodOf(n); if (G && m !== bgmMood) startBgm(G.id, m); }
 if (n.choice) showChoices(n.choice);
 if (n.end) onEnding(n);
 }
@@ -706,6 +727,7 @@ $("#extraClose").addEventListener("click", () => hideLayer(el.extraScr));
 function renderExtra(g) {
 if (extraTab === "flow") renderFlow(g);
 else if (extraTab === "gallery") renderGallery(g);
+else if (extraTab === "credits") renderCredits(g);
 else renderEndings(g);
 }
 function parseEndLabel(text) {
@@ -717,6 +739,22 @@ const inner = t.slice(i + 1, j < 0 ? undefined : j);
 const kind = inner.startsWith("GOOD") ? "GOOD" : inner.startsWith("NORMAL") ? "NORMAL" : "END";
 const parts = inner.split("―");
 return { kind, sub: (parts[1] || "").trim() };
+}
+const BGM_CREDITS = {
+sakura: { main: "Porch Swing Days - slower", calm: "Meditation Impromptu 02", love: "In Your Arms" },
+misaki: { main: "Bossa Antigua", calm: "Night on the Docks - Piano", love: "Night on the Docks - Sax" },
+rin: { main: "Light Thought var 1", calm: "Serene", love: "Touching Moments Two - Higher" },
+yuna: { main: "Gymnopedie No. 1", calm: "Meditation Impromptu 03", love: "Canon in D Major" },
+serena: { main: "Devonshire Waltz Moderato", calm: "Dark Fog", love: "Grand Dark Waltz Moderato" }
+};
+function renderCredits(g) {
+const c = BGM_CREDITS[g.id];
+const rows = [["日常シーン", c.main], ["静かなシーン", c.calm], ["夜・R18シーン", c.love]].map(([m, t]) =>
+`<div class="end-row"><div class="end-badge">BGM</div><div><div class="e-name">${t}</div><div class="e-sub">${m}</div></div></div>`).join("");
+el.extraBody.innerHTML = `<div class="flow-legend">使用素材クレジット</div><div class="ends-list">${rows}` +
+`<div class="end-row"><div class="end-badge">音楽</div><div><div class="e-name">Kevin MacLeod (incompetech.com)</div><div class="e-sub">Licensed under Creative Commons: By Attribution 4.0 License — http://creativecommons.org/licenses/by/4.0/</div></div></div>` +
+`<div class="end-row"><div class="end-badge">効果音</div><div><div class="e-name">オリジナル合成音源</div><div class="e-sub">本サイト内で生成した効果音を使用しています</div></div></div>` +
+`<div class="end-row"><div class="end-badge">ボイス</div><div><div class="e-name">Fish Audio（AI音声合成）</div><div class="e-sub">『桜色シグナル』のR18シーン台詞の一部に使用</div></div></div></div>`;
 }
 function renderEndings(g) {
 const p = prog(g.id);
@@ -736,7 +774,7 @@ const p = prog(g.id);
 const items = [{ key: "cover", name: "タイトル画", src: g.cover}, { key: "char", name: "立ち絵：" + g.heroine, src: g.images.char}];
 Object.keys(g.images).forEach((k) => { if (k!== "char") items.push({ key: "bg:" + k, name: "背景：" + (BG_LABELS[k] || k), src: bgOf(g, k)});});
 const fmap = facesOf(g);
-if (fmap) { const fl = { smile: "笑顔", shy: "照れ" }; Object.keys(fmap).forEach((k) => items.push({ key: "face:" + k, name: "立ち絵差分：" + (fl[k] || k), src: fmap[k] })); }
+if (fmap) { const fl = { smile: "笑顔", laugh: "大笑い", shy: "照れ", surprise: "驚き", wink: "ウインク", sad: "悲しみ", cry: "泣き", angry: "怒り", serious: "真剣", confused: "困り", love: "恋", sleepy: "眠い", pleasure: "快感", ecstasy: "絶頂" }; Object.keys(fmap).forEach((k) => items.push({ key: "face:" + k, name: "立ち絵差分：" + (fl[k] || k), src: fmap[k] })); }
 const wrap = document.createElement("div");
 wrap.innerHTML = `<div class="flow-legend">作中で表示された素材だけが解放されます（${items.filter((i) => p.seen.includes(i.key)).length} / ${items.length}）</div>`;
 const grid = document.createElement("div"); grid.className = "gallery-grid";
@@ -842,7 +880,7 @@ document.addEventListener("keydown", (e) => {
 const tag = (e.target.tagName || "").toLowerCase();
 if (tag === "input" || tag === "select" || tag === "textarea") { if (e.key!== "Escape") return;}
 if (!el.bossScr.hidden) {
-if (e.key === "Backspace" || e.key === "Escape") { e.preventDefault(); el.bossScr.hidden = true; if (G && !el.game.hidden) startBgm(G.id); }
+if (e.key === "Backspace" || e.key === "Escape") { e.preventDefault(); el.bossScr.hidden = true; if (G && !el.game.hidden) startBgm(G.id, bgmMood || "main"); }
 return;
 }
 if (cfg.boss && e.key === "Backspace") { e.preventDefault(); stopVoice(); if (bgmAudio) bgmAudio.pause(); el.bossScr.hidden = false; return;}
