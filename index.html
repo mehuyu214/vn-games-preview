@@ -129,21 +129,21 @@
 
 <!-- ============ コンフィグ ============ -->
 <div id="configScr" class="modal-wrap top" hidden>
+  <div class="cfg-bg" id="cfgBg"></div>
   <div class="cfg-panel">
-    <div class="cfg-motif" aria-hidden="true"></div>
-    <header class="cfg-head">
-      <div class="cfg-head-l">
-        <div class="cfg-eyebrow">CONFIGURATION</div>
-        <h2 class="cfg-title"><span id="cfgGameTitle">VN Arcade</span><span class="cfg-title-sub">システム設定</span></h2>
-      </div>
-      <button class="cfg-close" id="configClose" type="button">閉じる</button>
-    </header>
-    <div class="cfg-main">
+    <div class="cfg-rail">CONFIGURATION</div>
+    <div class="cfg-frame">
+      <header class="cfg-head">
+        <div class="cfg-head-l">
+          <div class="cfg-eyebrow">SYSTEM CONFIGURATION</div>
+          <h2 class="cfg-title"><span id="cfgGameTitle">VN Arcade</span><span class="cfg-title-sub">システム設定</span></h2>
+        </div>
+        <button class="cfg-close" id="configClose" type="button">閉じる</button>
+      </header>
       <nav class="cfg-tabs" id="cfgTabs">
-        <button type="button" class="cfg-tab on" data-tab="text">文章</button>
-        <button type="button" class="cfg-tab" data-tab="screen">再生と画面</button>
-        <button type="button" class="cfg-tab" data-tab="system">システム</button>
-        <button type="button" class="cfg-tab" data-tab="keys">キー操作</button>
+        <button type="button" class="cfg-tab on" data-tab="text"><span class="cfg-tab-en">TEXT</span><span class="cfg-tab-jp">文章</span></button>
+        <button type="button" class="cfg-tab" data-tab="display"><span class="cfg-tab-en">DISPLAY</span><span class="cfg-tab-jp">再生と画面</span></button>
+        <button type="button" class="cfg-tab" data-tab="system"><span class="cfg-tab-en">SYSTEM</span><span class="cfg-tab-jp">システム</span></button>
       </nav>
       <div class="cfg-panes">
         <section class="cfg-pane on" data-pane="text">
@@ -168,12 +168,18 @@
             </div>
           </div>
           <div class="cfg-item">
+            <div class="cfg-lab"><h3>フォント</h3><p>本文の書体</p></div>
+            <div class="ctl-seg font-seg" data-seg="font">
+              <button type="button" data-v="mincho" style="font-family:'Hiragino Mincho ProN','Yu Mincho',serif">明朝</button><button type="button" data-v="gothic" style="font-family:'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif">ゴシック</button><button type="button" data-v="maru" style="font-family:'Hiragino Maru Gothic ProN','Yu Gothic',sans-serif">丸ゴシック</button>
+            </div>
+          </div>
+          <div class="cfg-item">
             <div class="cfg-lab"><h3>既読テキストの色分け</h3><p>読み終えた文章の色を変えて表示する</p></div>
             <div class="ctl-seg" data-seg="readColorOn">
               <button type="button" data-v="on">ON</button><button type="button" data-v="off">OFF</button>
             </div>
           </div>
-          <div class="cfg-item">
+          <div class="cfg-item" id="readColorItem">
             <div class="cfg-lab"><h3>既読テキストの色</h3><p>色分けに使う色</p></div>
             <div class="ctl-swatches" id="ctlReadColor">
               <button type="button" class="sw" data-c="#a8c6fa" style="--sw:#a8c6fa" aria-label="青"></button>
@@ -185,7 +191,14 @@
             </div>
           </div>
         </section>
-        <section class="cfg-pane" data-pane="screen">
+        <section class="cfg-pane" data-pane="display">
+          <div class="cfg-item">
+            <div class="cfg-lab"><h3>メッセージウィンドウ透明度</h3><p>本文ウィンドウの背景の濃さ</p></div>
+            <div class="ctl-slider" data-slider="msgOpacity" tabindex="0" role="slider" aria-label="メッセージウィンドウ透明度">
+              <div class="ctl-track"><div class="ctl-fill"></div><div class="ctl-thumb"></div></div>
+              <div class="ctl-val" id="ctlOpacityVal">87%</div>
+            </div>
+          </div>
           <div class="cfg-item">
             <div class="cfg-lab"><h3>画面エフェクト</h3><p>背景や立ち絵のフェード、装飾の動き</p></div>
             <div class="ctl-seg" data-seg="fx">
@@ -210,8 +223,7 @@
               <button type="button" data-v="on">ON</button><button type="button" data-v="off">OFF</button>
             </div>
           </div>
-        </section>
-        <section class="cfg-pane" data-pane="keys">
+          <div class="cfg-subhead">キー操作</div>
           <div class="keylist">
             <div class="keyrow"><div class="keycaps"><span class="keycap">Enter</span><span class="keycap">Space</span><span class="keycap">クリック</span></div><p>文章を進める</p></div>
             <div class="keyrow"><div class="keycaps"><span class="keycap">Ctrl</span><span class="keycap dim">押している間</span></div><p>スキップ</p></div>
@@ -221,10 +233,14 @@
           </div>
         </section>
       </div>
+      <footer class="cfg-foot">
+        <button type="button" class="cfg-reset" id="cfgReset">設定を初期値に戻す</button>
+        <span class="cfg-foot-note">設定は自動で保存されます</span>
+      </footer>
     </div>
+    <div class="cfg-art"><img id="cfgArt" alt=""></div>
   </div>
 </div>
-
 <!-- ============ EXTRA ============ -->
 <div id="extraScr" class="modal-wrap top" hidden>
   <div class="sheet wide">

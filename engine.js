@@ -16,7 +16,7 @@ renderDevLog();
 
 /* ---------- 設定 ---------- */
 const CFG_KEY = "vna_config_v1";
-const defaultCfg = { speed: 25, autoDelay: 1600, fontSize: "2.35", skipMode: "read",
+const defaultCfg = { speed: 25, autoDelay: 1600, fontSize: "2.35", font: "mincho", msgOpacity: 87, skipMode: "read",
 readColorOn: true, readColor: "#a8c6fa", fx: true, boss: true};
 let cfg = (() => { try { return Object.assign({}, defaultCfg, JSON.parse(localStorage.getItem(CFG_KEY) || "{}"));} catch { return {...defaultCfg};}})();
 function saveCfg() { try { localStorage.setItem(CFG_KEY, JSON.stringify(cfg));} catch {}}
@@ -25,6 +25,9 @@ const portrait = window.innerHeight > window.innerWidth;
 const eff = (parseFloat(cfg.fontSize) * (portrait ? 1.35 : 1)).toFixed(2);
 document.documentElement.style.setProperty("--font-size", eff + "cqw");
 document.documentElement.style.setProperty("--read-color", cfg.readColorOn? cfg.readColor: "#fdfbff");
+document.documentElement.dataset.font = cfg.font || "mincho";
+document.documentElement.dataset.fx = cfg.fx? "on": "off";
+document.documentElement.style.setProperty("--msg-alpha", ((cfg.msgOpacity ?? 87) / 100));
 }
 
 /* ---------- 永続データ ---------- */
@@ -550,7 +553,7 @@ elm.querySelector(".ctl-thumb").style.left = (r * 100) + "%";
 }
 function paintSeg(key) {
 const val = { fontSize: cfg.fontSize, skipMode: cfg.skipMode,
-readColorOn: cfg.readColorOn? "on": "off", fx: cfg.fx? "on": "off", boss: cfg.boss? "on": "off" }[key];
+readColorOn: cfg.readColorOn? "on": "off", fx: cfg.fx? "on": "off", boss: cfg.boss? "on": "off", font: cfg.font || "mincho" }[key];
 $$(`.ctl-seg[data-seg="${key}"] button`).forEach((b) => b.classList.toggle("on", b.dataset.v === String(val)));
 }
 function syncConfigUI() {
@@ -559,7 +562,13 @@ paintSlider(document.querySelector('[data-slider="speed"]'), 80 - cfg.speed, 0, 
 $("#ctlSpeedVal").textContent = speedLabel();
 paintSlider(document.querySelector('[data-slider="auto"]'), cfg.autoDelay, 400, 5000);
 $("#ctlAutoVal").textContent = (cfg.autoDelay / 1000).toFixed(1) + " 秒";
-["fontSize", "skipMode", "readColorOn", "fx", "boss"].forEach(paintSeg);
+paintSlider(document.querySelector('[data-slider="msgOpacity"]'), cfg.msgOpacity ?? 87, 55, 97);
+$("#ctlOpacityVal").textContent = (cfg.msgOpacity ?? 87) + "%";
+["fontSize", "skipMode", "readColorOn", "fx", "boss", "font"].forEach(paintSeg);
+$("#readColorItem").classList.toggle("off", !cfg.readColorOn);
+const art = $("#cfgArt"), panel = el.configScr.querySelector(".cfg-panel");
+if (G) { art.src = G.images.char; art.parentElement.style.display = ""; panel.classList.add("has-art"); $("#cfgBg").style.backgroundImage = `url("${kvOf(G)}")`; }
+else { art.removeAttribute("src"); art.parentElement.style.display = "none"; panel.classList.remove("has-art"); $("#cfgBg").style.backgroundImage = ""; }
 $$("#ctlReadColor .sw").forEach((b) => b.classList.toggle("on", b.dataset.c === cfg.readColor));
 }
 const SLIDERS = {
@@ -567,6 +576,8 @@ speed: { min: 0, max: 80, step: 5, get: () => 80 - cfg.speed,
 set: (v) => { cfg.speed = 80 - v; $("#ctlSpeedVal").textContent = speedLabel(); } },
 auto: { min: 400, max: 5000, step: 200, get: () => cfg.autoDelay,
 set: (v) => { cfg.autoDelay = v; $("#ctlAutoVal").textContent = (v / 1000).toFixed(1) + " 秒"; } },
+msgOpacity: { min: 55, max: 97, step: 1, get: () => cfg.msgOpacity ?? 87,
+set: (v) => { cfg.msgOpacity = v; $("#ctlOpacityVal").textContent = v + "%"; applyCfg(); } },
 };
 function bindSlider(elm) {
 const def = SLIDERS[elm.dataset.slider];
@@ -603,7 +614,8 @@ const b = e.target.closest("button"); if (!b) return;
 const key = seg.dataset.seg, v = b.dataset.v;
 if (key === "fontSize") { cfg.fontSize = v; applyCfg(); }
 else if (key === "skipMode") cfg.skipMode = v;
-else if (key === "readColorOn") { cfg.readColorOn = v === "on"; applyCfg(); }
+else if (key === "readColorOn") { cfg.readColorOn = v === "on"; applyCfg(); $("#readColorItem").classList.toggle("off", !cfg.readColorOn); }
+else if (key === "font") { cfg.font = v; applyCfg(); }
 else if (key === "fx") cfg.fx = v === "on";
 else if (key === "boss") cfg.boss = v === "on";
 saveCfg(); paintSeg(key);
@@ -613,6 +625,11 @@ $$("#ctlReadColor .sw").forEach((b) => b.addEventListener("click", () => {
 cfg.readColor = b.dataset.c; saveCfg(); applyCfg();
 $$("#ctlReadColor .sw").forEach((x) => x.classList.toggle("on", x === b));
 }));
+$("#cfgReset").addEventListener("click", () => {
+askConfirm("設定を初期値に戻しますか？（セーブデータには影響しません）", () => {
+cfg = Object.assign({}, defaultCfg); saveCfg(); applyCfg(); syncConfigUI(); toast("設定を初期化しました");
+});
+});
 $("#cfgFullscreen").addEventListener("click", () => {
 if (document.fullscreenElement) document.exitFullscreen();
 else document.documentElement.requestFullscreen?.();
