@@ -548,12 +548,12 @@ const syncLabels = () => {
 $("#cfgSpeedVal").textContent = cfg.speed <= 0? "瞬時": cfg.speed <= 15? "速い": cfg.speed <= 40? "普通": "遅い";
 $("#cfgAutoVal").textContent = (cfg.autoDelay / 1000).toFixed(1) + " 秒";
 };
-sp.value = cfg.speed; au.value = cfg.autoDelay;
+sp.value = 80 - cfg.speed; au.value = cfg.autoDelay;
 $("#cfgFontSize").value = cfg.fontSize; $("#cfgSkipMode").value = cfg.skipMode;
 $("#cfgReadColorOn").checked = cfg.readColorOn; $("#cfgReadColor").value = cfg.readColor;
 $("#cfgFx").checked = cfg.fx; $("#cfgBoss").checked = cfg.boss;
 syncLabels();
-sp.addEventListener("input", () => { cfg.speed = +sp.value; saveCfg(); syncLabels();});
+sp.addEventListener("input", () => { cfg.speed = 80 - (+sp.value); saveCfg(); syncLabels();});
 au.addEventListener("input", () => { cfg.autoDelay = +au.value; saveCfg(); syncLabels();});
 $("#cfgFontSize").addEventListener("change", (e) => { cfg.fontSize = e.target.value; saveCfg(); applyCfg();});
 $("#cfgSkipMode").addEventListener("change", (e) => { cfg.skipMode = e.target.value; saveCfg();});
