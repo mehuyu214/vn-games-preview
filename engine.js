@@ -17,7 +17,7 @@ renderDevLog();
 /* ---------- 設定 ---------- */
 const CFG_KEY = "vna_config_v1";
 const defaultCfg = { speed: 25, autoDelay: 1600, fontSize: "2.35", font: "mincho", msgOpacity: 87, skipMode: "read",
-readColorOn: true, readColor: "#a8c6fa", fx: true, boss: true};
+readColorOn: true, readColor: "#a8c6fa", fx: true, boss: true, voiceVol: 80, voiceOn: true, bgmVol: 50, seVol: 70};
 let cfg = (() => { try { return Object.assign({}, defaultCfg, JSON.parse(localStorage.getItem(CFG_KEY) || "{}"));} catch { return {...defaultCfg};}})();
 function saveCfg() { try { localStorage.setItem(CFG_KEY, JSON.stringify(cfg));} catch {}}
 function applyCfg() {
@@ -28,6 +28,9 @@ document.documentElement.style.setProperty("--read-color", cfg.readColorOn? cfg.
 document.documentElement.dataset.font = cfg.font || "mincho";
 document.documentElement.dataset.fx = cfg.fx? "on": "off";
 document.documentElement.style.setProperty("--msg-alpha", ((cfg.msgOpacity ?? 87) / 100));
+if (voiceAudio) voiceAudio.volume = (cfg.voiceVol ?? 80) / 100;
+if (bgmAudio) bgmAudio.volume = (cfg.bgmVol ?? 50) / 100;
+if (!cfg.voiceOn) stopVoice();
 }
 
 /* ---------- 永続データ ---------- */
@@ -175,6 +178,7 @@ return { list: out, legacy};
 function openTitle(g) {
 G = g;
 el.portal.hidden = true; el.game.hidden = true; el.titleScr.hidden = false;
+startBgm(g.id);
 el.titleScr.dataset.theme = g.id;
 document.body.dataset.theme = g.id;
 el.tsBg.src = kvOf(g);
@@ -211,7 +215,7 @@ if (list.length) loadRec(list[0].rec);
 else if (act === "load") { saveMode = "load"; saveReturn = "title"; savePage = 0; renderSaveScr(); showLayer(el.saveScr);}
 else if (act === "config") { saveReturn = "title"; showLayer(el.configScr);}
 else if (act === "extra") { openExtra(G);}
-else if (act === "back") { el.titleScr.hidden = true; el.portal.hidden = false; buildPortal();}
+else if (act === "back") { stopBgm(); stopVoice(); el.titleScr.hidden = true; el.portal.hidden = false; buildPortal();}
 });
 
 /* ================================================================
@@ -273,6 +277,35 @@ el.charImg.classList.add("on"); markSeen(G.id, "char");
 else el.charImg.classList.remove("on");
 }
 
+let bgmAudio = null, bgmGameId = null;
+function startBgm(id) {
+if (!id) return;
+if (bgmGameId === id && bgmAudio) { const p = bgmAudio.play(); if (p && p.catch) p.catch(() => {}); return; }
+stopBgm();
+bgmGameId = id;
+bgmAudio = new Audio("audio/bgm_" + id + ".mp3");
+bgmAudio.loop = true;
+bgmAudio.volume = (cfg.bgmVol ?? 50) / 100;
+const p = bgmAudio.play(); if (p && p.catch) p.catch(() => {});
+}
+function stopBgm() { if (bgmAudio) { try { bgmAudio.pause(); } catch (err) {} bgmAudio = null; } bgmGameId = null; }
+function playSe(name) {
+if ((cfg.seVol ?? 70) <= 0) return;
+const a = new Audio("audio/se_" + name + ".mp3");
+a.volume = (cfg.seVol ?? 70) / 100;
+const p = a.play(); if (p && p.catch) p.catch(() => {});
+}
+let voiceAudio = null;
+function stopVoice() { if (voiceAudio) { try { voiceAudio.pause(); } catch (err) {} voiceAudio = null; } }
+function playVoiceFor(n) {
+stopVoice();
+if (!cfg.voiceOn || skipTimer || !window.VOICE_FILES || !G) return;
+if (!VOICE_FILES[G.id + "/" + n.id]) return;
+voiceAudio = new Audio("voice/" + G.id + "/" + n.id + ".mp3");
+voiceAudio.volume = (cfg.voiceVol ?? 80) / 100;
+const pr = voiceAudio.play();
+if (pr && pr.catch) pr.catch(() => {});
+}
 function showNode(n) {
 if (n.set) applySet(n.set);
 stopAuto();
@@ -293,6 +326,7 @@ if (backlog.length > 600) backlog.shift();
 ended =!!n.end;
 el.text.classList.toggle("read", wasRead && cfg.readColorOn);
 typeText(n.text || "");
+playVoiceFor(n);
 if (n.choice) showChoices(n.choice);
 if (n.end) onEnding(n);
 }
@@ -329,7 +363,7 @@ if (typing) { completeType(); return;}
 if (!cur || cur.choice) return;
 if (ended) { backToTitle(); return;}
 const id = nextId(cur);
-if (id) goTo(id); else backToTitle();
+if (id) { playSe("click"); goTo(id); } else backToTitle();
 }
 $("#textbox").addEventListener("click", advance);
 el.namebox.addEventListener("click", advance);
@@ -341,6 +375,7 @@ const b = document.createElement("button");
 b.type = "button"; b.textContent = c.text;
 b.addEventListener("click", (ev) => {
 ev.stopPropagation();
+playSe("select");
 el.choices.hidden = true; stopSkip(); stopAuto();
 if (c.set) applySet(c.set);
 goTo(c.jump);
@@ -504,7 +539,7 @@ if (!G ||!cur) return;
 const doSave = () => {
 const rec2 = makeRec();
 if (key === "quick") saveBook.quick = rec2; else saveBook.slots[key] = rec2;
-persistSaves(); renderSaveScr(); toast("セーブしました");
+persistSaves(); renderSaveScr(); playSe("save"); toast("セーブしました");
 };
 if (rec) askConfirm(`${label} に上書きセーブしますか？`, doSave); else doSave();
 } else if (rec) loadRec(rec);
@@ -553,7 +588,7 @@ elm.querySelector(".ctl-thumb").style.left = (r * 100) + "%";
 }
 function paintSeg(key) {
 const val = { fontSize: cfg.fontSize, skipMode: cfg.skipMode,
-readColorOn: cfg.readColorOn? "on": "off", fx: cfg.fx? "on": "off", boss: cfg.boss? "on": "off", font: cfg.font || "mincho" }[key];
+readColorOn: cfg.readColorOn? "on": "off", fx: cfg.fx? "on": "off", boss: cfg.boss? "on": "off", font: cfg.font || "mincho", voiceOn: cfg.voiceOn? "on": "off" }[key];
 $$(`.ctl-seg[data-seg="${key}"] button`).forEach((b) => b.classList.toggle("on", b.dataset.v === String(val)));
 }
 function syncConfigUI() {
@@ -562,9 +597,15 @@ paintSlider(document.querySelector('[data-slider="speed"]'), 80 - cfg.speed, 0, 
 $("#ctlSpeedVal").textContent = speedLabel();
 paintSlider(document.querySelector('[data-slider="auto"]'), cfg.autoDelay, 400, 5000);
 $("#ctlAutoVal").textContent = (cfg.autoDelay / 1000).toFixed(1) + " 秒";
-paintSlider(document.querySelector('[data-slider="msgOpacity"]'), cfg.msgOpacity ?? 87, 55, 97);
+paintSlider(document.querySelector('[data-slider="msgOpacity"]'), cfg.msgOpacity ?? 87, 30, 98);
 $("#ctlOpacityVal").textContent = (cfg.msgOpacity ?? 87) + "%";
-["fontSize", "skipMode", "readColorOn", "fx", "boss", "font"].forEach(paintSeg);
+["fontSize", "skipMode", "readColorOn", "fx", "boss", "font", "voiceOn"].forEach(paintSeg);
+paintSlider(document.querySelector('[data-slider="bgmVol"]'), cfg.bgmVol ?? 50, 0, 100);
+$("#ctlBgmVolVal").textContent = (cfg.bgmVol ?? 50) + "%";
+paintSlider(document.querySelector('[data-slider="seVol"]'), cfg.seVol ?? 70, 0, 100);
+$("#ctlSeVolVal").textContent = (cfg.seVol ?? 70) + "%";
+paintSlider(document.querySelector('[data-slider="voiceVol"]'), cfg.voiceVol ?? 80, 0, 100);
+$("#ctlVoiceVolVal").textContent = (cfg.voiceVol ?? 80) + "%";
 $("#readColorItem").classList.toggle("off", !cfg.readColorOn);
 const art = $("#cfgArt"), panel = el.configScr.querySelector(".cfg-panel");
 if (G) { art.src = G.images.char; art.parentElement.style.display = ""; panel.classList.add("has-art"); $("#cfgBg").style.backgroundImage = `url("${kvOf(G)}")`; }
@@ -576,7 +617,13 @@ speed: { min: 0, max: 80, step: 5, get: () => 80 - cfg.speed,
 set: (v) => { cfg.speed = 80 - v; $("#ctlSpeedVal").textContent = speedLabel(); } },
 auto: { min: 400, max: 5000, step: 200, get: () => cfg.autoDelay,
 set: (v) => { cfg.autoDelay = v; $("#ctlAutoVal").textContent = (v / 1000).toFixed(1) + " 秒"; } },
-msgOpacity: { min: 55, max: 97, step: 1, get: () => cfg.msgOpacity ?? 87,
+bgmVol: { min: 0, max: 100, step: 5, get: () => cfg.bgmVol ?? 50,
+set: (v) => { cfg.bgmVol = v; $("#ctlBgmVolVal").textContent = v + "%"; applyCfg(); } },
+seVol: { min: 0, max: 100, step: 5, get: () => cfg.seVol ?? 70,
+set: (v) => { cfg.seVol = v; $("#ctlSeVolVal").textContent = v + "%"; } },
+voiceVol: { min: 0, max: 100, step: 5, get: () => cfg.voiceVol ?? 80,
+set: (v) => { cfg.voiceVol = v; $("#ctlVoiceVolVal").textContent = v + "%"; applyCfg(); } },
+msgOpacity: { min: 30, max: 98, step: 1, get: () => cfg.msgOpacity ?? 87,
 set: (v) => { cfg.msgOpacity = v; $("#ctlOpacityVal").textContent = v + "%"; applyCfg(); } },
 };
 function bindSlider(elm) {
@@ -616,6 +663,7 @@ if (key === "fontSize") { cfg.fontSize = v; applyCfg(); }
 else if (key === "skipMode") cfg.skipMode = v;
 else if (key === "readColorOn") { cfg.readColorOn = v === "on"; applyCfg(); $("#readColorItem").classList.toggle("off", !cfg.readColorOn); }
 else if (key === "font") { cfg.font = v; applyCfg(); }
+else if (key === "voiceOn") { cfg.voiceOn = v === "on"; applyCfg(); }
 else if (key === "fx") cfg.fx = v === "on";
 else if (key === "boss") cfg.boss = v === "on";
 saveCfg(); paintSeg(key);
@@ -794,10 +842,10 @@ document.addEventListener("keydown", (e) => {
 const tag = (e.target.tagName || "").toLowerCase();
 if (tag === "input" || tag === "select" || tag === "textarea") { if (e.key!== "Escape") return;}
 if (!el.bossScr.hidden) {
-if (e.key === "Backspace" || e.key === "Escape") { e.preventDefault(); el.bossScr.hidden = true;}
+if (e.key === "Backspace" || e.key === "Escape") { e.preventDefault(); el.bossScr.hidden = true; if (G && !el.game.hidden) startBgm(G.id); }
 return;
 }
-if (cfg.boss && e.key === "Backspace") { e.preventDefault(); el.bossScr.hidden = false; return;}
+if (cfg.boss && e.key === "Backspace") { e.preventDefault(); stopVoice(); if (bgmAudio) bgmAudio.pause(); el.bossScr.hidden = false; return;}
 if (e.key === "Escape") { if (closeTopLayer()) return; if (!el.backlog.hidden) { hideLayer(el.backlog); return;}}
 if (e.key === "Control" &&!el.game.hidden &&!skipTimer) { ctrlSkip = true; startSkip(); return;}
 if (el.game.hidden || overlayStack.length) return;

@@ -156,13 +156,13 @@ img{ user-select:none; -webkit-user-drag:none; }
 }
 #namebox:empty{ visibility:hidden; }
 #textbox{
-  position:relative; cursor:pointer; min-height:15cqw; padding:1.7cqw 2.4cqw 1.3cqw;
+  position:relative; cursor:pointer; height:18.2cqw; padding:1.7cqw 2.4cqw 1.3cqw;
   background:linear-gradient(180deg, rgba(11,9,24,calc(var(--msg-alpha, .87) - .07)), rgba(7,6,17,var(--msg-alpha, .87)));
   border:1px solid rgba(255,255,255,.22); border-top:2px solid color-mix(in srgb, var(--accent) 65%, transparent);
   border-radius:3px;
 }
 #text{ font-size:var(--font-size); line-height:1.85; letter-spacing:.02em; white-space:pre-wrap; color:#fdfbff;
-  text-shadow:0 1px 3px rgba(0,0,0,.8); min-height:calc(var(--font-size) * 3.7); }
+  text-shadow:0 1px 3px rgba(0,0,0,.8); height:15.2cqw; overflow:hidden; }
 #text.read{ color:var(--read-color,#fdfbff); }
 html[data-font="mincho"] #text{ font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif; }
 html[data-font="gothic"] #text{ font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif; }

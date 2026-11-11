@@ -143,6 +143,7 @@
       <nav class="cfg-tabs" id="cfgTabs">
         <button type="button" class="cfg-tab on" data-tab="text"><span class="cfg-tab-en">TEXT</span><span class="cfg-tab-jp">文章</span></button>
         <button type="button" class="cfg-tab" data-tab="display"><span class="cfg-tab-en">DISPLAY</span><span class="cfg-tab-jp">再生と画面</span></button>
+        <button type="button" class="cfg-tab" data-tab="sound"><span class="cfg-tab-en">SOUND</span><span class="cfg-tab-jp">音声</span></button>
         <button type="button" class="cfg-tab" data-tab="system"><span class="cfg-tab-en">SYSTEM</span><span class="cfg-tab-jp">システム</span></button>
       </nav>
       <div class="cfg-panes">
@@ -193,8 +194,8 @@
         </section>
         <section class="cfg-pane" data-pane="display">
           <div class="cfg-item">
-            <div class="cfg-lab"><h3>メッセージウィンドウ透明度</h3><p>本文ウィンドウの背景の濃さ</p></div>
-            <div class="ctl-slider" data-slider="msgOpacity" tabindex="0" role="slider" aria-label="メッセージウィンドウ透明度">
+            <div class="cfg-lab"><h3>メッセージウィンドウの濃さ</h3><p>台詞が表示される枠の背景の濃さ</p></div>
+            <div class="ctl-slider" data-slider="msgOpacity" tabindex="0" role="slider" aria-label="メッセージウィンドウの濃さ">
               <div class="ctl-track"><div class="ctl-fill"></div><div class="ctl-thumb"></div></div>
               <div class="ctl-val" id="ctlOpacityVal">87%</div>
             </div>
@@ -209,6 +210,36 @@
             <div class="cfg-lab"><h3>画面モード</h3><p>ブラウザのフルスクリーン表示を切り替える</p></div>
             <button type="button" class="cfg-action" id="cfgFullscreen">フルスクリーン切替</button>
           </div>
+        </section>
+        <section class="cfg-pane" data-pane="sound">
+          <div class="cfg-item">
+            <div class="cfg-lab"><h3>BGM音量</h3><p>各作品のテーマ曲の大きさ</p></div>
+            <div class="ctl-slider" data-slider="bgmVol" tabindex="0" role="slider" aria-label="BGM音量">
+              <div class="ctl-track"><div class="ctl-fill"></div><div class="ctl-thumb"></div></div>
+              <div class="ctl-val" id="ctlBgmVolVal">50%</div>
+            </div>
+          </div>
+          <div class="cfg-item">
+            <div class="cfg-lab"><h3>ボイス音量</h3><p>R18シーンの台詞ボイスの大きさ</p></div>
+            <div class="ctl-slider" data-slider="voiceVol" tabindex="0" role="slider" aria-label="ボイス音量">
+              <div class="ctl-track"><div class="ctl-fill"></div><div class="ctl-thumb"></div></div>
+              <div class="ctl-val" id="ctlVoiceVolVal">80%</div>
+            </div>
+          </div>
+          <div class="cfg-item">
+            <div class="cfg-lab"><h3>ボイス再生</h3><p>台詞ボイスを再生するかどうか</p></div>
+            <div class="ctl-seg" data-seg="voiceOn">
+              <button type="button" data-v="on">ON</button><button type="button" data-v="off">OFF</button>
+            </div>
+          </div>
+          <div class="cfg-item">
+            <div class="cfg-lab"><h3>SE音量</h3><p>クリックや決定などの操作音の大きさ</p></div>
+            <div class="ctl-slider" data-slider="seVol" tabindex="0" role="slider" aria-label="SE音量">
+              <div class="ctl-track"><div class="ctl-fill"></div><div class="ctl-thumb"></div></div>
+              <div class="ctl-val" id="ctlSeVolVal">70%</div>
+            </div>
+          </div>
+          <p class="cfg-subhead">BGMとSEは全作品に収録されています。ボイスは『桜色シグナル』R18シーンの台詞のみです。</p>
         </section>
         <section class="cfg-pane" data-pane="system">
           <div class="cfg-item">
@@ -287,6 +318,7 @@
 <div id="toast" hidden></div>
 
 <script src="data.js"></script>
+<script src="voice_manifest.js"></script>
 <script src="engine.js"></script>
 </body>
 </html>
