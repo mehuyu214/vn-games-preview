@@ -52,7 +52,7 @@ const LOGO_SUB = { sakura: "SAKURA SIGNAL", misaki: "MIDNIGHT CONVENIENCE", rin:
 yuna: "LIBRARY AFTER CLOSE", serena: "SERENA MANOR"};
 
 const ASSET_OVERRIDES = {
-sakura: { kv: "assets/sakura_kv.jpg", bg: { station: "assets/sakura_station.jpg", park: "assets/sakura_park.jpg", room: "assets/sakura_room.jpg" }, faces: { smile: "assets/sakura_face_smile.jpg", shy: "assets/sakura_face_shy.jpg" } },
+sakura: { kv: "assets/sakura_kv.jpg", bg: { station: "assets/sakura_station.jpg", park: "assets/sakura_park.jpg", room: "assets/sakura_room.jpg" }, faces: { smile: "assets/sakura_face_smile.png", shy: "assets/sakura_face_shy.png" } },
 misaki: { kv: "assets/misaki_kv.jpg", bg: { store: "assets/misaki_store.jpg", street: "assets/misaki_street.jpg", room: "assets/misaki_room.jpg" } },
 rin: { kv: "assets/rin_kv.jpg", bg: { lab: "assets/rin_lab.jpg", campus: "assets/rin_campus.jpg", room: "assets/rin_room.jpg" } },
 yuna: { kv: "assets/yuna_kv.jpg", bg: { library: "assets/yuna_library.jpg", stacks: "assets/yuna_stacks.jpg", room: "assets/yuna_room.jpg" } },
@@ -147,6 +147,7 @@ portalBgFlip =!portalBgFlip;
 const show = portalBgFlip? el.portalBgA: el.portalBgB, hide = portalBgFlip? el.portalBgB: el.portalBgA;
 show.src = kvOf(g); show.classList.add("on"); hide.classList.remove("on");
 el.portal.dataset.theme = g.id;
+document.body.dataset.theme = g.id;
 }
 $("#portalConfigBtn").addEventListener("click", () => { saveReturn = "portal"; showLayer(el.configScr);});
 
@@ -172,6 +173,7 @@ function openTitle(g) {
 G = g;
 el.portal.hidden = true; el.game.hidden = true; el.titleScr.hidden = false;
 el.titleScr.dataset.theme = g.id;
+document.body.dataset.theme = g.id;
 el.tsBg.src = kvOf(g);
 el.tsChar.src = g.images.char;
 el.tsChar.style.display = (ASSET_OVERRIDES[g.id] && ASSET_OVERRIDES[g.id].kv) ? "none" : "";
@@ -189,7 +191,7 @@ b.querySelector(".lock")?.remove();
 if (act === "continue") b.disabled =!list.length;
 if (act === "extra") {
 b.disabled =!p.unlocked;
-if (!p.unlocked) { const s = document.createElement("span"); s.className = "lock"; s.textContent = "🔒 エンディング到達で解放"; b.appendChild(s);}
+if (!p.unlocked) { const s = document.createElement("span"); s.className = "lock"; s.textContent = "（エンディング到達で解放）"; b.appendChild(s);}
 }
 });
 markSeen(g.id, "cover");
@@ -219,6 +221,7 @@ replay =!!opts.replay;
 sceneMap = {}; g.scenes.forEach((n, i) => { sceneMap[n.id] = { node: n, index: i};});
 el.portal.hidden = true; el.titleScr.hidden = true; el.game.hidden = false;
 el.game.dataset.theme = g.id;
+document.body.dataset.theme = g.id;
 el.replayBadge.hidden =!replay;
 el.bgA.classList.remove("on"); el.bgB.classList.remove("on"); el.charImg.classList.remove("on");
 curBgKey = null; curFaceSrc = null;
@@ -282,6 +285,7 @@ el.namebox.style.visibility = n.name? "visible": "hidden";
 const wasRead = readSet(G.id).has(n.id);
 markRead(G.id, n.id);
 backlog.push({ scene: n.id, name: n.name || "", text: n.text || "", flags: {...flags}, read: wasRead});
+n._wasRead = wasRead;
 if (backlog.length > 600) backlog.shift();
 ended =!!n.end;
 el.text.classList.toggle("read", wasRead && cfg.readColorOn);
@@ -295,7 +299,7 @@ const p = prog(G.id);
 const first =!p.endings[n.id];
 p.endings[n.id] = Date.now(); p.unlocked = true;
 storeJSON(PROG_KEY, progress);
-toast(first? `🎉 ${kind} END に到達しました（EXTRAが解放されました）`: `${kind} END に到達`, 2600);
+toast(first? `${kind} END に到達しました（EXTRAが解放されました）`: `${kind} END に到達`, 2600);
 }
 
 function typeText(t) {
@@ -359,7 +363,7 @@ if (skipTimer) return;
 skipTimer = setInterval(() => {
 if (overlayStack.length ||!cur) return;
 if (cur.choice || ended) { stopSkip(); return;}
-if (cfg.skipMode === "read" &&!readSet(G.id).has(cur.id) &&!typing) { stopSkip(); return;}
+if (cfg.skipMode === "read" && cur._wasRead === false) { stopSkip(); return;}
 if (typing) completeType();
 else advance();
 }, 40);
@@ -603,7 +607,7 @@ let html = `<div class="flow-legend">到達したエンディング： ${Object.
 (p.unlocked? "（EXTRA解放済み）": "（未解放）") + `</div><div class="ends-list">`;
 ends.forEach((n, i) => {
 const lab = parseEndLabel(n.text), ts = p.endings[n.id];
-html += `<div class="end-row ${ts? "": "unreached"}"><div class="e-badge">${ts? "🏆": "🔒"}</div>` +
+html += `<div class="end-row ${ts? "": "unreached"}"><div class="end-badge">${ts? "到達": "未到達"}</div>` +
 `<div><div class="e-name">${lab.kind} END ― ${lab.sub || ("エンディング" + (i + 1))}</div>` +
 `<div class="e-sub">${ts? "到達：" + new Date(ts).toLocaleString("ja-JP"): "未到達（シーン " + n.id + "）"}</div></div></div>`;
 });
@@ -701,9 +705,11 @@ const isEnd = n.type === "end";
 html += `<div class="flow-node ${visited? "visited": ""} ${isEnd? "end": ""}" style="left:${P.x}px;top:${P.y}px">` +
 `<b>${n.label}</b><small>${n.id === "__start"? "": "シーン " + n.id + "／"}${(n.sub || "").replace(/</g, "&lt;")}</small>` +
 (visited &&!isEnd? `<br><button type="button" data-replay="${n.id}">ここから回想</button>`: "") +
-(isEnd? `<br><small>${p.endings[n.id]? "🏆 到達済み": "未到達"}</small>`: "") + `</div>`;
+(isEnd? `<br><small>${p.endings[n.id]? "到達済み": "未到達"}</small>`: "") + `</div>`;
 });
 el.extraBody.innerHTML = html + "</div></div>";
+const fWrap = $(".flow-wrap", el.extraBody), fCanvas = $(".flow-canvas", el.extraBody);
+if (fWrap && fCanvas) { const avail = fWrap.clientWidth - 4; if (W > avail && avail > 0) { const sc = avail / W; fCanvas.style.transform = "scale(" + sc + ")"; fWrap.style.height = Math.ceil(H * sc + 8) + "px"; } }
 $$("[data-replay]", el.extraBody).forEach((b) => b.addEventListener("click", () => {
 hideLayer(el.extraScr);
 startGame(g, { scene: b.dataset.replay, replay: true});

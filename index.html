@@ -15,7 +15,7 @@
   <header class="portal-head">
     <div class="logo-type"><span class="logo-main">VN Arcade</span><span class="logo-sub">オンライン・ビジュアルノベル</span></div>
     <div class="portal-tools">
-      <button id="portalConfigBtn" class="tool-btn" type="button">⚙ コンフィグ</button>
+      <button id="portalConfigBtn" class="tool-btn" type="button">コンフィグ</button>
     </div>
   </header>
   <p class="portal-note">ブラウザでそのまま遊べる、5つの物語。セーブデータはこの端末に保存されます。</p>
@@ -27,7 +27,6 @@
 <!-- ============ 年齢確認 ============ -->
 <div id="gate" class="modal-wrap" hidden>
   <div class="modal-card">
-    <div class="modal-orn">❦</div>
     <h2>年齢確認</h2>
     <p>この作品には成人向けの文章表現が含まれます。<br>あなたは18歳以上ですか？</p>
     <div class="modal-btns">
@@ -49,7 +48,7 @@
       <div class="ts-logo">
         <div class="ts-logo-sub" id="tsLogoSub"></div>
         <h1 class="ts-logo-main" id="tsLogoMain"></h1>
-        <div class="ts-logo-line"><span></span><i>✦</i><span></span></div>
+        <div class="ts-logo-line"><span></span><span></span></div>
         <div class="ts-heroine" id="tsHeroine"></div>
       </div>
       <nav class="ts-menu" id="tsMenu">
@@ -136,44 +135,43 @@
       <button class="btn small" id="configClose" type="button">閉じる</button>
     </div>
     <div class="cfg-body">
-      <label class="cfg-row"><span>文章表示速度</span>
-        <input type="range" id="cfgSpeed" min="0" max="80" step="5">
-        <em id="cfgSpeedVal"></em></label>
-      <label class="cfg-row"><span>オートモード待機</span>
-        <input type="range" id="cfgAuto" min="400" max="5000" step="200">
-        <em id="cfgAutoVal"></em></label>
-      <label class="cfg-row"><span>文字サイズ</span>
-        <select id="cfgFontSize">
-          <option value="2.05">小</option>
-          <option value="2.35">中</option>
-          <option value="2.7">大</option>
-        </select></label>
-      <label class="cfg-row"><span>スキップ対象</span>
-        <select id="cfgSkipMode">
-          <option value="read">既読のみ</option>
-          <option value="all">すべて</option>
-        </select></label>
-      <label class="cfg-row chk"><span>既読テキストを色分け</span>
-        <input type="checkbox" id="cfgReadColorOn">
-        <input type="color" id="cfgReadColor" value="#a8c6fa"></label>
-      <label class="cfg-row chk"><span>画面エフェクト（フェード／パーティクル）</span>
-        <input type="checkbox" id="cfgFx"></label>
-      <label class="cfg-row chk"><span>ボスキー（Backspace）有効</span>
-        <input type="checkbox" id="cfgBoss"></label>
-      <div class="cfg-row"><span>表示</span>
-        <button class="btn small" id="cfgFullscreen" type="button">フルスクリーン切替</button></div>
-      <div class="cfg-keys">
-        <h4>キーボードショートカット</h4>
-        <ul>
-          <li><b>クリック / Enter / Space</b> 文章を進める</li>
-          <li><b>Ctrl（押している間）</b> スキップ</li>
-          <li><b>↑ / ホイール上</b> バックログ</li>
-          <li><b>Backspace</b> ボスキー（偽装画面）</li>
-          <li><b>Esc</b> 開いている画面を閉じる</li>
-        </ul>
+      <div class="cfg-col">
+        <div class="cfg-sec">文章・表示</div>
+        <label class="cfg-row"><span>文章表示速度</span>
+          <input type="range" id="cfgSpeed" min="0" max="80" step="5">
+          <em id="cfgSpeedVal"></em></label>
+        <label class="cfg-row"><span>オートモード待機</span>
+          <input type="range" id="cfgAuto" min="400" max="5000" step="200">
+          <em id="cfgAutoVal"></em></label>
+        <label class="cfg-row"><span>文字サイズ</span>
+          <select id="cfgFontSize">
+            <option value="2.05">小</option>
+            <option value="2.35">中</option>
+            <option value="2.7">大</option>
+          </select></label>
+        <label class="cfg-row chk"><span>既読テキストを色分け</span>
+          <input type="checkbox" id="cfgReadColorOn">
+          <input type="color" id="cfgReadColor" value="#a8c6fa"></label>
       </div>
-      <div class="cfg-log">
-        <h4>開発者ログ</h4>
+      <div class="cfg-col">
+        <div class="cfg-sec">システム</div>
+        <label class="cfg-row"><span>スキップ対象</span>
+          <select id="cfgSkipMode">
+            <option value="read">既読のみ</option>
+            <option value="all">すべて</option>
+          </select></label>
+        <label class="cfg-row chk"><span>画面エフェクト</span>
+          <input type="checkbox" id="cfgFx"><em style="flex:none">フェード／装飾</em></label>
+        <label class="cfg-row chk"><span>ボスキー</span>
+          <input type="checkbox" id="cfgBoss"><em style="flex:none">Backspace</em></label>
+        <div class="cfg-row"><span>画面モード</span>
+          <button class="btn small" id="cfgFullscreen" type="button">フルスクリーン切替</button></div>
+      </div>
+      <div class="cfg-wide cfg-keys">
+        <b>操作</b>：クリック／Enter／Space＝進める　Ctrl＝押している間スキップ　↑／ホイール上＝バックログ　Backspace＝ボスキー　Esc＝閉じる
+      </div>
+      <div class="cfg-wide cfg-log">
+        <div class="cfg-sec">開発者ログ</div>
         <pre id="devLog">（エラーはありません）</pre>
       </div>
     </div>
