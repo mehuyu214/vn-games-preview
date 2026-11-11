@@ -129,50 +129,97 @@
 
 <!-- ============ コンフィグ ============ -->
 <div id="configScr" class="modal-wrap top" hidden>
-  <div class="sheet narrow">
-    <div class="sheet-head">
-      <h2>コンフィグ</h2>
-      <button class="btn small" id="configClose" type="button">閉じる</button>
-    </div>
-    <div class="cfg-body">
-      <div class="cfg-col">
-        <div class="cfg-sec">文章・表示</div>
-        <label class="cfg-row"><span>文章表示速度</span>
-          <input type="range" id="cfgSpeed" min="0" max="80" step="5">
-          <em id="cfgSpeedVal"></em></label>
-        <label class="cfg-row"><span>オートモード待機</span>
-          <input type="range" id="cfgAuto" min="400" max="5000" step="200">
-          <em id="cfgAutoVal"></em></label>
-        <label class="cfg-row"><span>文字サイズ</span>
-          <select id="cfgFontSize">
-            <option value="2.05">小</option>
-            <option value="2.35">中</option>
-            <option value="2.7">大</option>
-          </select></label>
-        <label class="cfg-row chk"><span>既読テキストを色分け</span>
-          <input type="checkbox" id="cfgReadColorOn">
-          <input type="color" id="cfgReadColor" value="#a8c6fa"></label>
+  <div class="cfg-panel">
+    <div class="cfg-motif" aria-hidden="true"></div>
+    <header class="cfg-head">
+      <div class="cfg-head-l">
+        <div class="cfg-eyebrow">CONFIGURATION</div>
+        <h2 class="cfg-title"><span id="cfgGameTitle">VN Arcade</span><span class="cfg-title-sub">システム設定</span></h2>
       </div>
-      <div class="cfg-col">
-        <div class="cfg-sec">システム</div>
-        <label class="cfg-row"><span>スキップ対象</span>
-          <select id="cfgSkipMode">
-            <option value="read">既読のみ</option>
-            <option value="all">すべて</option>
-          </select></label>
-        <label class="cfg-row chk"><span>画面エフェクト</span>
-          <input type="checkbox" id="cfgFx"><em style="flex:none">フェード／装飾</em></label>
-        <label class="cfg-row chk"><span>ボスキー</span>
-          <input type="checkbox" id="cfgBoss"><em style="flex:none">Backspace</em></label>
-        <div class="cfg-row"><span>画面モード</span>
-          <button class="btn small" id="cfgFullscreen" type="button">フルスクリーン切替</button></div>
-      </div>
-      <div class="cfg-wide cfg-keys">
-        <b>操作</b>：クリック／Enter／Space＝進める　Ctrl＝押している間スキップ　↑／ホイール上＝バックログ　Backspace＝ボスキー　Esc＝閉じる
-      </div>
-      <div class="cfg-wide cfg-log">
-        <div class="cfg-sec">開発者ログ</div>
-        <pre id="devLog">（エラーはありません）</pre>
+      <button class="cfg-close" id="configClose" type="button">閉じる</button>
+    </header>
+    <div class="cfg-main">
+      <nav class="cfg-tabs" id="cfgTabs">
+        <button type="button" class="cfg-tab on" data-tab="text">文章</button>
+        <button type="button" class="cfg-tab" data-tab="screen">再生と画面</button>
+        <button type="button" class="cfg-tab" data-tab="system">システム</button>
+        <button type="button" class="cfg-tab" data-tab="keys">キー操作</button>
+      </nav>
+      <div class="cfg-panes">
+        <section class="cfg-pane on" data-pane="text">
+          <div class="cfg-item">
+            <div class="cfg-lab"><h3>文章表示速度</h3><p>本文が1文字ずつ表示される速さ</p></div>
+            <div class="ctl-slider" data-slider="speed" tabindex="0" role="slider" aria-label="文章表示速度">
+              <div class="ctl-track"><div class="ctl-fill"></div><div class="ctl-thumb"></div></div>
+              <div class="ctl-val" id="ctlSpeedVal">普通</div>
+            </div>
+          </div>
+          <div class="cfg-item">
+            <div class="cfg-lab"><h3>オートモード待機</h3><p>自動再生で次の文章へ進むまでの時間</p></div>
+            <div class="ctl-slider" data-slider="auto" tabindex="0" role="slider" aria-label="オートモード待機">
+              <div class="ctl-track"><div class="ctl-fill"></div><div class="ctl-thumb"></div></div>
+              <div class="ctl-val" id="ctlAutoVal">1.6 秒</div>
+            </div>
+          </div>
+          <div class="cfg-item">
+            <div class="cfg-lab"><h3>文字サイズ</h3><p>本文の文字の大きさ</p></div>
+            <div class="ctl-seg" data-seg="fontSize">
+              <button type="button" data-v="2.05">小</button><button type="button" data-v="2.35">中</button><button type="button" data-v="2.7">大</button>
+            </div>
+          </div>
+          <div class="cfg-item">
+            <div class="cfg-lab"><h3>既読テキストの色分け</h3><p>読み終えた文章の色を変えて表示する</p></div>
+            <div class="ctl-seg" data-seg="readColorOn">
+              <button type="button" data-v="on">ON</button><button type="button" data-v="off">OFF</button>
+            </div>
+          </div>
+          <div class="cfg-item">
+            <div class="cfg-lab"><h3>既読テキストの色</h3><p>色分けに使う色</p></div>
+            <div class="ctl-swatches" id="ctlReadColor">
+              <button type="button" class="sw" data-c="#a8c6fa" style="--sw:#a8c6fa" aria-label="青"></button>
+              <button type="button" class="sw" data-c="#ffd9a0" style="--sw:#ffd9a0" aria-label="橙"></button>
+              <button type="button" class="sw" data-c="#b5e7a0" style="--sw:#b5e7a0" aria-label="緑"></button>
+              <button type="button" class="sw" data-c="#ffb7c5" style="--sw:#ffb7c5" aria-label="桃"></button>
+              <button type="button" class="sw" data-c="#d3b8ff" style="--sw:#d3b8ff" aria-label="紫"></button>
+              <button type="button" class="sw" data-c="#fdfbff" style="--sw:#fdfbff" aria-label="白"></button>
+            </div>
+          </div>
+        </section>
+        <section class="cfg-pane" data-pane="screen">
+          <div class="cfg-item">
+            <div class="cfg-lab"><h3>画面エフェクト</h3><p>背景や立ち絵のフェード、装飾の動き</p></div>
+            <div class="ctl-seg" data-seg="fx">
+              <button type="button" data-v="on">ON</button><button type="button" data-v="off">OFF</button>
+            </div>
+          </div>
+          <div class="cfg-item">
+            <div class="cfg-lab"><h3>画面モード</h3><p>ブラウザのフルスクリーン表示を切り替える</p></div>
+            <button type="button" class="cfg-action" id="cfgFullscreen">フルスクリーン切替</button>
+          </div>
+        </section>
+        <section class="cfg-pane" data-pane="system">
+          <div class="cfg-item">
+            <div class="cfg-lab"><h3>スキップ対象</h3><p>SKIPで飛ばす文章の範囲</p></div>
+            <div class="ctl-seg" data-seg="skipMode">
+              <button type="button" data-v="read">既読のみ</button><button type="button" data-v="all">全て</button>
+            </div>
+          </div>
+          <div class="cfg-item">
+            <div class="cfg-lab"><h3>ボスキー</h3><p>Backspaceで作業用画面に切り替える</p></div>
+            <div class="ctl-seg" data-seg="boss">
+              <button type="button" data-v="on">ON</button><button type="button" data-v="off">OFF</button>
+            </div>
+          </div>
+        </section>
+        <section class="cfg-pane" data-pane="keys">
+          <div class="keylist">
+            <div class="keyrow"><div class="keycaps"><span class="keycap">Enter</span><span class="keycap">Space</span><span class="keycap">クリック</span></div><p>文章を進める</p></div>
+            <div class="keyrow"><div class="keycaps"><span class="keycap">Ctrl</span><span class="keycap dim">押している間</span></div><p>スキップ</p></div>
+            <div class="keyrow"><div class="keycaps"><span class="keycap">↑</span><span class="keycap">ホイール上</span></div><p>バックログを開く</p></div>
+            <div class="keyrow"><div class="keycaps"><span class="keycap">Backspace</span></div><p>ボスキー（作業用画面）</p></div>
+            <div class="keyrow"><div class="keycaps"><span class="keycap">Esc</span></div><p>開いている画面を閉じる</p></div>
+          </div>
+        </section>
       </div>
     </div>
   </div>

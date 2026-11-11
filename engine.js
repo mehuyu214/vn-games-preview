@@ -92,7 +92,7 @@ function toast(msg, ms) {
 el.toast.textContent = msg; el.toast.hidden = false;
 clearTimeout(toast._t); toast._t = setTimeout(() => { el.toast.hidden = true;}, ms || 1700);
 }
-function showLayer(node) { node.hidden = false; if (!overlayStack.includes(node)) overlayStack.push(node);}
+function showLayer(node) { node.hidden = false; if (!overlayStack.includes(node)) overlayStack.push(node); if (node === el.configScr && typeof syncConfigUI === "function") syncConfigUI(); }
 function hideLayer(node) { node.hidden = true; overlayStack = overlayStack.filter((n) => n!== node);}
 function closeTopLayer() { const n = overlayStack[overlayStack.length - 1]; if (n) { hideLayer(n); return true;} return false;}
 
@@ -542,29 +542,82 @@ $("#saveClose").addEventListener("click", () => hideLayer(el.saveScr));
 /* ================================================================
 コンフィグ
 ================================================================ */
-function bindConfig() {
-const sp = $("#cfgSpeed"), au = $("#cfgAuto");
-const syncLabels = () => {
-$("#cfgSpeedVal").textContent = cfg.speed <= 0? "瞬時": cfg.speed <= 15? "速い": cfg.speed <= 40? "普通": "遅い";
-$("#cfgAutoVal").textContent = (cfg.autoDelay / 1000).toFixed(1) + " 秒";
+function speedLabel() { return cfg.speed <= 0? "瞬時": cfg.speed <= 15? "速い": cfg.speed <= 40? "普通": "遅い"; }
+function paintSlider(elm, v, min, max) {
+const r = Math.max(0, Math.min(1, (v - min) / (max - min)));
+elm.querySelector(".ctl-fill").style.width = (r * 100) + "%";
+elm.querySelector(".ctl-thumb").style.left = (r * 100) + "%";
+}
+function paintSeg(key) {
+const val = { fontSize: cfg.fontSize, skipMode: cfg.skipMode,
+readColorOn: cfg.readColorOn? "on": "off", fx: cfg.fx? "on": "off", boss: cfg.boss? "on": "off" }[key];
+$$(`.ctl-seg[data-seg="${key}"] button`).forEach((b) => b.classList.toggle("on", b.dataset.v === String(val)));
+}
+function syncConfigUI() {
+$("#cfgGameTitle").textContent = G? G.title: "VN Arcade";
+paintSlider(document.querySelector('[data-slider="speed"]'), 80 - cfg.speed, 0, 80);
+$("#ctlSpeedVal").textContent = speedLabel();
+paintSlider(document.querySelector('[data-slider="auto"]'), cfg.autoDelay, 400, 5000);
+$("#ctlAutoVal").textContent = (cfg.autoDelay / 1000).toFixed(1) + " 秒";
+["fontSize", "skipMode", "readColorOn", "fx", "boss"].forEach(paintSeg);
+$$("#ctlReadColor .sw").forEach((b) => b.classList.toggle("on", b.dataset.c === cfg.readColor));
+}
+const SLIDERS = {
+speed: { min: 0, max: 80, step: 5, get: () => 80 - cfg.speed,
+set: (v) => { cfg.speed = 80 - v; $("#ctlSpeedVal").textContent = speedLabel(); } },
+auto: { min: 400, max: 5000, step: 200, get: () => cfg.autoDelay,
+set: (v) => { cfg.autoDelay = v; $("#ctlAutoVal").textContent = (v / 1000).toFixed(1) + " 秒"; } },
 };
-sp.value = 80 - cfg.speed; au.value = cfg.autoDelay;
-$("#cfgFontSize").value = cfg.fontSize; $("#cfgSkipMode").value = cfg.skipMode;
-$("#cfgReadColorOn").checked = cfg.readColorOn; $("#cfgReadColor").value = cfg.readColor;
-$("#cfgFx").checked = cfg.fx; $("#cfgBoss").checked = cfg.boss;
-syncLabels();
-sp.addEventListener("input", () => { cfg.speed = 80 - (+sp.value); saveCfg(); syncLabels();});
-au.addEventListener("input", () => { cfg.autoDelay = +au.value; saveCfg(); syncLabels();});
-$("#cfgFontSize").addEventListener("change", (e) => { cfg.fontSize = e.target.value; saveCfg(); applyCfg();});
-$("#cfgSkipMode").addEventListener("change", (e) => { cfg.skipMode = e.target.value; saveCfg();});
-$("#cfgReadColorOn").addEventListener("change", (e) => { cfg.readColorOn = e.target.checked; saveCfg(); applyCfg();});
-$("#cfgReadColor").addEventListener("input", (e) => { cfg.readColor = e.target.value; saveCfg(); applyCfg();});
-$("#cfgFx").addEventListener("change", (e) => { cfg.fx = e.target.checked; saveCfg();});
-$("#cfgBoss").addEventListener("change", (e) => { cfg.boss = e.target.checked; saveCfg();});
+function bindSlider(elm) {
+const def = SLIDERS[elm.dataset.slider];
+const apply = (v) => {
+v = Math.max(def.min, Math.min(def.max, Math.round(v / def.step) * def.step));
+def.set(v); saveCfg(); paintSlider(elm, v, def.min, def.max);
+};
+const fromEvent = (e) => {
+const rect = elm.querySelector(".ctl-track").getBoundingClientRect();
+apply(def.min + ((e.clientX - rect.left) / rect.width) * (def.max - def.min));
+};
+elm.addEventListener("pointerdown", (e) => {
+elm.setPointerCapture(e.pointerId); fromEvent(e);
+const move = (ev) => fromEvent(ev);
+elm.addEventListener("pointermove", move);
+elm.addEventListener("pointerup", () => elm.removeEventListener("pointermove", move), { once: true });
+});
+elm.addEventListener("keydown", (e) => {
+if (e.key === "ArrowRight" || e.key === "ArrowUp") { apply(def.get() + def.step); e.preventDefault(); }
+if (e.key === "ArrowLeft" || e.key === "ArrowDown") { apply(def.get() - def.step); e.preventDefault(); }
+});
+}
+function bindConfig() {
+/* カテゴリタブ */
+$$("#cfgTabs .cfg-tab").forEach((t) => t.addEventListener("click", () => {
+$$("#cfgTabs .cfg-tab").forEach((x) => x.classList.toggle("on", x === t));
+$$(".cfg-pane").forEach((p) => p.classList.toggle("on", p.dataset.pane === t.dataset.tab));
+}));
+/* 専用スライダー */
+$$(".ctl-slider").forEach(bindSlider);
+/* 専用セグメント */
+$$(".ctl-seg").forEach((seg) => seg.addEventListener("click", (e) => {
+const b = e.target.closest("button"); if (!b) return;
+const key = seg.dataset.seg, v = b.dataset.v;
+if (key === "fontSize") { cfg.fontSize = v; applyCfg(); }
+else if (key === "skipMode") cfg.skipMode = v;
+else if (key === "readColorOn") { cfg.readColorOn = v === "on"; applyCfg(); }
+else if (key === "fx") cfg.fx = v === "on";
+else if (key === "boss") cfg.boss = v === "on";
+saveCfg(); paintSeg(key);
+}));
+/* 既読色チップ */
+$$("#ctlReadColor .sw").forEach((b) => b.addEventListener("click", () => {
+cfg.readColor = b.dataset.c; saveCfg(); applyCfg();
+$$("#ctlReadColor .sw").forEach((x) => x.classList.toggle("on", x === b));
+}));
 $("#cfgFullscreen").addEventListener("click", () => {
 if (document.fullscreenElement) document.exitFullscreen();
 else document.documentElement.requestFullscreen?.();
 });
+syncConfigUI();
 }
 $("#configClose").addEventListener("click", () => hideLayer(el.configScr));
 
