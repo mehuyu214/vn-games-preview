@@ -641,17 +641,20 @@ toast("ロードしました");
 function slotCard(key, rec, label) {
 const d = document.createElement("div");
 const wrap = document.createElement("button");
-wrap.type = "button"; wrap.className = "slot";
+wrap.type = "button"; wrap.className = "slot" + (key === "quick"? " quick-slot": "");
 if (rec) {
 const g = GAMES.find((x) => x.id === rec.game);
+const dt = new Date(rec.date);
+const pad = (v) => String(v).padStart(2, "0");
+const dateStr = `${dt.getFullYear()}/${pad(dt.getMonth() + 1)}/${pad(dt.getDate())}`;
+const timeStr = `${pad(dt.getHours())}:${pad(dt.getMinutes())}:${pad(dt.getSeconds())}`;
 wrap.innerHTML =
-`<span class="s-no">${label}</span>` +
+`<div class="s-head"><span class="s-no">${label}</span><span class="s-date">${dateStr}<br>${timeStr}</span></div>` +
+`<div class="s-chap">${g? g.title: rec.game} ／ ${rec.scene}</div>` +
 (rec.thumb? `<img class="thumb" src="${rec.thumb}" alt="">`: `<span class="thumb empty">サムネイルなし</span>`) +
-`<div class="s-meta"><span>${new Date(rec.date).toLocaleString("ja-JP")}</span><span>好感度 ${rec.love}</span></div>` +
-`<div class="s-title">${g? g.title: rec.game} ／ ${rec.scene}</div>` +
+`<div class="s-meta"><span>好感度 ${rec.love}</span><button class="s-del" type="button">削除</button></div>` +
 `<div class="s-text">${(rec.text || "").replace(/</g, "&lt;")}</div>`;
-const del = document.createElement("button");
-del.type = "button"; del.className = "s-del"; del.textContent = "削除";
+const del = wrap.querySelector(".s-del");
 del.addEventListener("click", (ev) => {
 ev.stopPropagation();
 askConfirm(`${label} のセーブデータを削除しますか？`, () => {
@@ -659,10 +662,10 @@ if (key === "quick") saveBook.quick = null; else delete saveBook.slots[key];
 persistSaves(); renderSaveScr(); toast("削除しました");
 });
 });
-wrap.appendChild(del);
 } else {
-wrap.innerHTML = `<span class="s-no">${label}</span><span class="thumb empty">― 空き ―</span>` +
-`<div class="s-title" style="margin-top:8px">データがありません</div>`;
+wrap.innerHTML = `<div class="s-head"><span class="s-no">${label}</span></div>` +
+`<div class="s-chap">Empty</div>` +
+`<span class="thumb empty"></span>`;
 }
 wrap.addEventListener("click", () => {
 if (saveMode === "save") {
@@ -680,6 +683,10 @@ return d;
 }
 function renderSaveScr() {
 el.saveTitle.textContent = saveMode === "save"? "セーブ": "ロード";
+// U7: Geminism実画面の色分け（セーブ=赤タイル／ロード=紫タイル）に倣いモード色を付ける
+el.saveScr.dataset.mode = saveMode;
+const rail = document.getElementById("saveRail");
+if (rail) rail.textContent = saveMode === "save"? "SAVE": "LOAD";
 el.slotQuick.innerHTML = "";
 const qh = document.createElement("div"); qh.className = "legacy-note"; qh.textContent = "クイックセーブ枠";
 el.slotQuick.appendChild(qh);
@@ -689,9 +696,18 @@ el.slotQuick.appendChild(qg);
 el.slots.innerHTML = "";
 for (let i = 0; i < 12; i++) {
 const idx = savePage * 12 + i;
-el.slots.appendChild(slotCard(String(idx), saveBook.slots[String(idx)] || null, "No." + (idx + 1)).firstChild);
+el.slots.appendChild(slotCard(String(idx), saveBook.slots[String(idx)] || null, String(idx + 1).padStart(3, "0")).firstChild);
 }
-el.pageInfo.textContent = `ページ ${savePage + 1} / 10`;
+// U7: Geminism実画面の右端ページグリッド（現在ページは黒反転）に倣い番号グリッド化
+el.pageInfo.innerHTML = "";
+for (let p = 0; p < 10; p++) {
+const b = document.createElement("button");
+b.type = "button"; b.className = "pg-num" + (p === savePage? " on": "");
+b.textContent = String(p + 1);
+b.setAttribute("aria-label", `ページ ${p + 1}`);
+b.addEventListener("click", () => { savePage = p; renderSaveScr();});
+el.pageInfo.appendChild(b);
+}
 // 旧形式セーブの互換表示（ロード時・対象作品のみ）
 el.saveLegacy.innerHTML = "";
 if (saveMode === "load" && G) {

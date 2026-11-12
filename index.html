@@ -117,7 +117,7 @@
 <!-- ============ セーブ/ロード ============ -->
 <div id="saveScr" class="modal-wrap top" hidden>
   <div class="sheet">
-    <div class="sys-rail">SAVE / LOAD</div>
+    <div class="sys-rail" id="saveRail">SAVE / LOAD</div>
     <div class="sheet-body">
     <div class="sheet-head">
       <div class="sheet-head-l">
@@ -132,7 +132,7 @@
     <div class="slot-quick" id="slotQuick"></div>
     <div class="pager">
       <button class="btn small" id="pagePrev" type="button">◀ 前のページ</button>
-      <span id="pageInfo"></span>
+      <span id="pageInfo" class="page-grid"></span>
       <button class="btn small" id="pageNext" type="button">次のページ ▶</button>
     </div>
     <div id="slots" class="slots"></div>

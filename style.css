@@ -312,6 +312,17 @@ html[data-fx="off"] #cutin, html[data-fx="off"] #locCard{ animation:none; }
 .pager{ display:flex; align-items:center; justify-content:center; gap:14px; margin:8px 0; font-size:12.5px; color:var(--cp-dim); flex:none; }
 #saveScr .pager .btn{ background:var(--cp-soft); border-color:var(--cp-line); color:var(--cp-ink); }
 #saveScr .pager .btn:hover{ border-color:var(--accent); }
+/* U7: Geminism実画面のページグリッド（現在ページは黒反転） */
+.page-grid{ display:inline-flex; gap:4px; }
+.page-grid .pg-num{ min-width:26px; height:26px; padding:0 6px; background:var(--cp-soft); border:1px solid var(--cp-line);
+  color:var(--cp-dim); font-size:12px; cursor:pointer; border-radius:2px; }
+.page-grid .pg-num:hover{ border-color:var(--accent); color:var(--cp-ink); }
+.page-grid .pg-num.on{ background:#111; color:#f4f1f8; border-color:#111; }
+/* U7: セーブ=赤／ロード=紫（Geminismのデータセーブ赤タイル／データロード紫タイルに倣う） */
+#saveScr[data-mode="save"] .sys-eyebrow{ color:#c0392b; }
+#saveScr[data-mode="load"] .sys-eyebrow{ color:#7a4fd0; }
+#saveScr[data-mode="save"] .sys-rail{ color:#d43d2a; }
+#saveScr[data-mode="load"] .sys-rail{ color:#8a5cf0; }
 .slots{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
 .slot{
   text-align:left; padding:7px; border-radius:3px; color:var(--cp-ink); position:relative; min-width:0;
@@ -320,13 +331,18 @@ html[data-fx="off"] #cutin, html[data-fx="off"] #locCard{ animation:none; }
 .slot:hover{ border-color:var(--accent); box-shadow:0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent); }
 .slot .thumb{ width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:2px; background:#23233d; display:block; border:1px solid var(--cp-line); }
 .slot .thumb.empty{ display:flex; align-items:center; justify-content:center; color:var(--cp-dim); font-size:11.5px; border:1px dashed var(--cp-line); background:var(--cp-soft); }
-.slot .s-meta{ display:flex; justify-content:space-between; gap:6px; font-size:10.5px; color:var(--cp-dim); margin-top:5px; }
-.slot .s-title{ font-size:12px; font-weight:700; margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--cp-ink); }
+/* U7: Geminism実画面のスロット構成（大きな番号＋右上日時2行＋中央の場面名＋サムネイル） */
+.slot .s-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+.slot .s-no{ font-size:26px; font-weight:300; letter-spacing:.06em; color:var(--cp-dim); line-height:1; }
+.slot.quick-slot .s-no{ font-size:20px; font-weight:600; letter-spacing:.08em; }
+.slot .s-date{ font-size:10.5px; color:var(--cp-dim); text-align:right; line-height:1.5; }
+.slot .s-chap{ font-size:12px; font-weight:700; text-align:center; margin:6px 0 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--cp-ink); }
+.slot .s-meta{ display:flex; justify-content:space-between; align-items:center; gap:6px; font-size:10.5px; color:var(--cp-dim); margin-top:5px; }
 .slot .s-text{ font-size:11px; color:var(--cp-dim); line-height:1.45; margin-top:2px; display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
-.slot .s-no{ position:absolute; top:11px; left:11px; background:rgba(8,6,18,.82); border:1px solid var(--cp-line); border-radius:2px; font-size:10.5px; padding:1px 7px; color:#f4f1f8; }
-.slot .s-del{ position:absolute; top:11px; right:11px; background:rgba(90,10,30,.88); border:1px solid rgba(255,140,170,.5); color:#ffd7e0;
-  border-radius:2px; font-size:10.5px; padding:1px 7px; }
-.slot-quick{ margin-bottom:2px; flex:none; }
+.slot .s-del{ position:static; background:none; border:none; color:var(--cp-dim); font-size:10.5px; padding:0; cursor:pointer; text-decoration:underline; }
+.slot .s-del:hover{ color:#ff8ca8; }
+/* U7: スロット列がシート高を超える場合（縦画面・低背画面）はシート内スクロール */
+#saveScr .sheet-body{ overflow-y:auto; }
 .slot-quick .slots{ grid-template-columns:minmax(200px, 300px); }
 .legacy-note{ font-size:11.5px; color:var(--cp-dim); margin-bottom:5px; }
 @media (max-width:900px){ .slots{ grid-template-columns:repeat(3,1fr); } }
@@ -334,8 +350,13 @@ html[data-fx="off"] #cutin, html[data-fx="off"] #locCard{ animation:none; }
   .slots{ grid-template-columns:repeat(3,1fr); gap:7px; }
   .slot .s-text{ display:none; }
   .slot{ padding:5px; }
-  /* U5: 狭幅ではタイトルを折り返して「データがありません」が切れないようにする */
-  .slot .s-title{ font-size:11px; white-space:normal; line-height:1.4; }
+  /* U5/U7: 狭幅では場面名を折り返して切れないようにする */
+  .slot .s-chap{ font-size:11px; white-space:normal; line-height:1.4; }
+  .slot .s-no{ font-size:19px; }
+  .slot.quick-slot .s-no{ font-size:15px; }
+  /* U7: 狭幅ではページグリッドが前/次ボタンと干渉するためボタンは隠す（グリッドで代替） */
+  #pagePrev, #pageNext{ display:none; }
+  .pager{ gap:8px; }
   .sheet-body{ padding:12px 12px 14px; }
 }
 
