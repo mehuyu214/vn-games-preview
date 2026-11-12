@@ -194,6 +194,7 @@ startBgm(g.id, "main");
 el.titleScr.dataset.theme = g.id;
 document.body.dataset.theme = g.id;
 el.tsBg.src = kvOf(g);
+el.titleScr.style.setProperty("--bd", "url(\"" + kvOf(g) + "\")");
 el.tsChar.src = g.images.char;
 el.tsChar.style.display = (ASSET_OVERRIDES[g.id] && ASSET_OVERRIDES[g.id].kv) ? "none" : "";
 el.tsLogoSub.textContent = LOGO_SUB[g.id] || "";
@@ -271,6 +272,7 @@ function setBg(key) {
 if (!key || key === curBgKey) return;
 curBgKey = key; markSeen(G.id, "bg:" + key);
 const src = bgOf(G, key); if (!src) return;
+el.game.style.setProperty("--bd", "url(\"" + src + "\")");
 bgFlip =!bgFlip;
 const show = bgFlip? el.bgA: el.bgB, hide = bgFlip? el.bgB: el.bgA;
 const img = new Image();
