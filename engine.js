@@ -103,13 +103,14 @@ let G = null, sceneMap = {}, cur = null, flags = {}, backlog = [];
 let typing = null, fullText = "", autoMode = false, autoTimer = null, skipTimer = null, ctrlSkip = false;
 let textPages = [""], pageStarts = [0], pageIdx = 0, restorePage = 0;
 let ended = false, replay = false, curBgKey = null, bgFlip = false, overlayStack = [];
+let lbOn = false; /* U8: レターボックスの表示状態（未指定ノードでは維持） */
 let pendingGame = null, saveMode = "save", savePage = 0, saveReturn = "game", extraTab = "flow";
 
 const el = {};
 ["portal","portalBgA","portalBgB","cards","gate","titleScr","tsBg","tsChar","tsLogoSub","tsLogoMain","tsHeroine","tsMenu","tsFoot",
 "game","stage","bgGrad","bgA","bgB","charImg","faceWin","gameParticles","tsParticles","msgwin","namebox","text","nextInd","quickbar","choices",
 "backlog","logLines","saveScr","slots","slotQuick","saveTitle","saveLegacy","pageInfo","configScr","extraScr","extraBody","extraTitle",
-"confirmScr","confirmMsg","bossScr","toast","r18badge","replayBadge"].forEach((id) => { el[id] = document.getElementById(id);});
+"confirmScr","confirmMsg","bossScr","toast","r18badge","replayBadge","cutin","locCard","lbTop","lbBot"].forEach((id) => { el[id] = document.getElementById(id);});
 
 function toast(msg, ms) {
 el.toast.textContent = msg; el.toast.hidden = false;
@@ -254,6 +255,10 @@ document.body.dataset.theme = g.id;
 el.replayBadge.hidden =!replay;
 el.bgA.classList.remove("on"); el.bgB.classList.remove("on"); el.charImg.classList.remove("on");
 curBgKey = null; curFaceSrc = null;
+/* U8: 演出レイヤーを初期状態へ戻す */
+lbOn = false; el.lbTop.hidden = true; el.lbBot.hidden = true;
+el.stage.classList.remove("center-text", "lb-on");
+el.cutin.hidden = true; el.locCard.hidden = true;
 buildParticles(el.gameParticles, g.id);
 stopAuto(); stopSkip();
 goTo(opts.scene || g.scenes[0].id);
@@ -337,6 +342,44 @@ voiceAudio.volume = (cfg.voiceVol ?? 80) / 100;
 const pr = voiceAudio.play();
 if (pr && pr.catch) pr.catch(() => {});
 }
+/* ---------- U8: 演出レイヤー ---------- */
+/* ノード任意フィールド（未指定時は従来表示で互換維持）:
+   cutin: 表情キー（faces）／"char"（立ち絵）／画像パス — 画面中央の横長バンドに目元カットを表示
+   loc: 場所名、loctime: 時刻・補足 — 場面転換のロケーションカードを表示
+   textMode: "center" — 地の文を全画面中央に表示（背景・立ち絵を隠す）
+   letterbox: true/false — 上下の黒帯。未指定は現状維持 */
+function cutinSrcFor(v) {
+if (!v || !G) return null;
+const faces = facesOf(G);
+if (faces && faces[v]) return faces[v];
+if (v === "char") return G.images.char;
+if (v.indexOf("/") >= 0) return v;
+return null;
+}
+function applyFx(n) {
+/* (3) センターテキスト：splitPages の計測より先にクラスを付ける */
+el.stage.classList.toggle("center-text", n.textMode === "center");
+/* (2) ロケーションカード */
+if (n.loc) {
+$(".loc-place", el.locCard).textContent = n.loc;
+const sub = $(".loc-sub", el.locCard);
+sub.textContent = n.loctime || "";
+sub.style.display = n.loctime? "": "none";
+el.locCard.hidden = false;
+} else el.locCard.hidden = true;
+/* (1) カットイン帯 */
+const cs = cutinSrcFor(n.cutin);
+if (cs) {
+if (el.cutin.dataset.cur !== cs) { el.cutin.style.backgroundImage = "url(\"" + cs + "\")"; el.cutin.dataset.cur = cs; }
+el.cutin.hidden = false;
+} else el.cutin.hidden = true;
+/* (4) レターボックス */
+if (n.letterbox === true) lbOn = true;
+else if (n.letterbox === false) lbOn = false;
+el.lbTop.hidden = el.lbBot.hidden = !lbOn;
+el.stage.classList.toggle("lb-on", lbOn);
+}
+
 function showNode(n) {
 if (n.set) applySet(n.set);
 stopAuto();
@@ -364,6 +407,7 @@ n._wasRead = wasRead;
 if (backlog.length > 600) backlog.shift();
 ended =!!n.end;
 el.text.classList.toggle("read", wasRead && cfg.readColorOn);
+applyFx(n); /* U8: センターテキストの計測に先立って演出を適用 */
 textPages = splitPages(n.text || "");
 pageIdx = Math.min(restorePage || 0, textPages.length - 1); restorePage = 0;
 typeText(textPages[pageIdx]);

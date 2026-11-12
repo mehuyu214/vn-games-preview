@@ -236,6 +236,38 @@ html[data-font="maru"] #text{ font-family:"Hiragino Maru Gothic ProN","Yu Gothic
 }
 #choices button:hover{ background:rgba(34,28,64,.97); border-color:var(--accent2); }
 
+/* ================= U8: 演出レイヤー ================= */
+/* (1) カットイン帯：画面中央の横長バンドに目元カットを割り込ませる */
+#cutin{ position:absolute; left:0; right:0; top:50%; transform:translateY(-50%); height:17cqw; z-index:4;
+  background-size:cover; background-position:center 24%; background-repeat:no-repeat; pointer-events:none;
+  border-top:2px solid rgba(255,255,255,.75); border-bottom:2px solid rgba(255,255,255,.75);
+  box-shadow:0 0 0 1px rgba(0,0,0,.55), 0 10px 34px rgba(0,0,0,.6), inset 0 0 60px rgba(0,0,0,.35); }
+#cutin:not([hidden]){ animation:cutinIn .38s ease-out; }
+@keyframes cutinIn{ from{ clip-path:inset(0 100% 0 0); } to{ clip-path:inset(0 0 0 0); } }
+/* (2) ロケーションカード：場所名＋時刻の場面転換表示 */
+#locCard{ position:absolute; right:5.5cqw; top:50%; transform:translateY(-50%); z-index:4; pointer-events:none;
+  text-align:left; color:#fff; text-shadow:0 1px 8px rgba(0,0,0,.9), 0 0 3px rgba(0,0,0,.9); }
+#locCard:not([hidden]){ animation:locIn .55s ease-out; }
+@keyframes locIn{ from{ opacity:0; transform:translate(2.5cqw, -50%); } to{ opacity:1; transform:translate(0, -50%); } }
+.loc-place{ font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif; font-size:4.4cqw; letter-spacing:.14em; line-height:1.25; }
+.loc-rule{ height:1px; background:rgba(255,255,255,.85); margin:.7cqw 0 .55cqw; box-shadow:0 1px 4px rgba(0,0,0,.8); }
+.loc-sub{ font-size:2.1cqw; letter-spacing:.22em; color:rgba(255,255,255,.94); }
+/* (4) レターボックス：上下の黒帯（メッセージウィンドウは帯の内側へ持ち上げる） */
+.lb-bar{ position:absolute; left:0; right:0; height:6.5cqw; background:#000; z-index:6; pointer-events:none; }
+#lbTop{ top:0; } #lbBot{ bottom:0; }
+.stage.lb-on #msgwin{ bottom:6.5cqw; }
+/* (3) 全画面センターテキスト：導入部の地の文を画面中央に表示 */
+.stage.center-text .bg-img, .stage.center-text .char-img, .stage.center-text #gameParticles{ opacity:0 !important; }
+.stage.center-text #faceWin, .stage.center-text #namebox{ display:none; }
+/* クイックバーは中央モードでも下端に残し、SAVE/SKIP等の操作を維持する */
+.stage.center-text #quickbar{ position:absolute; left:0; right:0; bottom:1.3cqw; }
+.stage.center-text #msgwin{ inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0; }
+.stage.center-text #textbox{ height:auto; width:min(78cqw, 96%); padding:0; background:none; text-align:center; }
+.stage.center-text #text{ height:calc(var(--font-size) * 1.85 * 4); font-size:calc(var(--font-size) * 1.35); line-height:1.85; text-align:center; }
+.stage.center-text #nextInd{ right:0; bottom:-2.6cqw; }
+.stage.center-text.lb-on #msgwin{ top:6.5cqw; bottom:6.5cqw; }
+html[data-fx="off"] #cutin, html[data-fx="off"] #locCard{ animation:none; }
+
 /* パネル（バックログ） */
 .panel{ position:absolute; inset:0; z-index:8; background:rgba(5,4,13,.94); display:flex; flex-direction:column; padding:2.2cqw; }
 .panel-head{ display:flex; align-items:center; gap:14px; margin-bottom:1.2cqw; }
