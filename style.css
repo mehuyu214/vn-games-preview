@@ -248,53 +248,74 @@ html[data-font="maru"] #text{ font-family:"Hiragino Maru Gothic ProN","Yu Gothic
 .log-line b{ color:var(--accent2); margin-right:.7em; }
 
 /* ================= シート（セーブ/コンフィグ/EXTRA） =================
-   画面内に収める：シート自体はスクロールさせない */
+   U5: セーブ／EXTRAをコンフィグv4水準へ統一。シート自体はスクロールさせない。
+   構成は .cfg-panel と同じ言語（レール＋枠＋角ダイヤ＋見出し＋作品別 --cp-* スキン）。
+   .sheet = パネル、.sheet-body = 枠（.cfg-frame 相当） */
 .modal-wrap.top{ align-items:center; overflow:hidden; }
 .sheet{
-  width:min(1020px, 100%); max-height:calc(100dvh - 20px); display:flex; flex-direction:column;
-  border-radius:4px; padding:16px 20px 18px; overflow:hidden;
-  background:var(--panel); border:1px solid var(--line); border-top:3px solid var(--accent);
+  position:relative; width:min(1240px, 97vw); max-height:calc(100dvh - 20px); display:flex;
+  background:var(--cp-bg); color:var(--cp-ink); border:1px solid var(--cp-line);
+  box-shadow:0 30px 80px rgba(0,0,0,.55); overflow:hidden;
 }
-.sheet.narrow{ width:min(860px,100%); }
-.sheet.wide{ width:min(1140px,100%); }
-.sheet-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; flex:none; }
-.sheet-head h2{ font-family:"Hiragino Mincho ProN","Yu Mincho",serif; letter-spacing:.18em; font-size:20px; }
+.sheet::before, .sheet::after, .sheet-body::before, .sheet-body::after{
+  content:""; position:absolute; width:13px; height:13px; transform:rotate(45deg); z-index:3;
+  background:var(--cp-bg); border:2px solid var(--accent); }
+.sheet::before{ top:9px; left:9px; }
+.sheet::after{ top:9px; right:9px; }
+.sheet-body::before{ bottom:9px; left:9px; }
+.sheet-body::after{ bottom:9px; right:9px; }
+.sys-rail{ flex:0 0 44px; writing-mode:vertical-rl; display:flex; align-items:center; justify-content:center;
+  font-size:11px; letter-spacing:.55em; color:var(--accent2); border-right:1px solid var(--cp-line); background:var(--cp-soft); }
+.sheet-body{ position:relative; flex:1; display:flex; flex-direction:column; min-width:0;
+  box-shadow:inset 0 0 0 1px var(--cp-line); margin:7px; padding:16px 26px 18px; overflow:hidden; }
+.sheet-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:10px; flex:none; }
+.sys-eyebrow{ font-size:10.5px; letter-spacing:.42em; color:var(--accent); margin-bottom:7px; }
+.sheet-head h2{ font-size:29px; font-weight:700; letter-spacing:.08em; color:var(--cp-ink); }
+.sys-close{ flex:none; background:none; border:1px solid var(--cp-line); color:var(--cp-ink); font-size:13.5px;
+  letter-spacing:.14em; padding:9px 22px; cursor:pointer; }
+.sys-close:hover{ border-color:var(--accent); color:var(--accent); }
 .sheet-tools{ display:flex; gap:10px; align-items:center; }
-.pager{ display:flex; align-items:center; justify-content:center; gap:14px; margin:8px 0; font-size:12.5px; color:var(--ink-dim); flex:none; }
+#saveScr .sheet-tools .btn{ background:var(--cp-soft); border-color:var(--cp-line); color:var(--cp-ink); }
+#saveScr .sheet-tools .btn:hover{ border-color:var(--accent); }
+.pager{ display:flex; align-items:center; justify-content:center; gap:14px; margin:8px 0; font-size:12.5px; color:var(--cp-dim); flex:none; }
+#saveScr .pager .btn{ background:var(--cp-soft); border-color:var(--cp-line); color:var(--cp-ink); }
+#saveScr .pager .btn:hover{ border-color:var(--accent); }
 .slots{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
 .slot{
-  text-align:left; padding:7px; border-radius:3px; color:var(--ink); position:relative; min-width:0;
-  background:rgba(16,14,34,.92); border:1px solid var(--line); transition:border-color .15s; width:100%;
+  text-align:left; padding:7px; border-radius:3px; color:var(--cp-ink); position:relative; min-width:0;
+  background:var(--cp-soft); border:1px solid var(--cp-line); transition:border-color .15s, box-shadow .15s; width:100%;
 }
-.slot:hover{ border-color:var(--accent2); }
-.slot .thumb{ width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:2px; background:#23233d; display:block; }
-.slot .thumb.empty{ display:flex; align-items:center; justify-content:center; color:#6f6a92; font-size:11.5px; border:1px dashed rgba(160,150,210,.3); }
-.slot .s-meta{ display:flex; justify-content:space-between; gap:6px; font-size:10.5px; color:var(--ink-dim); margin-top:5px; }
-.slot .s-title{ font-size:12px; font-weight:700; margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.slot .s-text{ font-size:11px; color:var(--ink-dim); line-height:1.45; margin-top:2px; display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
-.slot .s-no{ position:absolute; top:11px; left:11px; background:rgba(8,6,18,.8); border:1px solid var(--line); border-radius:2px; font-size:10.5px; padding:1px 7px; }
+.slot:hover{ border-color:var(--accent); box-shadow:0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent); }
+.slot .thumb{ width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:2px; background:#23233d; display:block; border:1px solid var(--cp-line); }
+.slot .thumb.empty{ display:flex; align-items:center; justify-content:center; color:var(--cp-dim); font-size:11.5px; border:1px dashed var(--cp-line); background:var(--cp-soft); }
+.slot .s-meta{ display:flex; justify-content:space-between; gap:6px; font-size:10.5px; color:var(--cp-dim); margin-top:5px; }
+.slot .s-title{ font-size:12px; font-weight:700; margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--cp-ink); }
+.slot .s-text{ font-size:11px; color:var(--cp-dim); line-height:1.45; margin-top:2px; display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
+.slot .s-no{ position:absolute; top:11px; left:11px; background:rgba(8,6,18,.82); border:1px solid var(--cp-line); border-radius:2px; font-size:10.5px; padding:1px 7px; color:#f4f1f8; }
 .slot .s-del{ position:absolute; top:11px; right:11px; background:rgba(90,10,30,.88); border:1px solid rgba(255,140,170,.5); color:#ffd7e0;
   border-radius:2px; font-size:10.5px; padding:1px 7px; }
 .slot-quick{ margin-bottom:2px; flex:none; }
 .slot-quick .slots{ grid-template-columns:minmax(200px, 300px); }
-.legacy-note{ font-size:11.5px; color:var(--ink-dim); margin-bottom:5px; }
+.legacy-note{ font-size:11.5px; color:var(--cp-dim); margin-bottom:5px; }
 @media (max-width:900px){ .slots{ grid-template-columns:repeat(3,1fr); } }
 @media (max-width:560px){
   .slots{ grid-template-columns:repeat(3,1fr); gap:7px; }
   .slot .s-text{ display:none; }
   .slot{ padding:5px; }
-  .sheet{ padding:12px 12px 14px; }
+  /* U5: 狭幅ではタイトルを折り返して「データがありません」が切れないようにする */
+  .slot .s-title{ font-size:11px; white-space:normal; line-height:1.4; }
+  .sheet-body{ padding:12px 12px 14px; }
 }
 
 /* ================= コンフィグ v4（全面再設計） ================= */
-/* 作品別スキン変数 */
-#configScr{ --cp-bg:linear-gradient(165deg, rgba(23,20,44,.97), rgba(14,12,30,.96)); --cp-ink:#f0edff; --cp-dim:#a49ec4; --cp-line:rgba(154,140,255,.28); --cp-soft:rgba(154,140,255,.08); }
-body[data-theme="sakura"] #configScr{ --cp-bg:linear-gradient(165deg, rgba(255,250,250,.96), rgba(255,236,242,.95)); --cp-ink:#503040; --cp-dim:#a37b8d; --cp-line:rgba(190,105,145,.38); --cp-soft:rgba(232,139,176,.12); }
-body[data-theme="misaki"] #configScr{ --cp-bg:linear-gradient(165deg, rgba(19,22,46,.96), rgba(11,13,30,.95)); --cp-ink:#f4ecd9; --cp-dim:#9aa0c2; --cp-line:rgba(242,166,90,.30); --cp-soft:rgba(242,166,90,.09); }
-body[data-theme="rin"] #configScr{ --cp-bg:linear-gradient(165deg, rgba(20,30,44,.96), rgba(12,19,30,.95)); --cp-ink:#e8f0f7; --cp-dim:#93a9bd; --cp-line:rgba(127,178,217,.30); --cp-soft:rgba(127,178,217,.09); }
-body[data-theme="yuna"] #configScr{ --cp-bg:linear-gradient(165deg, rgba(38,30,21,.96), rgba(24,19,13,.95)); --cp-ink:#f2e7d0; --cp-dim:#b3a284; --cp-line:rgba(196,154,90,.32); --cp-soft:rgba(196,154,90,.10); }
-body[data-theme="serena"] #configScr{ --cp-bg:linear-gradient(165deg, rgba(34,15,26,.96), rgba(20,9,16,.95)); --cp-ink:#f5e6ee; --cp-dim:#bd93a8; --cp-line:rgba(217,160,91,.34); --cp-soft:rgba(198,122,168,.10); }
-#configScr{ background:rgba(5,4,12,.6); color:var(--cp-ink); }
+/* U5: --cp-* スキン変数はコンフィグ／セーブ／EXTRAで共有する */
+#configScr, #saveScr, #extraScr{ --cp-bg:linear-gradient(165deg, rgba(23,20,44,.97), rgba(14,12,30,.96)); --cp-ink:#f0edff; --cp-dim:#a49ec4; --cp-line:rgba(154,140,255,.28); --cp-soft:rgba(154,140,255,.08); }
+body[data-theme="sakura"] #configScr, body[data-theme="sakura"] #saveScr, body[data-theme="sakura"] #extraScr{ --cp-bg:linear-gradient(165deg, rgba(255,250,250,.96), rgba(255,236,242,.95)); --cp-ink:#503040; --cp-dim:#a37b8d; --cp-line:rgba(190,105,145,.38); --cp-soft:rgba(232,139,176,.12); }
+body[data-theme="misaki"] #configScr, body[data-theme="misaki"] #saveScr, body[data-theme="misaki"] #extraScr{ --cp-bg:linear-gradient(165deg, rgba(19,22,46,.96), rgba(11,13,30,.95)); --cp-ink:#f4ecd9; --cp-dim:#9aa0c2; --cp-line:rgba(242,166,90,.30); --cp-soft:rgba(242,166,90,.09); }
+body[data-theme="rin"] #configScr, body[data-theme="rin"] #saveScr, body[data-theme="rin"] #extraScr{ --cp-bg:linear-gradient(165deg, rgba(20,30,44,.96), rgba(12,19,30,.95)); --cp-ink:#e8f0f7; --cp-dim:#93a9bd; --cp-line:rgba(127,178,217,.30); --cp-soft:rgba(127,178,217,.09); }
+body[data-theme="yuna"] #configScr, body[data-theme="yuna"] #saveScr, body[data-theme="yuna"] #extraScr{ --cp-bg:linear-gradient(165deg, rgba(38,30,21,.96), rgba(24,19,13,.95)); --cp-ink:#f2e7d0; --cp-dim:#b3a284; --cp-line:rgba(196,154,90,.32); --cp-soft:rgba(196,154,90,.10); }
+body[data-theme="serena"] #configScr, body[data-theme="serena"] #saveScr, body[data-theme="serena"] #extraScr{ --cp-bg:linear-gradient(165deg, rgba(34,15,26,.96), rgba(20,9,16,.95)); --cp-ink:#f5e6ee; --cp-dim:#bd93a8; --cp-line:rgba(217,160,91,.34); --cp-soft:rgba(198,122,168,.10); }
+#configScr, #saveScr, #extraScr{ background:rgba(5,4,12,.6); color:var(--cp-ink); }
 .cfg-bg{ position:absolute; inset:-24px; background-size:cover; background-position:center; filter:blur(15px) saturate(1.05);
   transform:scale(1.05); opacity:.5; }
 .cfg-panel{ position:relative; width:min(1240px,97vw); height:min(790px,96dvh); display:flex;
@@ -423,40 +444,56 @@ html[data-fx="off"] .cfg-pane.on{ animation:none; }
   .cfg-panes{ padding:0 18px 4px; }
 }
 
-/* EXTRA */
-.extra-tabs{ display:flex; gap:7px; margin-bottom:12px; flex:none; }
-.extra-tabs button{ padding:6px 16px; border-radius:3px; background:rgba(18,15,40,.9); border:1px solid var(--line); color:var(--ink-dim); font-size:13px; letter-spacing:.06em; }
-.extra-tabs button.on{ background:var(--accent); color:#fff; border-color:transparent; font-weight:700; }
-.extra-body{ overflow:hidden; }
+/* EXTRA（U5: タブは .cfg-tab を流用してコンフィグv4と同一意匠に。内容も --cp-* スキンで統一） */
+.extra-tabs{ display:flex; gap:8px; padding:2px 0 0; margin-bottom:12px; flex:none; }
+.extra-body{ flex:1; min-height:0; overflow:hidden; }
+#extraScr .extra-body .btn{ background:var(--cp-soft); border-color:var(--cp-line); color:var(--cp-ink); }
+#extraScr .extra-body .btn:hover{ border-color:var(--accent); }
 .flow-wrap{ overflow:hidden; padding:2px; }
 .flow-canvas{ position:relative; margin:0 auto; transform-origin:top left; }
 .flow-node{
   position:absolute; width:172px; padding:7px 9px; border-radius:3px; font-size:11.5px; line-height:1.5;
-  background:rgba(20,17,44,.96); border:1px solid var(--line); color:var(--ink-dim);
+  background:var(--cp-soft); border:1px solid var(--cp-line); color:var(--cp-dim);
 }
-.flow-node b{ display:block; font-size:12px; color:var(--ink); margin-bottom:1px; }
-.flow-node small{ color:#9a94bd; }
-.flow-node.visited{ border-color:var(--accent); color:var(--ink); }
+.flow-node b{ display:block; font-size:12px; color:var(--cp-ink); margin-bottom:1px; }
+.flow-node small{ color:var(--cp-dim); }
+.flow-node.visited{ border-color:var(--accent); color:var(--cp-ink); }
 .flow-node.end{ border-color:#4da873; }
-.flow-node.end.visited{ background:rgba(18,52,34,.95); }
-.flow-node button{ margin-top:5px; font-size:11px; padding:2px 9px; border-radius:2px; background:rgba(46,40,88,.95); border:1px solid var(--line); color:#fff; }
+.flow-node.end.visited{ background:rgba(18,52,34,.95); color:#c9ffe9; }
+.flow-node.end.visited b, .flow-node.end.visited small{ color:#c9ffe9; }
+.flow-node button{ margin-top:5px; font-size:11px; padding:2px 9px; border-radius:2px; background:var(--cp-soft); border:1px solid var(--cp-line); color:var(--cp-ink); }
 .flow-node button:hover{ border-color:var(--accent2); }
 .flow-svg{ position:absolute; inset:0; pointer-events:none; }
-.flow-legend{ font-size:11.5px; color:var(--ink-dim); margin-bottom:8px; }
+.flow-legend{ font-size:11.5px; color:var(--cp-dim); margin-bottom:8px; }
 .gallery-wrap{ overflow:auto; max-height:calc(100dvh - 190px); }
 .gallery-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:10px; }
-.g-item{ border:1px solid var(--line); border-radius:3px; overflow:hidden; background:rgba(14,12,32,.92); }
+.g-item{ border:1px solid var(--cp-line); border-radius:3px; overflow:hidden; background:var(--cp-soft); }
 .g-item img{ width:100%; aspect-ratio:16/10; object-fit:cover; object-position:top; display:block; }
-.g-item .g-name{ padding:6px 9px; font-size:12px; }
+.g-item .g-name{ padding:6px 9px; font-size:12px; color:var(--cp-ink); }
 .g-item.locked img{ filter:brightness(0) opacity(.45); }
-.g-item.locked .g-name{ color:#8d87a8; }
+.g-item.locked .g-name{ color:var(--cp-dim); }
 .ends-list{ display:flex; flex-direction:column; gap:9px; }
-.end-row{ display:flex; align-items:center; gap:13px; border:1px solid var(--line); border-radius:3px; padding:11px 14px; background:rgba(14,12,32,.92); }
+.end-row{ display:flex; align-items:center; gap:13px; border:1px solid var(--cp-line); border-radius:3px; padding:11px 14px; background:var(--cp-soft); }
 .end-badge{ font-size:11px; font-weight:700; letter-spacing:.1em; padding:3px 9px; border-radius:2px; background:#7fd6a4; color:#0d2419; flex:none; }
 .end-row.unreached .end-badge{ background:rgba(70,64,104,.9); color:#b9b3cf; }
-.end-row .e-name{ font-weight:700; font-size:14px; }
-.end-row .e-sub{ font-size:11.5px; color:var(--ink-dim); }
+.end-row .e-name{ font-weight:700; font-size:14px; color:var(--cp-ink); }
+.end-row .e-sub{ font-size:11.5px; color:var(--cp-dim); }
 .end-row.unreached{ opacity:.6; }
+
+/* U5 モバイル：セーブ／EXTRAもコンフィグ同様に全画面化（レール・角ダイヤは隠す） */
+@media (max-width:860px){
+  #saveScr.modal-wrap, #extraScr.modal-wrap{ padding:0; }
+  .sheet{ width:100vw; height:100dvh; max-height:none; border:none; }
+  .sheet::before, .sheet::after, .sheet-body::before, .sheet-body::after{ display:none; }
+  .sheet-body{ margin:0; box-shadow:none; padding:12px 16px 14px; }
+  .sys-rail{ display:none; }
+  .sheet-head h2{ font-size:21px; }
+  .sys-eyebrow{ margin-bottom:4px; letter-spacing:.3em; }
+  .extra-tabs{ gap:5px; }
+  /* U5: 390pxでもタブの日本語が折り返さないよう詰める */
+  .extra-tabs .cfg-tab{ padding:7px 6px; }
+  .extra-tabs .cfg-tab-jp{ white-space:nowrap; font-size:9.5px; letter-spacing:.06em; }
+}
 
 /* ボスキー */
 #bossScr{ position:fixed; inset:0; z-index:200; background:#e8eaed; color:#202124; padding:26px; overflow:auto;

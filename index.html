@@ -111,11 +111,16 @@
 <!-- ============ セーブ/ロード ============ -->
 <div id="saveScr" class="modal-wrap top" hidden>
   <div class="sheet">
+    <div class="sys-rail">SAVE / LOAD</div>
+    <div class="sheet-body">
     <div class="sheet-head">
-      <h2 id="saveTitle">セーブ</h2>
+      <div class="sheet-head-l">
+        <div class="sys-eyebrow">SAVE &amp; LOAD — SYSTEM</div>
+        <h2 id="saveTitle">セーブ</h2>
+      </div>
       <div class="sheet-tools">
         <span id="saveLegacy"></span>
-        <button class="btn small" id="saveClose" type="button">閉じる</button>
+        <button class="sys-close" id="saveClose" type="button">閉じる</button>
       </div>
     </div>
     <div class="slot-quick" id="slotQuick"></div>
@@ -125,6 +130,7 @@
       <button class="btn small" id="pageNext" type="button">次のページ ▶</button>
     </div>
     <div id="slots" class="slots"></div>
+    </div>
   </div>
 </div>
 
@@ -284,18 +290,24 @@
 </div>
 <!-- ============ EXTRA ============ -->
 <div id="extraScr" class="modal-wrap top" hidden>
-  <div class="sheet wide">
+  <div class="sheet">
+    <div class="sys-rail">EXTRA</div>
+    <div class="sheet-body">
     <div class="sheet-head">
-      <h2 id="extraTitle">EXTRA</h2>
-      <button class="btn small" id="extraClose" type="button">閉じる</button>
+      <div class="sheet-head-l">
+        <div class="sys-eyebrow">EXTRA CONTENTS</div>
+        <h2 id="extraTitle">EXTRA</h2>
+      </div>
+      <button class="sys-close" id="extraClose" type="button">閉じる</button>
     </div>
     <div class="extra-tabs">
-      <button type="button" data-tab="flow" class="on">フローチャート</button>
-      <button type="button" data-tab="gallery">ギャラリー</button>
-      <button type="button" data-tab="ends">エンディング</button>
-      <button type="button" data-tab="credits">クレジット</button>
+      <button type="button" data-tab="flow" class="cfg-tab on"><span class="cfg-tab-en">FLOW</span><span class="cfg-tab-jp">フローチャート</span></button>
+      <button type="button" data-tab="gallery" class="cfg-tab"><span class="cfg-tab-en">GALLERY</span><span class="cfg-tab-jp">ギャラリー</span></button>
+      <button type="button" data-tab="ends" class="cfg-tab"><span class="cfg-tab-en">ENDINGS</span><span class="cfg-tab-jp">エンディング</span></button>
+      <button type="button" data-tab="credits" class="cfg-tab"><span class="cfg-tab-en">CREDITS</span><span class="cfg-tab-jp">クレジット</span></button>
     </div>
     <div id="extraBody" class="extra-body"></div>
+    </div>
   </div>
 </div>
 

@@ -820,8 +820,8 @@ function openExtra(g) {
 el.extraTitle.textContent = g.title + " — EXTRA";
 extraTab = "flow";
 $$(".extra-tabs button").forEach((b) => b.classList.toggle("on", b.dataset.tab === "flow"));
+showLayer(el.extraScr); // U5: 先に表示してから描画する（renderFlow の幅計測が hidden だと 0 になり縮小が効かなかった）
 renderExtra(g);
-showLayer(el.extraScr);
 }
 $$(".extra-tabs button").forEach((b) => b.addEventListener("click", () => {
 extraTab = b.dataset.tab;
