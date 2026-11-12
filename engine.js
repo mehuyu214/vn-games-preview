@@ -22,7 +22,7 @@ let cfg = (() => { try { return Object.assign({}, defaultCfg, JSON.parse(localSt
 function saveCfg() { try { localStorage.setItem(CFG_KEY, JSON.stringify(cfg));} catch {}}
 function applyCfg() {
 const portrait = window.innerHeight > window.innerWidth;
-const eff = (parseFloat(cfg.fontSize) * (portrait ? 1.6 : 1)).toFixed(2);
+const eff = (parseFloat(cfg.fontSize) * (portrait ? 1.45 : 1)).toFixed(2);
 document.documentElement.style.setProperty("--font-size", eff + "cqw");
 document.documentElement.style.setProperty("--read-color", cfg.readColorOn? cfg.readColor: "#fdfbff");
 document.documentElement.dataset.font = cfg.font || "mincho";
@@ -31,6 +31,7 @@ document.documentElement.style.setProperty("--msg-alpha", ((cfg.msgOpacity ?? 87
 if (voiceAudio) voiceAudio.volume = (cfg.voiceVol ?? 80) / 100;
 if (bgmAudio) bgmAudio.volume = (cfg.bgmVol ?? 50) / 100;
 if (!cfg.voiceOn) stopVoice();
+if (cur && !el.game.hidden && cur.text) { if (typing) completeType(); const off = pageStarts[pageIdx] || 0; textPages = splitPages(cur.text); pageIdx = 0; for (let i = 0; i < pageStarts.length; i++) { if (pageStarts[i] <= off) pageIdx = i; } el.text.textContent = textPages[pageIdx]; afterType(); }
 }
 
 /* ---------- 永続データ ---------- */
@@ -97,6 +98,7 @@ return g.images.char;
 /* ---------- 実行時状態 ---------- */
 let G = null, sceneMap = {}, cur = null, flags = {}, backlog = [];
 let typing = null, fullText = "", autoMode = false, autoTimer = null, skipTimer = null, ctrlSkip = false;
+let textPages = [""], pageStarts = [0], pageIdx = 0, restorePage = 0;
 let ended = false, replay = false, curBgKey = null, bgFlip = false, overlayStack = [];
 let pendingGame = null, saveMode = "save", savePage = 0, saveReturn = "game", extraTab = "flow";
 
@@ -355,7 +357,9 @@ n._wasRead = wasRead;
 if (backlog.length > 600) backlog.shift();
 ended =!!n.end;
 el.text.classList.toggle("read", wasRead && cfg.readColorOn);
-typeText(n.text || "");
+textPages = splitPages(n.text || "");
+pageIdx = Math.min(restorePage || 0, textPages.length - 1); restorePage = 0;
+typeText(textPages[pageIdx]);
 playVoiceFor(n);
 { const m = n.bgm || moodOf(n); if (G) { if (m === "off") { if (bgmAudio) stopBgm(); } else if (m !== bgmMood) startBgm(G.id, m); } }
 if (n.se && !skipTimer) playSe(n.se);
@@ -371,6 +375,48 @@ storeJSON(PROG_KEY, progress);
 toast(first? `${kind} END に到達しました（EXTRAが解放されました）`: `${kind} END に到達`, 2600);
 }
 
+/* 長文をメッセージ枠に収まるページへ分割する。枠は固定高さ＋overflow:hidden
+   のため、分割しないと長文は黙って見切れる（エンディング文で実測済み）。
+   実測ベースの分割なので、フォントサイズ・画面幅が変わっても見切れない。 */
+let measureEl = null;
+function splitPages(t) {
+pageStarts = [0];
+if (!t) return [""];
+if (!measureEl) {
+measureEl = document.createElement("div");
+measureEl.style.cssText = "position:absolute; left:0; top:0; visibility:hidden; pointer-events:none; white-space:pre-wrap;";
+el.text.parentElement.appendChild(measureEl);
+}
+const cs = getComputedStyle(el.text);
+measureEl.style.width = el.text.clientWidth + "px";
+measureEl.style.font = cs.font;
+measureEl.style.lineHeight = cs.lineHeight;
+measureEl.style.letterSpacing = cs.letterSpacing;
+const maxH = el.text.clientHeight + 1;
+const fits = (str) => { measureEl.textContent = str; return measureEl.scrollHeight <= maxH; };
+let result;
+if (fits(t)) { result = [t]; }
+else {
+const pages = [];
+let rest = t, base = 0;
+while (rest.length) {
+if (fits(rest)) { pages.push(rest); break; }
+let lo = 1, hi = rest.length;
+while (lo < hi) { const mid = Math.ceil((lo + hi) / 2); if (fits(rest.slice(0, mid))) lo = mid; else hi = mid - 1; }
+let cut = Math.max(1, lo);
+const seg = rest.slice(0, cut);
+const br = Math.max(seg.lastIndexOf("。"), seg.lastIndexOf("！"), seg.lastIndexOf("？"), seg.lastIndexOf("\n"));
+if (br >= cut * 0.55) cut = br + 1;
+pages.push(rest.slice(0, cut));
+base += cut; pageStarts.push(base);
+rest = rest.slice(cut);
+}
+result = pages;
+}
+measureEl.textContent = "";
+return result;
+}
+
 function typeText(t) {
 fullText = t; el.text.textContent = ""; el.nextInd.style.visibility = "hidden";
 if (typing) clearInterval(typing);
@@ -383,8 +429,8 @@ if (i >= t.length) { clearInterval(typing); typing = null; afterType();}
 }, 20);
 }
 function afterType() {
-el.nextInd.style.visibility = (cur &&!cur.choice &&!ended)? "visible": "hidden";
-if (autoMode && cur &&!cur.choice &&!ended) { stopAuto(); autoTimer = setTimeout(() => advance(), cfg.autoDelay);}
+el.nextInd.style.visibility = (cur &&!cur.choice && (!ended || pageIdx < textPages.length - 1))? "visible": "hidden";
+if (autoMode && cur &&!cur.choice && (!ended || pageIdx < textPages.length - 1)) { stopAuto(); autoMode = true; autoTimer = setTimeout(() => advance(), cfg.autoDelay);}
 if (skipTimer &&!cur?.choice &&!ended) { /* スキップ継続はadvance側で処理 */}
 }
 function completeType() { if (typing) { clearInterval(typing); typing = null; el.text.textContent = fullText; afterType();}}
@@ -393,6 +439,7 @@ function advance() {
 if (overlayStack.length) return;
 if (typing) { completeType(); return;}
 if (!cur || cur.choice) return;
+if (pageIdx < textPages.length - 1) { pageIdx++; typeText(textPages[pageIdx]); return; }
 if (ended) { backToTitle(); return;}
 const id = nextId(cur);
 if (id) { playSe("click"); goTo(id); } else backToTitle();
@@ -517,7 +564,7 @@ return c.toDataURL("image/jpeg", 0.62);
 } catch { return null;}
 }
 function makeRec() {
-return { game: G.id, scene: cur.id, flags: {...flags}, date: new Date().toISOString(),
+return { game: G.id, scene: cur.id, page: pageIdx, flags: {...flags}, date: new Date().toISOString(),
 text: (cur.text || "").slice(0, 120), love: flags.love || 0, thumb: captureThumb()};
 }
 function persistSaves() {
@@ -536,6 +583,7 @@ saveBook.quick = makeRec(); persistSaves(); toast("クイックセーブしま�
 function loadRec(rec) {
 const g = GAMES.find((x) => x.id === rec.game); if (!g) return;
 hideLayer(el.saveScr);
+restorePage = rec.page || 0;
 startGame(g, { scene: rec.scene, flags: rec.flags});
 toast("ロードしました");
 }
