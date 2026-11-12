@@ -347,7 +347,8 @@ ended =!!n.end;
 el.text.classList.toggle("read", wasRead && cfg.readColorOn);
 typeText(n.text || "");
 playVoiceFor(n);
-{ const m = moodOf(n); if (G && m !== bgmMood) startBgm(G.id, m); }
+{ const m = n.bgm || moodOf(n); if (G) { if (m === "off") { if (bgmAudio) stopBgm(); } else if (m !== bgmMood) startBgm(G.id, m); } }
+if (n.se && !skipTimer) playSe(n.se);
 if (n.choice) showChoices(n.choice);
 if (n.end) onEnding(n);
 }
