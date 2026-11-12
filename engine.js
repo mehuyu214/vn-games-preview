@@ -195,6 +195,10 @@ return { list: out, legacy};
 function openTitle(g) {
 G = g;
 el.portal.hidden = true; el.game.hidden = true; el.titleScr.hidden = false;
+/* U4: 入場演出を毎回最初から再生（クラス付け直しでアニメーション再始動） */
+el.titleScr.classList.remove("ts-anim");
+void el.titleScr.offsetWidth;
+el.titleScr.classList.add("ts-anim");
 startBgm(g.id, "main");
 el.titleScr.dataset.theme = g.id;
 document.body.dataset.theme = g.id;

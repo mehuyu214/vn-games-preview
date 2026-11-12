@@ -123,6 +123,46 @@ img{ user-select:none; -webkit-user-drag:none; }
 .ts-menu button .lock{ font-size:1.1cqw; color:#ffb0c0; margin-left:.7cqw; letter-spacing:.04em; }
 .ts-foot{ position:absolute; right:5.2cqw; top:2cqw; font-size:1.1cqw; color:rgba(255,255,255,.85); letter-spacing:.1em; text-shadow:0 1px 6px rgba(0,0,0,.7); }
 
+/* U4: タイトル画面の入場演出（openTitle が .ts-anim を付け直して再生）
+   fill は backwards のみ：終了後は通常スタイルへ戻し、hover の transform を殺さない */
+@keyframes tsFadeUp{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+@keyframes tsFadeIn{ from{ opacity:0; } to{ opacity:1; } }
+@keyframes tsLogoIn{ from{ opacity:0; transform:scale(1.05); filter:blur(6px); } to{ opacity:1; transform:none; filter:blur(0); } }
+@keyframes tsCharIn{ from{ opacity:0; transform:translateX(3cqw); } to{ opacity:1; transform:none; } }
+@keyframes tsBgZoom{ from{ opacity:.45; transform:scale(1.07); } to{ opacity:1; transform:scale(1); } }
+@keyframes tsLineGrow{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
+#titleScr.ts-anim .ts-bg{ animation:tsBgZoom 1.15s ease-out backwards; }
+#titleScr.ts-anim .ts-char{ animation:tsCharIn .6s .05s ease-out backwards; }
+#titleScr.ts-anim .ts-frame{ animation:tsFadeIn .5s .02s ease-out backwards; }
+#titleScr.ts-anim .ts-logo-sub{ animation:tsFadeUp .45s .05s ease-out backwards; }
+#titleScr.ts-anim .ts-logo-main{ animation:tsLogoIn .55s .12s ease-out backwards; }
+#titleScr.ts-anim .ts-logo-line span{ transform-origin:left center; animation:tsLineGrow .4s .3s ease-out backwards; }
+#titleScr.ts-anim .ts-heroine{ animation:tsFadeUp .45s .38s ease-out backwards; }
+#titleScr.ts-anim .ts-menu button{ animation:tsFadeUp .36s ease-out backwards; }
+#titleScr.ts-anim .ts-menu button:nth-child(1){ animation-delay:.44s; }
+#titleScr.ts-anim .ts-menu button:nth-child(2){ animation-delay:.49s; }
+#titleScr.ts-anim .ts-menu button:nth-child(3){ animation-delay:.54s; }
+#titleScr.ts-anim .ts-menu button:nth-child(4){ animation-delay:.59s; }
+#titleScr.ts-anim .ts-menu button:nth-child(5){ animation-delay:.64s; }
+#titleScr.ts-anim .ts-menu button:nth-child(6){ animation-delay:.69s; }
+#titleScr.ts-anim .ts-foot{ animation:tsFadeIn .5s .5s ease-out backwards; }
+/* 演出OFF設定・OSの reduced motion では入場演出を出さない */
+html[data-fx="off"] #titleScr.ts-anim .ts-bg,
+html[data-fx="off"] #titleScr.ts-anim .ts-char,
+html[data-fx="off"] #titleScr.ts-anim .ts-frame,
+html[data-fx="off"] #titleScr.ts-anim .ts-logo-sub,
+html[data-fx="off"] #titleScr.ts-anim .ts-logo-main,
+html[data-fx="off"] #titleScr.ts-anim .ts-logo-line span,
+html[data-fx="off"] #titleScr.ts-anim .ts-heroine,
+html[data-fx="off"] #titleScr.ts-anim .ts-menu button,
+html[data-fx="off"] #titleScr.ts-anim .ts-foot{ animation:none; }
+@media (prefers-reduced-motion: reduce){
+  #titleScr.ts-anim .ts-bg, #titleScr.ts-anim .ts-char, #titleScr.ts-anim .ts-frame,
+  #titleScr.ts-anim .ts-logo-sub, #titleScr.ts-anim .ts-logo-main,
+  #titleScr.ts-anim .ts-logo-line span, #titleScr.ts-anim .ts-heroine,
+  #titleScr.ts-anim .ts-menu button, #titleScr.ts-anim .ts-foot{ animation:none; }
+}
+
 /* パーティクル（控えめ） */
 .particles{ position:absolute; inset:0; overflow:hidden; pointer-events:none; }
 .particles i{ position:absolute; top:0; display:block; border-radius:60% 40% 60% 40%;
