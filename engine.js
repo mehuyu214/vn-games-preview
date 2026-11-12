@@ -102,7 +102,7 @@ let pendingGame = null, saveMode = "save", savePage = 0, saveReturn = "game", ex
 
 const el = {};
 ["portal","portalBgA","portalBgB","cards","gate","titleScr","tsBg","tsChar","tsLogoSub","tsLogoMain","tsHeroine","tsMenu","tsFoot",
-"game","stage","bgGrad","bgA","bgB","charImg","gameParticles","tsParticles","msgwin","namebox","text","nextInd","quickbar","choices",
+"game","stage","bgGrad","bgA","bgB","charImg","faceWin","gameParticles","tsParticles","msgwin","namebox","text","nextInd","quickbar","choices",
 "backlog","logLines","saveScr","slots","slotQuick","saveTitle","saveLegacy","pageInfo","configScr","extraScr","extraBody","extraTitle",
 "confirmScr","confirmMsg","bossScr","toast","r18badge","replayBadge"].forEach((id) => { el[id] = document.getElementById(id);});
 
@@ -340,6 +340,14 @@ else if (!n.name) setChar(false);
 else if (n.r18) setChar(true, n);
 el.namebox.textContent = n.name || "";
 el.namebox.style.visibility = n.name? "visible": "hidden";
+const heroShort = (G.heroine || "").split("（")[0];
+let fwShown = false;
+if (n.name && heroShort && n.name === heroShort) {
+const fs = faceFor(G, n);
+if (fs) { if (el.faceWin.dataset.cur !== fs) { el.faceWin.style.backgroundImage = "url(\"" + fs + "\")"; el.faceWin.dataset.cur = fs; } el.faceWin.classList.add("on"); fwShown = true; }
+}
+el.faceWin.classList.toggle("on", fwShown);
+el.msgwin.classList.toggle("has-face", fwShown);
 const wasRead = readSet(G.id).has(n.id);
 markRead(G.id, n.id);
 backlog.push({ scene: n.id, name: n.name || "", text: n.text || "", flags: {...flags}, read: wasRead});
