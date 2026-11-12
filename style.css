@@ -449,7 +449,7 @@ html[data-fx="off"] .cfg-pane.on{ animation:none; }
 @media (max-aspect-ratio: 1/1){
   /* 本編 */
   #msgwin{ padding:0 1.8cqw 1.5cqw; }
-  #namebox{ font-size:3.1cqw; }
+  #namebox{ font-size:15px; }
   #msgwin.has-face #namebox{ margin-left:16.3cqw; }
   #faceWin{ left:1.1cqw; bottom:4.6cqw; width:14.5cqw; height:16cqw; }
   #textbox{ height:auto; padding:1.2cqw 2.4cqw 1cqw; }

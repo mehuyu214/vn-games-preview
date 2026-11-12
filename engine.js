@@ -22,8 +22,11 @@ let cfg = (() => { try { return Object.assign({}, defaultCfg, JSON.parse(localSt
 function saveCfg() { try { localStorage.setItem(CFG_KEY, JSON.stringify(cfg));} catch {}}
 function applyCfg() {
 const portrait = window.innerHeight > window.innerWidth;
-const eff = (parseFloat(cfg.fontSize) * (portrait ? 1.45 : 1)).toFixed(2);
-document.documentElement.style.setProperty("--font-size", eff + "cqw");
+/* 本文サイズは画面幅で変えない。横画面はステージ連動（cqw）、縦画面は 16px
+   固定（設定の文字サイズは 2.35 基準の比率で効かせる）。枠に収まらない分は
+   splitPages のページ送りで読ませる。 */
+const eff = portrait? (16 * parseFloat(cfg.fontSize) / 2.35).toFixed(2) + "px": (parseFloat(cfg.fontSize)).toFixed(2) + "cqw";
+document.documentElement.style.setProperty("--font-size", eff);
 document.documentElement.style.setProperty("--read-color", cfg.readColorOn? cfg.readColor: "#fdfbff");
 document.documentElement.dataset.font = cfg.font || "mincho";
 document.documentElement.dataset.fx = cfg.fx? "on": "off";
