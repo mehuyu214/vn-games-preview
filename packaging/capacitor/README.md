@@ -65,6 +65,19 @@ cd android && ./gradlew assembleDebug
   合わせて変更する場合は `capacitor.config.ts` と android 側の両方を揃えてください
   （公開後の appId 変更は別アプリ扱いになります）。
 
+## 検証済み事項（2026-11-12、A3）
+
+- GitHub Actions（A2、run 43147533570）で `cap add android` →
+  `assembleDebug` が成功し、デバッグ APK（144MB）が成果物化された。
+- タッチ操作：Playwright モバイルエミュレーション（Pixel 7、タッチ有効）
+  で `qa/test_a3_android.py` 21/21 合格。タップのみでポータル→年齢
+  ゲート→タイトル→本編→選択肢→クイックセーブ／スロット保存まで到達。
+- 永続化：同テストでリロード後も `vna_saves_v1` が残存し、タイトル
+  の LOAD から保存シーンへ復帰できることを確認。Capacitor の
+  WebView は `server.androidScheme: 'https'` によりオリジン
+  `https://localhost` で localStorage がアプリ領域に永続化される設計。
+- `bash sync_www.sh` の出力（208ファイル・約143MB）が本体と一致することを確認。
+
 ## 未検証事項
 
 - この雛形は実機／エミュレータでのビルド・起動を確認していません。
