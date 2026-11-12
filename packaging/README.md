@@ -115,10 +115,13 @@ www/ は extraResources として `resources/www` に配置されます。
 - **Windows 実機での確認はしていません。** EXE（portable / NSIS）の実ビルド、
   実機での起動、全画面表示、localStorage の永続化は Windows 環境での
   検証が必要です（上記の通り Linux 版で同等の仕組みまでは確認済み）。
-- **Android のビルドはしていません。** この環境には Android SDK がないため、
-  `cap add android` 以降（Gradle ビルド、実機／エミュレータでの起動、
-  セーブ保存、BGM 再生）は未検証です。Capacitor の要件バージョン
-  （JDK 等）も公式ドキュメントで再確認してください。
+- **Android のビルドはしています。** GitHub Actions（A2）で
+  `cap add android` → `assembleDebug` が成功し、デバッグ APK
+  （144MB）が成果物化されました。タッチ操作と localStorage 永続化は
+  モバイルエミュレーションで検証済み（A3、`qa/test_a3_android.py`
+  21/21）。ただし実機／エミュレータでの起動・セーブ保存・BGM 再生は
+  この環境に Android SDK がないため未検証で、A3b として残置します。
+  Capacitor の要件バージョン（JDK 等）も公式ドキュメントで再確認してください。
 - コード署名（Windows）・リリース署名（Android）は未対応です。
   配布時は SmartScreen 警告やインストール制限の対象になりえます。
 - アプリアイコンは未設定です（Electron / Android ともデフォルトアイコンのまま）。
