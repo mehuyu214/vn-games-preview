@@ -1,0 +1,111 @@
+# VN ARCADE — アプリ版ビルド（Electron / Capacitor）
+#
+# 【注意】これはワークフローの「案」です。packaging/workflows/ に置いたままでは
+# GitHub Actions は認識しません。利用する際はこのファイルを
+# リポジトリ直下の .github/workflows/build-apps.yml へコピーしてください。
+#
+# 実行タイミング:
+#   - 手動実行（workflow_dispatch）
+#   - v* タグの push（この場合のみ Release へ成果物を添付する）
+#
+# 成果物:
+#   - Windows: VN-ARCADE-<version>-portable.exe / VN-ARCADE-<version>-setup.exe
+#   - Android: app-debug.apk（デバッグ署名。正式配布用ではない）
+
+name: Build Apps
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write # タグ時に Release へ添付するため
+
+jobs:
+  electron-windows:
+    name: Electron (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 配布用 www/ を組み立てる（windows-latest には Git Bash が同梱されている）
+      - name: Sync www
+        shell: bash
+        run: bash packaging/sync_www.sh
+
+      - name: Install
+        working-directory: packaging/electron
+        run: npm install
+
+      - name: Build (portable + NSIS)
+        working-directory: packaging/electron
+        run: npx electron-builder --win --publish never
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: vn-arcade-windows
+          path: |
+            packaging/electron/dist/*.exe
+          if-no-files-found: error
+
+      - name: Attach to Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            packaging/electron/dist/*.exe
+
+  capacitor-android:
+    name: Capacitor (Android debug APK)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          # Capacitor 7 の Android テンプレート想定。要件は公式ドキュメントで要確認。
+          java-version: 21
+
+      - name: Sync www
+        run: bash packaging/sync_www.sh
+
+      - name: Install
+        working-directory: packaging/capacitor
+        run: npm install
+
+      - name: Add Android platform
+        working-directory: packaging/capacitor
+        run: npx cap add android
+
+      - name: Sync web assets
+        working-directory: packaging/capacitor
+        run: npx cap sync android
+
+      - name: Build debug APK
+        working-directory: packaging/capacitor/android
+        run: ./gradlew assembleDebug
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: vn-arcade-android-debug
+          path: packaging/capacitor/android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+
+      - name: Attach to Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: packaging/capacitor/android/app/build/outputs/apk/debug/*.apk
