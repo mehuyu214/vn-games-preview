@@ -703,6 +703,46 @@ $("#cfgFullscreen").addEventListener("click", () => {
 if (document.fullscreenElement) document.exitFullscreen();
 else document.documentElement.requestFullscreen?.();
 });
+const SAVE_KEYS = ["vna_saves_v1", "vna_config_v1", "vna_progress_v1", "vna_read_v1"];
+$("#cfgExport").addEventListener("click", () => {
+const data = {};
+SAVE_KEYS.forEach((k) => { const v = localStorage.getItem(k); if (v !== null) { try { data[k] = JSON.parse(v); } catch (err) { data[k] = v; } } });
+const payload = JSON.stringify({ app: "vn-arcade", version: 1, exportedAt: new Date().toISOString(), data }, null, 2);
+const a = document.createElement("a");
+a.href = URL.createObjectURL(new Blob([payload], { type: "application/json" }));
+a.download = "vn-arcade-save.json";
+a.click();
+setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+toast("セーブデータを書き出しました");
+});
+$("#cfgImport").addEventListener("click", () => {
+let inp = document.getElementById("cfgImportFile");
+if (!inp) {
+inp = document.createElement("input");
+inp.type = "file"; inp.id = "cfgImportFile"; inp.accept = "application/json,.json"; inp.hidden = true;
+inp.addEventListener("change", onImportFile);
+document.body.appendChild(inp);
+}
+inp.click();
+});
+function onImportFile(ev) {
+const f = ev.target.files && ev.target.files[0];
+ev.target.value = "";
+if (!f) return;
+const r = new FileReader();
+r.onload = () => {
+try {
+const obj = JSON.parse(String(r.result));
+if (!obj || obj.app !== "vn-arcade" || !obj.data) throw new Error("bad file");
+askConfirm("セーブデータを読み込みますか？（現在のセーブ・進行度・設定は上書きされます）", () => {
+SAVE_KEYS.forEach((k) => { if (obj.data[k] !== undefined) localStorage.setItem(k, JSON.stringify(obj.data[k])); });
+toast("読み込みました。再読み込みします");
+setTimeout(() => location.reload(), 600);
+});
+} catch (err) { toast("読み込めませんでした（ファイル形式が違います）"); }
+};
+r.readAsText(f);
+}
 syncConfigUI();
 }
 $("#configClose").addEventListener("click", () => hideLayer(el.configScr));
