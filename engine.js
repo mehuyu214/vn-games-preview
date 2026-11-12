@@ -22,7 +22,7 @@ let cfg = (() => { try { return Object.assign({}, defaultCfg, JSON.parse(localSt
 function saveCfg() { try { localStorage.setItem(CFG_KEY, JSON.stringify(cfg));} catch {}}
 function applyCfg() {
 const portrait = window.innerHeight > window.innerWidth;
-const eff = (parseFloat(cfg.fontSize) * (portrait ? 1.35 : 1)).toFixed(2);
+const eff = (parseFloat(cfg.fontSize) * (portrait ? 1.6 : 1)).toFixed(2);
 document.documentElement.style.setProperty("--font-size", eff + "cqw");
 document.documentElement.style.setProperty("--read-color", cfg.readColorOn? cfg.readColor: "#fdfbff");
 document.documentElement.dataset.font = cfg.font || "mincho";

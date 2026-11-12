@@ -438,3 +438,40 @@ html[data-fx="off"] .cfg-pane.on{ animation:none; }
   .logo-main{ font-size:28px; }
   .ts-menu{ width:64cqw; }
 }
+
+/* ================= 縦画面（U3）：16:9レターボックス時の代替レイアウト =================
+   縦持ちではステージ幅＝画面幅のため 1cqw が小さくなり、本文・タイトル・
+   クイックバー等が読めないほど小さくなる。縦画面時のみ cqw 基準の主要
+   サイズを底上げし、メッセージウィンドウを3行表示に広げる。
+   （本文の倍率は engine.js applyCfg の portrait 係数 1.6 で底上げ） */
+@media (max-aspect-ratio: 1/1){
+  /* 本編 */
+  #msgwin{ padding:0 1.8cqw 1.8cqw; }
+  #namebox{ font-size:3.2cqw; }
+  #msgwin.has-face #namebox{ margin-left:19.5cqw; }
+  #faceWin{ left:1.1cqw; bottom:3.4cqw; width:17cqw; height:19cqw; }
+  #textbox{ height:26.5cqw; padding:1.5cqw 2.4cqw 1.1cqw; }
+  #msgwin.has-face #textbox{ padding-left:20.5cqw; }
+  #text{ height:22.5cqw; line-height:1.7; }
+  #nextInd{ font-size:2.6cqw; }
+  #quickbar{ gap:1cqw; margin-top:.5cqw; flex-wrap:wrap; }
+  #quickbar button{ font-size:2.2cqw; letter-spacing:.1em; padding:.5cqw .4cqw; }
+  #r18badge, #replayBadge{ font-size:2.4cqw; padding:.6cqw 1.5cqw; }
+  /* 選択肢 */
+  #choices button{ width:min(84cqw, 94%); padding:2cqw 2.2cqw; font-size:3.6cqw; }
+  /* バックログ */
+  .panel-head h3{ font-size:3.3cqw; }
+  .panel-hint{ font-size:2.4cqw; }
+  .log-line{ font-size:2.6cqw; padding:1.2cqw 1.4cqw; }
+  /* タイトル */
+  .ts-content{ padding:2cqw 5.2cqw 2cqw; }
+  .ts-logo-sub{ font-size:2.2cqw; letter-spacing:.35em; }
+  .ts-logo-main{ font-size:8cqw; }
+  .ts-logo-line{ margin:.5cqw 0; }
+  .ts-heroine{ font-size:2.4cqw; }
+  .ts-menu{ width:64cqw; gap:.45cqw; }
+  .ts-menu button{ padding:1cqw 1.6cqw; font-size:3cqw; }
+  .ts-menu button span{ font-size:1.8cqw; }
+  .ts-menu button .lock{ font-size:1.7cqw; }
+  .ts-foot{ font-size:2.1cqw; }
+}
