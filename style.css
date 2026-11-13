@@ -227,14 +227,31 @@ html[data-font="maru"] #text{ font-family:"Hiragino Maru Gothic ProN","Yu Gothic
 #quickbar button.on{ background:none; color:var(--accent2); font-weight:700; }
 
 /* 選択肢 */
-#choices{ position:absolute; inset:0; z-index:7; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:1.3cqw; padding:3cqw; background:rgba(3,2,9,.55); }
+/* U7b: 選択肢画面の再設計（天使☆騒々 RE-BOOT! 実況動画の実画面に基づく。
+   https://www.youtube.com/watch?v=hD0cn0O8kAU 0:00〜0:01、選択肢3つ。
+   観測: 横長長方形・角ほぼ直角・両端に白い曲線装飾・白い細い二重枠線、
+   青グラデーション（左・中央が明るい青、右が濃い青）、幅は画面の約66%・
+   中央配置・上部中央寄りに縦に等間隔、白い太字・中央揃え・黒い縁取り、
+   背景の暗転なし（背景の場面が明るいまま見える）。 */
+#choices{ position:absolute; inset:0; z-index:7; display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+  gap:2.2cqw; padding:17cqw 3cqw 3cqw; background:transparent; }
 #choices button{
-  width:min(54cqw, 94%); padding:1.4cqw 2.2cqw; font-size:1.95cqw; color:#fff; text-align:center;
-  background:rgba(14,12,30,.96); border:1px solid rgba(255,255,255,.4); border-left:4px solid var(--accent); border-radius:3px;
-  transition:background .15s, border-color .15s;
+  position:relative; width:min(66cqw, 92%); padding:1.5cqw 3.4cqw; font-size:2.1cqw; font-weight:700; color:#fff; text-align:center;
+  background:linear-gradient(90deg, #8fc3f0 0%, #5ea3dd 42%, #2f6cb0 74%, #1e4f8f 100%);
+  border:1px solid rgba(255,255,255,.95); border-radius:2px;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.45), 0 2px 16px rgba(0,0,0,.5);
+  text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 6px rgba(0,0,0,.7);
+  transition:filter .15s, box-shadow .15s; cursor:pointer;
 }
-#choices button:hover{ background:rgba(34,28,64,.97); border-color:var(--accent2); }
+/* 両端の白い曲線装飾（半楕円の弧） */
+#choices button::before, #choices button::after{
+  content:""; position:absolute; top:50%; width:1.1cqw; height:64%;
+  transform:translateY(-50%); border:2px solid rgba(255,255,255,.95); pointer-events:none;
+}
+#choices button::before{ left:.9cqw; border-right:none; border-radius:50% 0 0 50%; }
+#choices button::after{ right:.9cqw; border-left:none; border-radius:0 50% 50% 0; }
+#choices button:hover{ filter:brightness(1.18);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.7), 0 0 22px rgba(120,180,240,.75), 0 2px 16px rgba(0,0,0,.5); }
 
 /* ================= U8: 演出レイヤー ================= */
 /* (1) カットイン帯：画面中央の横長バンドに目元カットを割り込ませる */
@@ -589,8 +606,12 @@ html[data-fx="off"] .cfg-pane.on{ animation:none; }
   #quickbar{ gap:.7cqw; margin-top:.45cqw; flex-wrap:nowrap; }
   #quickbar button{ font-size:1.9cqw; letter-spacing:.06em; padding:.45cqw .3cqw; }
   #r18badge, #replayBadge{ font-size:2.4cqw; padding:.6cqw 1.5cqw; }
-  /* 選択肢 */
-  #choices button{ width:min(84cqw, 94%); padding:2cqw 2.2cqw; font-size:3.6cqw; }
+  /* 選択肢（U7b：横画面と同系の青グラデ＋白二重枠＋両端の曲線装飾） */
+  #choices{ padding-top:26cqw; gap:3cqw; }
+  #choices button{ width:min(84cqw, 94%); padding:2.4cqw 4.4cqw; font-size:3.8cqw; }
+  #choices button::before, #choices button::after{ width:2cqw; }
+  #choices button::before{ left:1.6cqw; }
+  #choices button::after{ right:1.6cqw; }
   /* バックログ */
   .panel-head h3{ font-size:3.3cqw; }
   .panel-hint{ font-size:2.4cqw; }
