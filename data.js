@@ -287,7 +287,7 @@ const GAMES = [
   r18: true,
   images: { store: "assets/misaki_store.svg", street: "assets/misaki_street.svg", room: "assets/misaki_room.svg", char: "assets/misaki_char.webp" },
   scenes: [
-    { id: "b01", textMode: "center", bg: "store", name: "", text: "深夜1時のコンビニ。客足の途絶えた店内に、蛍光灯の低い唸りだけが響く。\n俺の夜勤バイトも、今日で3か月目になった。夜勤を選んだのは手当がつくからで、生活費はこのバイト一本でまかなっている。" },
+    { id: "b01", textMode: "center", bg: "store", name: "", text: "深夜1時のコンビニ。客足の途絶えた店内に、蛍光灯の低い唸りだけが響く。\n俺の夜勤バイトも、今日で3か月目になった。夜勤を選んだのは手当がつくからで、生活費はこのバイト一本でまかなっている。大学には行っていない。将来のことは、まだ何も決めていない。" },
     { id: "b02", face: "smile", char: true, name: "美咲", text: "悠太くん、おつかれさま。はい、あったかいコーヒー。……ねえ、今日の夜勤、わたしと二人だけだって。知ってた？" },
     { id: "b03", name: "悠太", text: "美咲さんのおかげで、仕事だいぶ覚えました。……二人だけって、ちょっと緊張しますね。" },
     { id: "b04", face: "smile", name: "美咲", text: "あら、緊張？　ふふ、可愛い。……あ、雨、強くなってきたね。天気予報じゃ、朝まで止まないって。" },
