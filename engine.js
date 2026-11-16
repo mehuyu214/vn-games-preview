@@ -619,17 +619,24 @@ return { game: G.id, scene: cur.id, page: pageIdx, flags: {...flags}, date: new 
 text: (cur.text || "").slice(0, 120), love: flags.love || 0, thumb: captureThumb()};
 }
 function persistSaves() {
-if (!storeJSON(SAVES_KEY, saveBook)) {
+// 最終的な保存成否を返す。再試行も失敗した場合は false を返し、
+// 呼び出し元が失敗を明示できるようにする（成功と誤認させない）。
+if (storeJSON(SAVES_KEY, saveBook)) return true;
 // 容量超過時はサムネイルを落として再試行
 Object.values(saveBook.slots).forEach((r) => { if (r) r.thumb = null;});
 if (saveBook.quick) saveBook.quick.thumb = null;
-storeJSON(SAVES_KEY, saveBook);
+if (storeJSON(SAVES_KEY, saveBook)) {
 toast("容量の都合でサムネイルなしで保存しました");
+return true;
 }
+return false;
 }
+const SAVE_FAIL_MSG = "セーブに失敗しました（保存領域の空き容量不足の可能性があります）";
 function quickSave() {
 if (!G ||!cur) return;
-saveBook.quick = makeRec(); persistSaves(); toast("クイックセーブしました");
+saveBook.quick = makeRec();
+if (persistSaves()) toast("クイックセーブしました");
+else toast(SAVE_FAIL_MSG, 3600);
 }
 function loadRec(rec) {
 const g = GAMES.find((x) => x.id === rec.game); if (!g) return;
@@ -673,7 +680,8 @@ if (!G ||!cur) return;
 const doSave = () => {
 const rec2 = makeRec();
 if (key === "quick") saveBook.quick = rec2; else saveBook.slots[key] = rec2;
-persistSaves(); renderSaveScr(); playSe("save"); toast("セーブしました");
+if (persistSaves()) { renderSaveScr(); playSe("save"); toast("セーブしました"); }
+else { renderSaveScr(); toast(SAVE_FAIL_MSG, 3600); }
 };
 if (rec) askConfirm(`${label} に上書きセーブしますか？`, doSave); else doSave();
 } else if (rec) loadRec(rec);
