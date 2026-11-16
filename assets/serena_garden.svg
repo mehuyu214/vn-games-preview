@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#c89be8"/><stop offset="1" stop-color="#5e2f8c"/></linearGradient></defs>
+<rect width="960" height="540" fill="url(#g)"/>
+<text x="50%" y="47%" font-size="53" fill="#ffffff" text-anchor="middle" font-family="sans-serif" font-weight="bold">背景：月下の庭園</text>
+<text x="50%" y="58%" font-size="30" fill="#e8e6ff" text-anchor="middle" font-family="sans-serif">差し替え用プレースホルダ</text>
+</svg>
