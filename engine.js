@@ -280,7 +280,11 @@ if (n.jump) return n.jump;
 const e = sceneMap[n.id]; if (!e) return null;
 const nxt = G.scenes[e.index + 1]; return nxt? nxt.id: null;
 }
-function applySet(s) { Object.keys(s).forEach((k) => { flags[k] = (typeof flags[k] === "number" && typeof s[k] === "number" && k === "love")? Math.max(flags[k], s[k]): s[k];});}
+/* set は代入仕様：love も含め全フラグをそのまま書き込む。旧 max 特例
+   （love のみ下げられない）は 2026-11-17 に除去。love=0 の選択肢が
+   それまで love を下げられず無視される「死に設定」になっていたため。
+   全5作品の分岐到達は不変（sim_all_routes の前後比較で確認）。 */
+function applySet(s) { Object.keys(s).forEach((k) => { flags[k] = s[k]; }); }
 
 function setBg(key) {
 if (!key || key === curBgKey) return;
