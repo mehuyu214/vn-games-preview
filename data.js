@@ -1144,8 +1144,8 @@ const GAMES = [
     { id: "e13", branch: { flag: "love", min: 1, then: "e14", else: "e18" } },
     { id: "e14", bg: "garden", name: "", text: "舞踏会を抜け出し、二人で月下の庭園へ。セレナは俺の腕に寄り添い、離れようとしなかった。" },
     { id: "e15", choice: [
-      { text: "「今夜、あなたの部屋へ行ってもいいですか」", jump: "e16", set: { love: 2 } },
-      { text: "「おやすみなさい」と紳士的に帰る", jump: "e261", set: { love: 0 } }
+      { text: "「今夜、あなたの部屋へ行ってもいいですか」", jump: "e16" },
+      { text: "「おやすみなさい」と紳士的に帰る", jump: "e261" }
     ] },
     { id: "e16", face: "love", name: "セレナ", text: "はい。わたしの部屋で、もっとあなたとお話ししたい。……いえ、本当は、話だけじゃ終わらせたくないの。", jump: "e19" },
     { id: "e18", bgm: "calm", face: "sleepy", bg: "garden", char: true, name: "セレナ", text: "今夜は素敵な舞踏会でした。……おやすみなさい、先生。また明日の授業で。\n【NORMAL END ― 月下の庭園】", end: true },
