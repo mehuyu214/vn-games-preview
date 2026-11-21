@@ -2844,8 +2844,8 @@ const GAMES = [
         "face": "serious",
         "char": true,
         "name": "美咲",
-        "text": "……店長に、聞いてみる。傘のこと、知ってるはずだよ。",
-        "jump": "b454"
+        "text": "……店長に、聞いてみる。",
+        "jump": "b577"
       },
       {
         "id": "b125",
@@ -2857,8 +2857,8 @@ const GAMES = [
         "id": "b126",
         "face": "sad",
         "name": "美咲",
-        "text": "ううん。……雨の日に、聞く。直接、顔を見て聞きたい。",
-        "jump": "b411"
+        "text": "ううん。……雨の日に、聞く。",
+        "jump": "b578"
       },
       {
         "id": "b127",
@@ -5826,6 +5826,21 @@ const GAMES = [
         "text": "大島に引き継ぐ』……大島？",
         "face": "serious",
         "jump": "b339"
+      },
+      {
+        "id": "b577",
+        "name": "美咲",
+        "text": "傘のこと、知ってるはずだよ。",
+        "face": "serious",
+        "char": true,
+        "jump": "b454"
+      },
+      {
+        "id": "b578",
+        "name": "美咲",
+        "text": "直接、顔を見て聞きたい。",
+        "face": "sad",
+        "jump": "b411"
       }
     ]
   },
@@ -8011,8 +8026,8 @@ const GAMES = [
       {
         "id": "d47",
         "name": "悠太",
-        "text": "目録に無い本を、数か月も直し続けるんですか。",
-        "jump": "d334"
+        "text": "目録に無い本を、",
+        "jump": "d650"
       },
       {
         "id": "d48",
@@ -8138,10 +8153,10 @@ const GAMES = [
       {
         "id": "d64",
         "name": "優奈",
-        "text": "任せる、だなんて……それは、少しずるいです。",
+        "text": "任せる、だなんて……",
         "face": "sad",
         "char": true,
-        "jump": "d466"
+        "jump": "d651"
       },
       {
         "id": "d65",
@@ -8304,10 +8319,10 @@ const GAMES = [
       {
         "id": "d89",
         "name": "優奈",
-        "text": "ご用件を、どうぞ。お力になれることでしたら。",
+        "text": "ご用件を、どうぞ。",
         "face": "smile",
         "char": true,
-        "jump": "d468"
+        "jump": "d652"
       },
       {
         "id": "d90",
@@ -12058,6 +12073,28 @@ const GAMES = [
         "face": "serious",
         "char": true,
         "jump": "d194"
+      },
+      {
+        "id": "d650",
+        "name": "悠太",
+        "text": "数か月も直し続けるんですか。",
+        "jump": "d334"
+      },
+      {
+        "id": "d651",
+        "name": "優奈",
+        "text": "それは、少しずるいです。",
+        "face": "sad",
+        "char": true,
+        "jump": "d466"
+      },
+      {
+        "id": "d652",
+        "name": "優奈",
+        "text": "お力になれることでしたら。",
+        "face": "smile",
+        "char": true,
+        "jump": "d468"
       }
     ]
   },
