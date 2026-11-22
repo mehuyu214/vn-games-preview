@@ -2333,8 +2333,8 @@ const GAMES = [
         "face": "serious",
         "char": true,
         "name": "美咲",
-        "text": "……お待たせ、しました。これ、ですよね。",
-        "jump": "b398"
+        "text": "……お待たせ、しました。",
+        "jump": "b734"
       },
       {
         "id": "b49",
@@ -2798,8 +2798,8 @@ const GAMES = [
         "face": "smile",
         "char": true,
         "name": "美咲",
-        "text": "うん。棚卸しが終わったら、二人で見よう。",
-        "jump": "b511"
+        "text": "うん。棚卸しが終わったら、",
+        "jump": "b735"
       },
       {
         "id": "b118",
@@ -2980,8 +2980,8 @@ const GAMES = [
       {
         "id": "b145",
         "name": "店長",
-        "text": "美咲ちゃんの雨シフトは、おれが組んでた。",
-        "jump": "b342"
+        "text": "美咲ちゃんの雨シフトは、",
+        "jump": "b736"
       },
       {
         "id": "b146",
@@ -3113,8 +3113,8 @@ const GAMES = [
         "face": "surprise",
         "char": true,
         "name": "美咲",
-        "text": "……海外。……いつ、帰ってくるんですか。",
-        "jump": "b420"
+        "text": "……海外。……いつ、",
+        "jump": "b737"
       },
       {
         "id": "b166",
@@ -3193,8 +3193,8 @@ const GAMES = [
         "id": "b177",
         "face": "serious",
         "name": "美咲",
-        "text": "写真……。若い男の人が、二人。笑ってる。",
-        "jump": "b376"
+        "text": "写真……。若い男の人が、",
+        "jump": "b738"
       },
       {
         "id": "b178",
@@ -3317,8 +3317,8 @@ const GAMES = [
         "id": "b194",
         "face": "shy",
         "name": "美咲",
-        "text": "……じゃあ、書く。悠太くん、隣で見てて。",
-        "jump": "b463"
+        "text": "……じゃあ、書く。",
+        "jump": "b739"
       },
       {
         "id": "b195",
@@ -3514,8 +3514,8 @@ const GAMES = [
         "id": "b222",
         "face": "sad",
         "name": "美咲",
-        "text": "あの傘が、お父さんの物だって知りました。",
-        "jump": "b551"
+        "text": "あの傘が、お父さんの",
+        "jump": "b740"
       },
       {
         "id": "b223",
@@ -6838,6 +6838,57 @@ const GAMES = [
         "name": "悠太",
         "text": "先輩の沈黙を、守る夜だ）",
         "jump": "b71"
+      },
+      {
+        "id": "b734",
+        "name": "美咲",
+        "text": "これ、ですよね。",
+        "face": "serious",
+        "char": true,
+        "jump": "b398"
+      },
+      {
+        "id": "b735",
+        "name": "美咲",
+        "text": "二人で見よう。",
+        "face": "smile",
+        "char": true,
+        "jump": "b511"
+      },
+      {
+        "id": "b736",
+        "name": "店長",
+        "text": "おれが組んでた。",
+        "jump": "b342"
+      },
+      {
+        "id": "b737",
+        "name": "美咲",
+        "text": "帰ってくるんですか。",
+        "face": "surprise",
+        "char": true,
+        "jump": "b420"
+      },
+      {
+        "id": "b738",
+        "name": "美咲",
+        "text": "二人。笑ってる。",
+        "face": "serious",
+        "jump": "b376"
+      },
+      {
+        "id": "b739",
+        "name": "美咲",
+        "text": "悠太くん、隣で見てて。",
+        "face": "shy",
+        "jump": "b463"
+      },
+      {
+        "id": "b740",
+        "name": "美咲",
+        "text": "物だって知りました。",
+        "face": "sad",
+        "jump": "b551"
       }
     ]
   },
@@ -9331,8 +9382,8 @@ const GAMES = [
       {
         "id": "d90b",
         "name": "榊",
-        "text": "祖母の遺品整理で日記が出てきまして。",
-        "jump": "d481"
+        "text": "祖母の遺品整理で",
+        "jump": "d810"
       },
       {
         "id": "d91",
@@ -14163,6 +14214,12 @@ const GAMES = [
         "name": "榊",
         "text": "ダメですか。",
         "jump": "d448"
+      },
+      {
+        "id": "d810",
+        "name": "榊",
+        "text": "日記が出てきまして。",
+        "jump": "d481"
       }
     ]
   },
