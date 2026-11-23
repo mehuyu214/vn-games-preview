@@ -5419,9 +5419,9 @@ const GAMES = [
       {
         "id": "b514",
         "name": "美咲",
-        "text": "わたしは、父のことを、誰も責めてない",
+        "text": "わたしは、父のことを、",
         "face": "serious",
-        "jump": "b190"
+        "jump": "b827"
       },
       {
         "id": "b515",
@@ -7457,6 +7457,13 @@ const GAMES = [
         "name": "悠太",
         "text": "約束します",
         "jump": "b119"
+      },
+      {
+        "id": "b827",
+        "name": "美咲",
+        "text": "誰も責めてない",
+        "face": "serious",
+        "jump": "b190"
       }
     ]
   },
@@ -10916,10 +10923,10 @@ const GAMES = [
       {
         "id": "d208",
         "name": "優奈",
-        "text": "……ありがとう、悠真さん。本当に",
+        "text": "……ありがとう、",
         "face": "smile",
         "char": true,
-        "jump": "d209"
+        "jump": "d899"
       },
       {
         "id": "d209",
@@ -10973,10 +10980,10 @@ const GAMES = [
       {
         "id": "d215",
         "name": "優奈",
-        "text": "半世紀前、未返却になった本です。",
+        "text": "半世紀前、",
         "face": "sad",
         "char": true,
-        "jump": "d408"
+        "jump": "d900"
       },
       {
         "id": "d216",
@@ -15401,6 +15408,22 @@ const GAMES = [
         "name": "園田",
         "text": "後悔はしていないんだ。",
         "jump": "d610"
+      },
+      {
+        "id": "d899",
+        "name": "優奈",
+        "text": "悠真さん。本当に",
+        "face": "smile",
+        "char": true,
+        "jump": "d209"
+      },
+      {
+        "id": "d900",
+        "name": "優奈",
+        "text": "未返却になった本です。",
+        "face": "sad",
+        "char": true,
+        "jump": "d408"
       }
     ]
   },
