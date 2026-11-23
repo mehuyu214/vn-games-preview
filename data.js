@@ -3775,8 +3775,8 @@ const GAMES = [
         "face": "shy",
         "char": true,
         "name": "美咲",
-        "text": "悠太くん。さっきの、続き。聞かせて。",
-        "jump": "b565"
+        "text": "悠太くん。さっきの、続き。",
+        "jump": "b811"
       },
       {
         "id": "b263",
@@ -7348,6 +7348,14 @@ const GAMES = [
         "name": "悠太",
         "text": "言葉、見つかりません。",
         "jump": "b436"
+      },
+      {
+        "id": "b811",
+        "name": "美咲",
+        "text": "聞かせて。",
+        "face": "shy",
+        "char": true,
+        "jump": "b565"
       }
     ]
   },
@@ -13027,8 +13035,8 @@ const GAMES = [
       {
         "id": "d568",
         "name": "悠太",
-        "text": "カウンターの上で止まった。……梓。",
-        "jump": "d450"
+        "text": "カウンターの上で止まった。",
+        "jump": "d883"
       },
       {
         "id": "d569",
@@ -13195,10 +13203,10 @@ const GAMES = [
       {
         "id": "d593",
         "name": "優奈",
-        "text": "半世紀越しの、お届け物があります。",
+        "text": "半世紀越しの、",
         "face": "serious",
         "char": true,
-        "jump": "d213b"
+        "jump": "d884"
       },
       {
         "id": "d594",
@@ -15183,6 +15191,20 @@ const GAMES = [
         "name": "園田",
         "text": "もう辞めていたんだ。",
         "jump": "d341"
+      },
+      {
+        "id": "d883",
+        "name": "悠太",
+        "text": "……梓。",
+        "jump": "d450"
+      },
+      {
+        "id": "d884",
+        "name": "優奈",
+        "text": "お届け物があります。",
+        "face": "serious",
+        "char": true,
+        "jump": "d213b"
       }
     ]
   },
