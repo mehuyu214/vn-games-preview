@@ -6009,8 +6009,8 @@ const GAMES = [
       {
         "id": "b605",
         "name": "藤井",
-        "text": "雨の日を、待ってるみたいだよ、あの人。",
-        "jump": "b318"
+        "text": "雨の日を、",
+        "jump": "b795"
       },
       {
         "id": "b606",
@@ -7244,6 +7244,12 @@ const GAMES = [
         "name": "藤井",
         "text": "ホットコーヒーちょうだい。",
         "jump": "b363"
+      },
+      {
+        "id": "b795",
+        "name": "藤井",
+        "text": "待ってるみたいだよ、あの人。",
+        "jump": "b318"
       }
     ]
   },
@@ -11447,10 +11453,10 @@ const GAMES = [
       {
         "id": "d352",
         "name": "優奈",
-        "text": "もう、直すだけの日々は終わりです。",
+        "text": "もう、直すだけの日々は",
         "face": "serious",
         "char": true,
-        "jump": "d643"
+        "jump": "d867"
       },
       {
         "id": "d353",
@@ -11553,10 +11559,10 @@ const GAMES = [
       {
         "id": "d368",
         "name": "優奈",
-        "text": "司書である前に、規則を守る人間です",
+        "text": "司書である前に、",
         "face": "serious",
         "char": true,
-        "jump": "d45"
+        "jump": "d868"
       },
       {
         "id": "d369",
@@ -14963,6 +14969,22 @@ const GAMES = [
         "face": "serious",
         "char": true,
         "jump": "d377"
+      },
+      {
+        "id": "d867",
+        "name": "優奈",
+        "text": "終わりです。",
+        "face": "serious",
+        "char": true,
+        "jump": "d643"
+      },
+      {
+        "id": "d868",
+        "name": "優奈",
+        "text": "規則を守る人間です",
+        "face": "serious",
+        "char": true,
+        "jump": "d45"
       }
     ]
   },
