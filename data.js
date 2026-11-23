@@ -4816,9 +4816,9 @@ const GAMES = [
       {
         "id": "b421",
         "name": "美咲",
-        "text": "開くよ、本当に。……中、何か入ってる",
+        "text": "開くよ、本当に。",
         "face": "surprise",
-        "jump": "b176"
+        "jump": "b819"
       },
       {
         "id": "b422",
@@ -7403,6 +7403,13 @@ const GAMES = [
         "name": "店長",
         "text": "店の前、川みたいだよ",
         "jump": "b09"
+      },
+      {
+        "id": "b819",
+        "name": "美咲",
+        "text": "……中、何か入ってる",
+        "face": "surprise",
+        "jump": "b176"
       }
     ]
   },
@@ -9368,10 +9375,10 @@ const GAMES = [
       {
         "id": "d16",
         "name": "優奈",
-        "text": "貸出カードは、入っていましたか？",
+        "text": "貸出カードは、",
         "face": "serious",
         "char": true,
-        "jump": "d427"
+        "jump": "d891"
       },
       {
         "id": "d17",
@@ -9420,10 +9427,10 @@ const GAMES = [
       {
         "id": "d24",
         "name": "優奈",
-        "text": "見なかったことに、してください。",
+        "text": "見なかったことに、",
         "face": "sad",
         "char": true,
-        "jump": "d596"
+        "jump": "d892"
       },
       {
         "id": "d25",
@@ -15290,6 +15297,22 @@ const GAMES = [
         "name": "榊",
         "text": "図書館に寄贈してもいい",
         "jump": "d200"
+      },
+      {
+        "id": "d891",
+        "name": "優奈",
+        "text": "入っていましたか？",
+        "face": "serious",
+        "char": true,
+        "jump": "d427"
+      },
+      {
+        "id": "d892",
+        "name": "優奈",
+        "text": "してください。",
+        "face": "sad",
+        "char": true,
+        "jump": "d596"
       }
     ]
   },
