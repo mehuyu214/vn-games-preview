@@ -2129,8 +2129,8 @@ const GAMES = [
         "face": "smile",
         "char": true,
         "name": "美咲",
-        "text": "いらっしゃいませ。どうぞ、こちらへ。",
-        "jump": "b325"
+        "text": "いらっしゃいませ。",
+        "jump": "b796"
       },
       {
         "id": "b18",
@@ -2219,8 +2219,8 @@ const GAMES = [
       {
         "id": "b32",
         "name": "藤井",
-        "text": "ん？　あんた、どっかで見た顔だねえ。",
-        "jump": "b570"
+        "text": "ん？　あんた、",
+        "jump": "b797"
       },
       {
         "id": "b33",
@@ -2433,8 +2433,8 @@ const GAMES = [
         "face": "sad",
         "char": true,
         "name": "美咲",
-        "text": "……悠太くん。今夜のことは、内緒ね。",
-        "jump": "b312"
+        "text": "……悠太くん。",
+        "jump": "b798"
       },
       {
         "id": "b65",
@@ -2713,8 +2713,8 @@ const GAMES = [
         "id": "b106",
         "face": "serious",
         "name": "美咲",
-        "text": "……藤井さん。それ、個人情報ですよ。",
-        "jump": "b407"
+        "text": "……藤井さん。",
+        "jump": "b799"
       },
       {
         "id": "b107",
@@ -2752,8 +2752,8 @@ const GAMES = [
         "face": "serious",
         "char": true,
         "name": "美咲",
-        "text": "五年分……どこから見ればいいのかな。",
-        "jump": "b486"
+        "text": "五年分……",
+        "jump": "b800"
       },
       {
         "id": "b111",
@@ -2771,8 +2771,8 @@ const GAMES = [
       {
         "id": "b113",
         "name": "悠太",
-        "text": "備考欄、他のページと字が違いますね。",
-        "jump": "b338"
+        "text": "備考欄、",
+        "jump": "b801"
       },
       {
         "id": "b114",
@@ -2817,8 +2817,8 @@ const GAMES = [
       {
         "id": "b120",
         "name": "悠太",
-        "text": "備考は……『持ち主来店まで永久保管。",
-        "jump": "b452"
+        "text": "備考は……『",
+        "jump": "b802"
       },
       {
         "id": "b121",
@@ -7250,6 +7250,55 @@ const GAMES = [
         "name": "藤井",
         "text": "待ってるみたいだよ、あの人。",
         "jump": "b318"
+      },
+      {
+        "id": "b796",
+        "name": "美咲",
+        "text": "どうぞ、こちらへ。",
+        "face": "smile",
+        "char": true,
+        "jump": "b325"
+      },
+      {
+        "id": "b797",
+        "name": "藤井",
+        "text": "どっかで見た顔だねえ。",
+        "jump": "b570"
+      },
+      {
+        "id": "b798",
+        "name": "美咲",
+        "text": "今夜のことは、内緒ね。",
+        "face": "sad",
+        "char": true,
+        "jump": "b312"
+      },
+      {
+        "id": "b799",
+        "name": "美咲",
+        "text": "それ、個人情報ですよ。",
+        "face": "serious",
+        "jump": "b407"
+      },
+      {
+        "id": "b800",
+        "name": "美咲",
+        "text": "どこから見ればいいのかな。",
+        "face": "serious",
+        "char": true,
+        "jump": "b486"
+      },
+      {
+        "id": "b801",
+        "name": "悠太",
+        "text": "他のページと字が違いますね。",
+        "jump": "b338"
+      },
+      {
+        "id": "b802",
+        "name": "悠太",
+        "text": "持ち主来店まで永久保管。",
+        "jump": "b452"
       }
     ]
   },
@@ -11667,8 +11716,8 @@ const GAMES = [
       {
         "id": "d383",
         "name": "悠太",
-        "text": "言葉にしない分、行動が正直な人だ）",
-        "jump": "d60"
+        "text": "言葉にしない分、",
+        "jump": "d869"
       },
       {
         "id": "d384",
@@ -11723,10 +11772,10 @@ const GAMES = [
       {
         "id": "d392",
         "name": "優奈",
-        "text": "わたしの言葉は、まだ製本中なんです",
+        "text": "わたしの言葉は、",
         "face": "sad",
         "char": true,
-        "jump": "d279"
+        "jump": "d870"
       },
       {
         "id": "d393",
@@ -11823,10 +11872,10 @@ const GAMES = [
       {
         "id": "d407",
         "name": "優奈",
-        "text": "本当です。昨日は、嘘をつきました。",
+        "text": "本当です。",
         "face": "serious",
         "char": true,
-        "jump": "d649"
+        "jump": "d871"
       },
       {
         "id": "d408",
@@ -11839,8 +11888,8 @@ const GAMES = [
       {
         "id": "d409",
         "name": "園田",
-        "text": "半世紀、待ち続けた席なんだ、ここは",
-        "jump": "d224"
+        "text": "半世紀、",
+        "jump": "d872"
       },
       {
         "id": "d410",
@@ -11869,10 +11918,10 @@ const GAMES = [
       {
         "id": "d413",
         "name": "優奈",
-        "text": "隣にいる、というのは大きなことです",
+        "text": "隣にいる、",
         "face": "smile",
         "char": true,
-        "jump": "d276"
+        "jump": "d873"
       },
       {
         "id": "d414",
@@ -11937,10 +11986,10 @@ const GAMES = [
       {
         "id": "d423",
         "name": "優奈",
-        "text": "恋の手紙、と言っていいと思います。",
+        "text": "恋の手紙、",
         "face": "sad",
         "char": true,
-        "jump": "d746"
+        "jump": "d874"
       },
       {
         "id": "d424",
@@ -14985,6 +15034,50 @@ const GAMES = [
         "face": "serious",
         "char": true,
         "jump": "d45"
+      },
+      {
+        "id": "d869",
+        "name": "悠太",
+        "text": "行動が正直な人だ）",
+        "jump": "d60"
+      },
+      {
+        "id": "d870",
+        "name": "優奈",
+        "text": "まだ製本中なんです",
+        "face": "sad",
+        "char": true,
+        "jump": "d279"
+      },
+      {
+        "id": "d871",
+        "name": "優奈",
+        "text": "昨日は、嘘をつきました。",
+        "face": "serious",
+        "char": true,
+        "jump": "d649"
+      },
+      {
+        "id": "d872",
+        "name": "園田",
+        "text": "待ち続けた席なんだ、ここは",
+        "jump": "d224"
+      },
+      {
+        "id": "d873",
+        "name": "優奈",
+        "text": "というのは大きなことです",
+        "face": "smile",
+        "char": true,
+        "jump": "d276"
+      },
+      {
+        "id": "d874",
+        "name": "優奈",
+        "text": "と言っていいと思います。",
+        "face": "sad",
+        "char": true,
+        "jump": "d746"
       }
     ]
   },
