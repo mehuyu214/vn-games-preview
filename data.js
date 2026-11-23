@@ -2999,8 +2999,8 @@ const GAMES = [
       {
         "id": "b148",
         "name": "悠太",
-        "text": "店長の口癖、今日は全然出てきませんね。",
-        "jump": "b458"
+        "text": "店長の口癖、",
+        "jump": "b766"
       },
       {
         "id": "b149",
@@ -3069,8 +3069,8 @@ const GAMES = [
         "face": "serious",
         "char": true,
         "name": "美咲",
-        "text": "待ちます。五年間、そうしてきたんです。",
-        "jump": "b531"
+        "text": "待ちます。",
+        "jump": "b767"
       },
       {
         "id": "b159",
@@ -3219,8 +3219,8 @@ const GAMES = [
         "id": "b181",
         "face": "sad",
         "name": "美咲",
-        "text": "『雨の日は、傘を貸せる人間であれ』……",
-        "jump": "b549"
+        "text": "『雨の日は、",
+        "jump": "b768"
       },
       {
         "id": "b182",
@@ -3232,8 +3232,8 @@ const GAMES = [
         "id": "b183",
         "face": "cry",
         "name": "美咲",
-        "text": "お父さん、五年前の春に亡くなってるの。",
-        "jump": "b462"
+        "text": "お父さん、",
+        "jump": "b769"
       },
       {
         "id": "b184",
@@ -3391,8 +3391,8 @@ const GAMES = [
         "face": "serious",
         "char": true,
         "name": "美咲",
-        "text": "……来るかな。本当に、来てくれるかな。",
-        "jump": "b465"
+        "text": "……来るかな。",
+        "jump": "b770"
       },
       {
         "id": "b206",
@@ -7050,6 +7050,42 @@ const GAMES = [
         "name": "店長",
         "text": "ちょっと聞いてほしいっしょ。",
         "jump": "b579"
+      },
+      {
+        "id": "b766",
+        "name": "悠太",
+        "text": "今日は全然出てきませんね。",
+        "jump": "b458"
+      },
+      {
+        "id": "b767",
+        "name": "美咲",
+        "text": "五年間、そうしてきたんです。",
+        "face": "serious",
+        "char": true,
+        "jump": "b531"
+      },
+      {
+        "id": "b768",
+        "name": "美咲",
+        "text": "傘を貸せる人間であれ』……",
+        "face": "sad",
+        "jump": "b549"
+      },
+      {
+        "id": "b769",
+        "name": "美咲",
+        "text": "五年前の春に亡くなってるの。",
+        "face": "cry",
+        "jump": "b462"
+      },
+      {
+        "id": "b770",
+        "name": "美咲",
+        "text": "本当に、来てくれるかな。",
+        "face": "serious",
+        "char": true,
+        "jump": "b465"
       }
     ]
   },
@@ -13153,8 +13189,8 @@ const GAMES = [
       {
         "id": "d630",
         "name": "園田",
-        "text": "若い娘さんが勧めてくれた、詩集一冊。",
-        "jump": "d418"
+        "text": "若い娘さんが勧めてくれた、",
+        "jump": "d842"
       },
       {
         "id": "d631",
@@ -14595,6 +14631,12 @@ const GAMES = [
         "face": "serious",
         "char": true,
         "jump": "d402"
+      },
+      {
+        "id": "d842",
+        "name": "園田",
+        "text": "詩集一冊。",
+        "jump": "d418"
       }
     ]
   },
