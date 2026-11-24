@@ -6313,9 +6313,9 @@ const GAMES = [
       {
         "id": "b653",
         "name": "美咲",
-        "text": "……いただく前に、まず供養するね。",
+        "text": "……いただく前に、",
         "face": "serious",
-        "jump": "b535"
+        "jump": "b874"
       },
       {
         "id": "b654",
@@ -6402,8 +6402,8 @@ const GAMES = [
       {
         "id": "b667",
         "name": "悠太",
-        "text": "だから『最後の雨』なんて言い方を。",
-        "jump": "b346"
+        "text": "だから『最後の雨』",
+        "jump": "b875"
       },
       {
         "id": "b668",
@@ -7756,6 +7756,19 @@ const GAMES = [
         "name": "悠太",
         "text": "……",
         "jump": "b345"
+      },
+      {
+        "id": "b874",
+        "name": "美咲",
+        "text": "まず供養するね。",
+        "face": "serious",
+        "jump": "b535"
+      },
+      {
+        "id": "b875",
+        "name": "悠太",
+        "text": "なんて言い方を。",
+        "jump": "b346"
       }
     ]
   },
@@ -11136,8 +11149,8 @@ const GAMES = [
       {
         "id": "d199b",
         "name": "榊",
-        "text": "祖母の想いを、届けたいんです。",
-        "jump": "d672"
+        "text": "祖母の想いを、",
+        "jump": "d947"
       },
       {
         "id": "d200",
@@ -11154,10 +11167,10 @@ const GAMES = [
       {
         "id": "d202",
         "name": "優奈",
-        "text": "はい。毎週、ここに来る方です。",
+        "text": "はい。",
         "face": "smile",
         "char": true,
-        "jump": "d560"
+        "jump": "d948"
       },
       {
         "id": "d203",
@@ -16042,6 +16055,20 @@ const GAMES = [
         "face": "sad",
         "char": true,
         "jump": "d518"
+      },
+      {
+        "id": "d947",
+        "name": "榊",
+        "text": "届けたいんです。",
+        "jump": "d672"
+      },
+      {
+        "id": "d948",
+        "name": "優奈",
+        "text": "毎週、ここに来る方です。",
+        "face": "smile",
+        "char": true,
+        "jump": "d560"
       }
     ]
   },
