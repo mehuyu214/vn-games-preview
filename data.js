@@ -5100,18 +5100,18 @@ const GAMES = [
       {
         "id": "b465",
         "name": "美咲",
-        "text": "最後の雨に。約束はしてないのに",
+        "text": "最後の雨に。",
         "face": "serious",
         "char": true,
-        "jump": "b206"
+        "jump": "b946"
       },
       {
         "id": "b466",
         "name": "美咲",
-        "text": "私の手紙です。昨夜、書きました",
+        "text": "私の手紙です。",
         "face": "serious",
         "char": true,
-        "jump": "b219"
+        "jump": "b947"
       },
       {
         "id": "b467",
@@ -5122,8 +5122,8 @@ const GAMES = [
       {
         "id": "b468",
         "name": "相沢",
-        "text": "新しい傘です、今日買いました。",
-        "jump": "b723"
+        "text": "新しい傘です、",
+        "jump": "b948"
       },
       {
         "id": "b469",
@@ -5175,8 +5175,8 @@ const GAMES = [
       {
         "id": "b476",
         "name": "美咲",
-        "text": "今は……ごめんね、先に行って。",
-        "jump": "b726"
+        "text": "今は……ごめんね、",
+        "jump": "b949"
       },
       {
         "id": "b477",
@@ -5237,10 +5237,10 @@ const GAMES = [
       {
         "id": "b486",
         "name": "美咲",
-        "text": "量がすごいよ。台帳、三冊もある",
+        "text": "量がすごいよ。",
         "face": "serious",
         "char": true,
-        "jump": "b111"
+        "jump": "b950"
       },
       {
         "id": "b487",
@@ -5283,8 +5283,8 @@ const GAMES = [
       {
         "id": "b493",
         "name": "悠太",
-        "text": "きっと大丈夫。俺も隣にいますし",
-        "jump": "b200"
+        "text": "きっと大丈夫。",
+        "jump": "b951"
       },
       {
         "id": "b494",
@@ -5603,8 +5603,8 @@ const GAMES = [
       {
         "id": "b542",
         "name": "店長",
-        "text": "本人の口から聞きな、それが筋さ",
-        "jump": "b63"
+        "text": "本人の口から聞きな",
+        "jump": "b952"
       },
       {
         "id": "b543",
@@ -5717,8 +5717,8 @@ const GAMES = [
       {
         "id": "b560",
         "name": "悠太",
-        "text": "　防水のケースみたいなものが。",
-        "jump": "b348"
+        "text": "　防水のケースみたいな",
+        "jump": "b953"
       },
       {
         "id": "b561",
@@ -8220,6 +8220,60 @@ const GAMES = [
         "text": "何の前触れもなく",
         "face": "cry",
         "jump": "b184"
+      },
+      {
+        "id": "b946",
+        "name": "美咲",
+        "text": "約束はしてないのに",
+        "face": "serious",
+        "char": true,
+        "jump": "b206"
+      },
+      {
+        "id": "b947",
+        "name": "美咲",
+        "text": "昨夜、書きました",
+        "face": "serious",
+        "char": true,
+        "jump": "b219"
+      },
+      {
+        "id": "b948",
+        "name": "相沢",
+        "text": "今日買いました。",
+        "jump": "b723"
+      },
+      {
+        "id": "b949",
+        "name": "美咲",
+        "text": "先に行って。",
+        "jump": "b726"
+      },
+      {
+        "id": "b950",
+        "name": "美咲",
+        "text": "台帳、三冊もある",
+        "face": "serious",
+        "char": true,
+        "jump": "b111"
+      },
+      {
+        "id": "b951",
+        "name": "悠太",
+        "text": "俺も隣にいますし",
+        "jump": "b200"
+      },
+      {
+        "id": "b952",
+        "name": "店長",
+        "text": "、それが筋さ",
+        "jump": "b63"
+      },
+      {
+        "id": "b953",
+        "name": "悠太",
+        "text": "ものが。",
+        "jump": "b348"
       }
     ]
   },
@@ -11151,18 +11205,18 @@ const GAMES = [
       {
         "id": "d149",
         "name": "優奈",
-        "text": "……わたしも、同じなんです。",
+        "text": "……わたしも、",
         "face": "sad",
         "char": true,
-        "jump": "d704"
+        "jump": "d1011"
       },
       {
         "id": "d149b",
         "name": "優奈",
-        "text": "言えない気持ちを、直すことで",
+        "text": "言えない気持ちを",
         "face": "sad",
         "char": true,
-        "jump": "d570"
+        "jump": "d1012"
       },
       {
         "id": "d150",
@@ -11316,15 +11370,16 @@ const GAMES = [
       {
         "id": "d167b",
         "name": "悠太",
-        "text": "（半世紀ぶりの、完成か……）"
+        "text": "（半世紀ぶりの、",
+        "jump": "d1013"
       },
       {
         "id": "d167c",
         "name": "優奈",
-        "text": "本は、直せば応えてくれます。",
+        "text": "本は、",
         "face": "smile",
         "char": true,
-        "jump": "d559"
+        "jump": "d1014"
       },
       {
         "id": "d168",
@@ -11351,8 +11406,8 @@ const GAMES = [
       {
         "id": "d171",
         "name": "悠太",
-        "text": "修理は、優奈さんの『待った』",
-        "jump": "d666"
+        "text": "修理は、優奈さんの",
+        "jump": "d1015"
       },
       {
         "id": "d172",
@@ -11365,8 +11420,8 @@ const GAMES = [
       {
         "id": "d173",
         "name": "悠太",
-        "text": "じゃあ最後に、俺からも一つ。",
-        "jump": "d607"
+        "text": "じゃあ最後に、",
+        "jump": "d1016"
       },
       {
         "id": "d174",
@@ -11444,8 +11499,8 @@ const GAMES = [
       {
         "id": "d182b",
         "name": "白鳥",
-        "text": "ええ。お茶と本の話になると、",
-        "jump": "d635"
+        "text": "ええ。",
+        "jump": "d1017"
       },
       {
         "id": "d183",
@@ -11551,10 +11606,10 @@ const GAMES = [
       {
         "id": "d194",
         "name": "優奈",
-        "text": "ですが、お渡しはできません。",
+        "text": "ですが、",
         "face": "serious",
         "char": true,
-        "jump": "d375"
+        "jump": "d1018"
       },
       {
         "id": "d195",
@@ -16947,6 +17002,62 @@ const GAMES = [
         "face": "surprise",
         "char": true,
         "jump": "d135c"
+      },
+      {
+        "id": "d1011",
+        "name": "優奈",
+        "text": "同じなんです。",
+        "face": "sad",
+        "char": true,
+        "jump": "d704"
+      },
+      {
+        "id": "d1012",
+        "name": "優奈",
+        "text": "、直すことで",
+        "face": "sad",
+        "char": true,
+        "jump": "d570"
+      },
+      {
+        "id": "d1013",
+        "name": "悠太",
+        "text": "完成か……）",
+        "jump": "d167c"
+      },
+      {
+        "id": "d1014",
+        "name": "優奈",
+        "text": "直せば応えてくれます。",
+        "face": "smile",
+        "char": true,
+        "jump": "d559"
+      },
+      {
+        "id": "d1015",
+        "name": "悠太",
+        "text": "『待った』",
+        "jump": "d666"
+      },
+      {
+        "id": "d1016",
+        "name": "悠太",
+        "text": "俺からも一つ。",
+        "jump": "d607"
+      },
+      {
+        "id": "d1017",
+        "name": "白鳥",
+        "text": "お茶と本の話になると、",
+        "jump": "d635"
+      },
+      {
+        "id": "d1018",
+        "name": "優奈",
+        "text": "お渡しはできません。",
+        "face": "serious",
+        "char": true,
+        "jump": "d375"
       }
     ]
   },
