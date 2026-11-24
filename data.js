@@ -3410,8 +3410,8 @@ const GAMES = [
       {
         "id": "b208",
         "name": "悠太",
-        "text": "礼は、傘を返せてから、ですよ。",
-        "jump": "b562"
+        "text": "礼は、傘を返せてから、",
+        "jump": "b930"
       },
       {
         "id": "b209",
@@ -3501,8 +3501,8 @@ const GAMES = [
         "id": "b220",
         "face": "shy",
         "name": "美咲",
-        "text": "五年間、言えなかったお礼です。",
-        "jump": "b610"
+        "text": "五年間、言えなかった",
+        "jump": "b931"
       },
       {
         "id": "b221",
@@ -3725,8 +3725,8 @@ const GAMES = [
       {
         "id": "b255",
         "name": "店長",
-        "text": "……まあ、なんとかなる、かな。",
-        "jump": "b644"
+        "text": "……まあ、",
+        "jump": "b932"
       },
       {
         "id": "b256",
@@ -3814,8 +3814,8 @@ const GAMES = [
         "id": "b268",
         "face": "love",
         "name": "美咲",
-        "text": "悠太くんじゃなきゃ、だめなの。",
-        "jump": "b503"
+        "text": "悠太くんじゃなきゃ、",
+        "jump": "b933"
       },
       {
         "id": "b269",
@@ -3859,8 +3859,8 @@ const GAMES = [
         "r18": true,
         "face": "pleasure",
         "name": "美咲",
-        "text": "あっ……だめ、声、出ちゃう……",
-        "jump": "b528"
+        "text": "あっ……だめ、",
+        "jump": "b934"
       },
       {
         "id": "b275",
@@ -3981,8 +3981,8 @@ const GAMES = [
         "id": "b292",
         "face": "smile",
         "name": "美咲",
-        "text": "うん。なんとかなったね、店長。",
-        "jump": "b507"
+        "text": "うん。",
+        "jump": "b935"
       },
       {
         "id": "b293",
@@ -4095,8 +4095,8 @@ const GAMES = [
       {
         "id": "b310",
         "name": "悠太",
-        "text": "雨の日は、必ず出勤してますね。",
-        "jump": "b568"
+        "text": "雨の日は、",
+        "jump": "b936"
       },
       {
         "id": "b311",
@@ -4129,8 +4129,8 @@ const GAMES = [
       {
         "id": "b315",
         "name": "藤井",
-        "text": "聞き返したら、目を閉じちゃった",
-        "jump": "b104"
+        "text": "聞き返したら、",
+        "jump": "b937"
       },
       {
         "id": "b316",
@@ -8111,6 +8111,59 @@ const GAMES = [
         "name": "店長",
         "text": "本当に。",
         "jump": "b559"
+      },
+      {
+        "id": "b930",
+        "name": "悠太",
+        "text": "ですよ。",
+        "jump": "b562"
+      },
+      {
+        "id": "b931",
+        "name": "美咲",
+        "text": "お礼です。",
+        "face": "shy",
+        "jump": "b610"
+      },
+      {
+        "id": "b932",
+        "name": "店長",
+        "text": "なんとかなる、かな。",
+        "jump": "b644"
+      },
+      {
+        "id": "b933",
+        "name": "美咲",
+        "text": "だめなの。",
+        "face": "love",
+        "jump": "b503"
+      },
+      {
+        "id": "b934",
+        "name": "美咲",
+        "text": "声、出ちゃう……",
+        "face": "pleasure",
+        "r18": true,
+        "jump": "b528"
+      },
+      {
+        "id": "b935",
+        "name": "美咲",
+        "text": "なんとかなったね、店長。",
+        "face": "smile",
+        "jump": "b507"
+      },
+      {
+        "id": "b936",
+        "name": "悠太",
+        "text": "必ず出勤してますね。",
+        "jump": "b568"
+      },
+      {
+        "id": "b937",
+        "name": "藤井",
+        "text": "目を閉じちゃった",
+        "jump": "b104"
       }
     ]
   },
@@ -10062,10 +10115,10 @@ const GAMES = [
       {
         "id": "d14",
         "name": "優奈",
-        "text": "……どうしました、悠太さん。",
+        "text": "……どうしました、",
         "face": "surprise",
         "char": true,
-        "jump": "d517"
+        "jump": "d997"
       },
       {
         "id": "d15",
@@ -10180,10 +10233,10 @@ const GAMES = [
       {
         "id": "d30",
         "name": "優奈",
-        "text": "……ありがとう、ございます。",
+        "text": "……ありがとう、",
         "face": "shy",
         "char": true,
-        "jump": "d346"
+        "jump": "d998"
       },
       {
         "id": "d31",
@@ -10202,10 +10255,10 @@ const GAMES = [
       {
         "id": "d33",
         "name": "優奈",
-        "text": "理由は……今は、言えません。",
+        "text": "理由は……今は、",
         "face": "sad",
         "char": true,
-        "jump": "d697"
+        "jump": "d999"
       },
       {
         "id": "d34",
@@ -10247,10 +10300,10 @@ const GAMES = [
       {
         "id": "d40",
         "name": "優奈",
-        "text": "悠太さん、まだいたんですか。",
+        "text": "悠太さん、",
         "face": "serious",
         "char": true,
-        "jump": "d578"
+        "jump": "d1000"
       },
       {
         "id": "d41",
@@ -10317,10 +10370,10 @@ const GAMES = [
       {
         "id": "d50",
         "name": "優奈",
-        "text": "この本は、誰にも渡せません。",
+        "text": "この本は、",
         "face": "serious",
         "char": true,
-        "jump": "d699"
+        "jump": "d1001"
       },
       {
         "id": "d51",
@@ -10345,10 +10398,10 @@ const GAMES = [
       {
         "id": "d54",
         "name": "優奈",
-        "text": "手紙は、届かなかったんです。",
+        "text": "手紙は、届かなかった",
         "face": "sad",
         "char": true,
-        "jump": "d623"
+        "jump": "d1002"
       },
       {
         "id": "d55",
@@ -16735,6 +16788,54 @@ const GAMES = [
         "name": "悠太",
         "text": "救うこともある）",
         "jump": "d99"
+      },
+      {
+        "id": "d997",
+        "name": "優奈",
+        "text": "悠太さん。",
+        "face": "surprise",
+        "char": true,
+        "jump": "d517"
+      },
+      {
+        "id": "d998",
+        "name": "優奈",
+        "text": "ございます。",
+        "face": "shy",
+        "char": true,
+        "jump": "d346"
+      },
+      {
+        "id": "d999",
+        "name": "優奈",
+        "text": "言えません。",
+        "face": "sad",
+        "char": true,
+        "jump": "d697"
+      },
+      {
+        "id": "d1000",
+        "name": "優奈",
+        "text": "まだいたんですか。",
+        "face": "serious",
+        "char": true,
+        "jump": "d578"
+      },
+      {
+        "id": "d1001",
+        "name": "優奈",
+        "text": "誰にも渡せません。",
+        "face": "serious",
+        "char": true,
+        "jump": "d699"
+      },
+      {
+        "id": "d1002",
+        "name": "優奈",
+        "text": "んです。",
+        "face": "sad",
+        "char": true,
+        "jump": "d623"
       }
     ]
   },
