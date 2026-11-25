@@ -13067,8 +13067,8 @@ const GAMES = [
       {
         "id": "d232",
         "name": "榊",
-        "text": "……祖母さん、よかったね。",
-        "jump": "d675"
+        "text": "……祖母さん、",
+        "jump": "d1087"
       },
       {
         "id": "d233",
@@ -13123,10 +13123,10 @@ const GAMES = [
       {
         "id": "d240b",
         "name": "優奈",
-        "text": "だから、わたしは言います。",
+        "text": "だから、わたし",
         "face": "serious",
         "char": true,
-        "jump": "d710"
+        "jump": "d1088"
       },
       {
         "id": "d241",
@@ -13222,7 +13222,8 @@ const GAMES = [
       {
         "id": "d253b",
         "name": "悠太",
-        "text": "うん。もっと近くに、行くよ"
+        "text": "うん。もっと",
+        "jump": "d1089"
       },
       {
         "id": "d253c",
@@ -13492,10 +13493,10 @@ const GAMES = [
       {
         "id": "d333",
         "name": "優奈",
-        "text": "……閉館ですよ、悠太さん。",
+        "text": "……閉館ですよ、",
         "face": "serious",
         "char": true,
-        "jump": "d590"
+        "jump": "d1090"
       },
       {
         "id": "d334",
@@ -13534,8 +13535,8 @@ const GAMES = [
       {
         "id": "d339",
         "name": "悠太",
-        "text": "張り切って来たんですけど、",
-        "jump": "d783"
+        "text": "張り切って来た",
+        "jump": "d1091"
       },
       {
         "id": "d340",
@@ -13616,10 +13617,10 @@ const GAMES = [
       {
         "id": "d351",
         "name": "優奈",
-        "text": "もう少しだけ、ここにいたい",
+        "text": "もう少しだけ、",
         "face": "shy",
         "char": true,
-        "jump": "d178"
+        "jump": "d1092"
       },
       {
         "id": "d352",
@@ -13678,8 +13679,8 @@ const GAMES = [
       {
         "id": "d360",
         "name": "白鳥",
-        "text": "明日は、長い一日になります",
-        "jump": "d188"
+        "text": "明日は、長い一",
+        "jump": "d1093"
       },
       {
         "id": "d361",
@@ -13744,10 +13745,10 @@ const GAMES = [
       {
         "id": "d370",
         "name": "優奈",
-        "text": "除籍の印も、廃棄の記録も、",
+        "text": "除籍の印も、",
         "face": "serious",
         "char": true,
-        "jump": "d646"
+        "jump": "d1094"
       },
       {
         "id": "d371",
@@ -18656,6 +18657,62 @@ const GAMES = [
         "name": "白鳥",
         "text": "とびきりです。",
         "jump": "d709"
+      },
+      {
+        "id": "d1087",
+        "name": "榊",
+        "text": "よかったね。",
+        "jump": "d675"
+      },
+      {
+        "id": "d1088",
+        "name": "優奈",
+        "text": "は言います。",
+        "face": "serious",
+        "char": true,
+        "jump": "d710"
+      },
+      {
+        "id": "d1089",
+        "name": "悠太",
+        "text": "近くに、行くよ",
+        "jump": "d253c"
+      },
+      {
+        "id": "d1090",
+        "name": "優奈",
+        "text": "悠太さん。",
+        "face": "serious",
+        "char": true,
+        "jump": "d590"
+      },
+      {
+        "id": "d1091",
+        "name": "悠太",
+        "text": "んですけど、",
+        "jump": "d783"
+      },
+      {
+        "id": "d1092",
+        "name": "優奈",
+        "text": "ここにいたい",
+        "face": "shy",
+        "char": true,
+        "jump": "d178"
+      },
+      {
+        "id": "d1093",
+        "name": "白鳥",
+        "text": "日になります",
+        "jump": "d188"
+      },
+      {
+        "id": "d1094",
+        "name": "優奈",
+        "text": "廃棄の記録も、",
+        "face": "serious",
+        "char": true,
+        "jump": "d646"
       }
     ]
   },
