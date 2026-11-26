@@ -1,12 +1,13 @@
 # スキップ（既読のみ）の回帰テスト
 # 注: a311 は 2026-11-18 の W2 分割で生まれた a05 の後半ノード（a05→a311→a06）。
-# 既読シードに a311 を含めないと a311 が未読として止まる（エンジンは正しい）。
+# a325 は 2026-11-26 の W2 分割で生まれた a04 の後半ノード（a04→a325→a05）。
+# 既読シードに後半ノードを含めないと未読として止まる（エンジンは正しい）。
 from playwright.sync_api import sync_playwright
 
 def run(p, seed):
     ctx = p.chromium.launch(args=["--no-sandbox"]).new_context(viewport={"width":1280,"height":720})
     if seed:
-        ctx.add_init_script("localStorage.setItem('vna_read_v1', JSON.stringify({sakura:['a01','a02','a03','a04','a05','a311']}))")
+        ctx.add_init_script("localStorage.setItem('vna_read_v1', JSON.stringify({sakura:['a01','a02','a03','a04','a325','a05','a311']}))")
     pg = ctx.new_page()
     errs = []
     pg.on("pageerror", lambda e: errs.append(str(e)))
