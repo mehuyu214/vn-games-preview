@@ -451,7 +451,8 @@ const GAMES = [
         "name": "さくら",
         "face": "smile",
         "char": true,
-        "text": "はーい。悠太、こっち来て。フィルムの巻き方、覚えてる？"
+        "text": "はーい。悠太、こっち来て。",
+        "jump": "a365"
       },
       {
         "id": "a72",
@@ -1203,7 +1204,8 @@ const GAMES = [
         "name": "さくら",
         "face": "serious",
         "char": true,
-        "text": "悠太。……そろそろ、話すね。駅の日のこと。ほんとのこと"
+        "text": "悠太。……そろそろ、話すね。",
+        "jump": "a366"
       },
       {
         "id": "a189",
@@ -1449,7 +1451,8 @@ const GAMES = [
       {
         "id": "a223",
         "name": "藤堂",
-        "text": "個展の件、会場には私から。全て元通りに。謝罪も、正式に"
+        "text": "個展の件、会場には私から。",
+        "jump": "a367"
       },
       {
         "id": "a224",
@@ -1582,7 +1585,8 @@ const GAMES = [
         "name": "さくら",
         "face": "smile",
         "char": true,
-        "text": "みんなのおかげ。……ねえ悠太。夜、時間ある？　大事な話"
+        "text": "みんなのおかげ。……ねえ悠太。",
+        "jump": "a368"
       },
       {
         "id": "a244",
@@ -2410,6 +2414,36 @@ const GAMES = [
         "face": "smile",
         "char": true,
         "jump": "a299"
+      },
+      {
+        "id": "a365",
+        "name": "さくら",
+        "text": "フィルムの巻き方、覚えてる？",
+        "face": "smile",
+        "char": true,
+        "jump": "a72"
+      },
+      {
+        "id": "a366",
+        "name": "さくら",
+        "text": "駅の日のこと。ほんとのこと",
+        "face": "serious",
+        "char": true,
+        "jump": "a189"
+      },
+      {
+        "id": "a367",
+        "name": "藤堂",
+        "text": "全て元通りに。謝罪も、正式に",
+        "jump": "a224"
+      },
+      {
+        "id": "a368",
+        "name": "さくら",
+        "text": "夜、時間ある？　大事な話",
+        "face": "smile",
+        "char": true,
+        "jump": "a244"
       }
     ]
   },
