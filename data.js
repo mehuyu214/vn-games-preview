@@ -238,7 +238,8 @@ const GAMES = [
         "name": "さくら",
         "face": "serious",
         "char": true,
-        "text": "……ありません。未現像の古いロールは、ありません"
+        "text": "……ありません。",
+        "jump": "a376"
       },
       {
         "id": "a38",
@@ -497,7 +498,8 @@ const GAMES = [
       {
         "id": "a79",
         "name": "店主",
-        "text": "……昔話はこのへんにして。一杯どうだ、冷えてるぞ"
+        "text": "……昔話はこのへんにして。",
+        "jump": "a377"
       },
       {
         "id": "a80",
@@ -887,7 +889,8 @@ const GAMES = [
         "name": "さくら",
         "face": "confused",
         "char": true,
-        "text": "こ、これは、その……。……見ちゃったんだ。そっか"
+        "text": "こ、これは、その……。",
+        "jump": "a378"
       },
       {
         "id": "a139",
@@ -1667,7 +1670,8 @@ const GAMES = [
         "name": "さくら",
         "face": "love",
         "char": true,
-        "text": "うん。悠太となら、大丈夫。ねえ、もっと近くに来て"
+        "text": "うん。悠太となら、大丈夫。",
+        "jump": "a379"
       },
       {
         "id": "a256",
@@ -2498,6 +2502,36 @@ const GAMES = [
         "face": "serious",
         "char": true,
         "jump": "a247"
+      },
+      {
+        "id": "a376",
+        "name": "さくら",
+        "text": "未現像の古いロールは、ありません",
+        "face": "serious",
+        "char": true,
+        "jump": "a38"
+      },
+      {
+        "id": "a377",
+        "name": "店主",
+        "text": "一杯どうだ、冷えてるぞ",
+        "jump": "a80"
+      },
+      {
+        "id": "a378",
+        "name": "さくら",
+        "text": "……見ちゃったんだ。そっか",
+        "face": "confused",
+        "char": true,
+        "jump": "a139"
+      },
+      {
+        "id": "a379",
+        "name": "さくら",
+        "text": "ねえ、もっと近くに来て",
+        "face": "love",
+        "char": true,
+        "jump": "a256"
       }
     ]
   },
@@ -21580,7 +21614,8 @@ const GAMES = [
       {
         "id": "e10",
         "name": "悠太",
-        "text": "セレナさんですね。今日からよろしくお願いします。"
+        "text": "セレナさんですね。",
+        "jump": "e288"
       },
       {
         "id": "e11",
@@ -22193,9 +22228,10 @@ const GAMES = [
       {
         "id": "e111",
         "name": "セレナ",
-        "text": "わたくしの婚約者のふりを、していただけませんか。",
+        "text": "わたくしの婚約者のふりを、",
         "face": "shy",
-        "char": true
+        "char": true,
+        "jump": "e289"
       },
       {
         "id": "e112",
@@ -23296,6 +23332,20 @@ const GAMES = [
         "face": "confused",
         "char": true,
         "jump": "e15"
+      },
+      {
+        "id": "e288",
+        "name": "悠太",
+        "text": "今日からよろしくお願いします。",
+        "jump": "e11"
+      },
+      {
+        "id": "e289",
+        "name": "セレナ",
+        "text": "していただけませんか。",
+        "face": "shy",
+        "char": true,
+        "jump": "e112"
       }
     ]
   }
