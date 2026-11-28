@@ -12939,10 +12939,10 @@ const GAMES = [
       {
         "id": "c426",
         "name": "凛",
-        "text": "誤差ゼロで言われたわ、悠太に、完璧な精度で。",
+        "text": "誤差ゼロで言われたわ",
         "face": "surprise",
         "char": true,
-        "jump": "c237"
+        "jump": "c571"
       },
       {
         "id": "c427",
@@ -13044,10 +13044,10 @@ const GAMES = [
       {
         "id": "c441",
         "name": "凛",
-        "text": "私の12分、正確だったでしょう、悠太、ふふ。",
+        "text": "私の12分、正確だった",
         "face": "sleepy",
         "char": true,
-        "jump": "c48"
+        "jump": "c572"
       },
       {
         "id": "c442",
@@ -13126,10 +13126,10 @@ const GAMES = [
       {
         "id": "c453",
         "name": "凛",
-        "text": "……あなた、怖い子ね、悠太、本当に、時々ね。",
+        "text": "……あなた、怖い子ね",
         "face": "surprise",
         "char": true,
-        "jump": "c148"
+        "jump": "c573"
       },
       {
         "id": "c454",
@@ -13154,8 +13154,8 @@ const GAMES = [
       {
         "id": "c457",
         "name": "高峰",
-        "text": "データは逃げないからね、いつだって、昔から。",
-        "jump": "c158"
+        "text": "データは逃げないからね",
+        "jump": "c574"
       },
       {
         "id": "c458",
@@ -13226,8 +13226,8 @@ const GAMES = [
       {
         "id": "c468",
         "name": "悠太",
-        "text": "何でも言ってください、凛さん、全部聞きます。",
-        "jump": "c234"
+        "text": "何でも言ってください",
+        "jump": "c575"
       },
       {
         "id": "c469",
@@ -13919,6 +13919,42 @@ const GAMES = [
         "face": "surprise",
         "char": true,
         "jump": "c192"
+      },
+      {
+        "id": "c571",
+        "name": "凛",
+        "text": "、悠太に、完璧な精度で。",
+        "face": "surprise",
+        "char": true,
+        "jump": "c237"
+      },
+      {
+        "id": "c572",
+        "name": "凛",
+        "text": "でしょう、悠太、ふふ。",
+        "face": "sleepy",
+        "char": true,
+        "jump": "c48"
+      },
+      {
+        "id": "c573",
+        "name": "凛",
+        "text": "、悠太、本当に、時々ね。",
+        "face": "surprise",
+        "char": true,
+        "jump": "c148"
+      },
+      {
+        "id": "c574",
+        "name": "高峰",
+        "text": "、いつだって、昔から。",
+        "jump": "c158"
+      },
+      {
+        "id": "c575",
+        "name": "悠太",
+        "text": "、凛さん、全部聞きます。",
+        "jump": "c234"
       }
     ]
   },
