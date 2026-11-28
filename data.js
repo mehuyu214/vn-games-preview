@@ -12432,18 +12432,18 @@ const GAMES = [
       {
         "id": "c354",
         "name": "凛",
-        "text": "巻き込まれるわよ、本当にいいの、後悔しない。",
+        "text": "巻き込まれるわよ、",
         "face": "surprise",
         "char": true,
-        "jump": "c52"
+        "jump": "c563"
       },
       {
         "id": "c355",
         "name": "凛",
-        "text": "発表資料は順調に進んでいますから、ご安心を。",
+        "text": "発表資料は順調に進んで",
         "face": "smile",
         "char": true,
-        "jump": "c65"
+        "jump": "c564"
       },
       {
         "id": "c356",
@@ -12454,8 +12454,8 @@ const GAMES = [
       {
         "id": "c357",
         "name": "真壁",
-        "text": "発表資料は順調そうだね、凛さん、見たところ。",
-        "jump": "c83"
+        "text": "発表資料は順調そうだ",
+        "jump": "c565"
       },
       {
         "id": "c358",
@@ -12474,8 +12474,8 @@ const GAMES = [
       {
         "id": "c360",
         "name": "真壁",
-        "text": "……じゃあ、本番で会おう、凛さん、助手くん。",
-        "jump": "c88"
+        "text": "……じゃあ、本番で会おう",
+        "jump": "c566"
       },
       {
         "id": "c361",
@@ -12486,10 +12486,10 @@ const GAMES = [
       {
         "id": "c362",
         "name": "凛",
-        "text": "誤差は許さないわよ、悠太、頼むわね、本気で。",
+        "text": "誤差は許さないわよ、悠太",
         "face": "serious",
         "char": true,
-        "jump": "c106"
+        "jump": "c567"
       },
       {
         "id": "c363",
@@ -12544,10 +12544,10 @@ const GAMES = [
       {
         "id": "c370",
         "name": "凛",
-        "text": "巻き込むわけにはいかないの、悠太、悪いけど。",
+        "text": "巻き込むわけにはいかない",
         "face": "serious",
         "char": true,
-        "jump": "c152"
+        "jump": "c568"
       },
       {
         "id": "c371",
@@ -12564,10 +12564,10 @@ const GAMES = [
       {
         "id": "c373",
         "name": "凛",
-        "text": "今日の最終は、これよ、悠太、分かるでしょう。",
+        "text": "今日の最終は、これよ",
         "face": "serious",
         "char": true,
-        "jump": "c169"
+        "jump": "c569"
       },
       {
         "id": "c374",
@@ -12590,10 +12590,10 @@ const GAMES = [
       {
         "id": "c377",
         "name": "凛",
-        "text": "最初から知っていたんですか、全部を、ずっと。",
+        "text": "最初から知っていたんですか",
         "face": "surprise",
         "char": true,
-        "jump": "c192"
+        "jump": "c570"
       },
       {
         "id": "c378",
@@ -13859,6 +13859,66 @@ const GAMES = [
         "name": "悠太",
         "text": "ください、今夜のこと。",
         "jump": "c49"
+      },
+      {
+        "id": "c563",
+        "name": "凛",
+        "text": "本当にいいの、後悔しない。",
+        "face": "surprise",
+        "char": true,
+        "jump": "c52"
+      },
+      {
+        "id": "c564",
+        "name": "凛",
+        "text": "いますから、ご安心を。",
+        "face": "smile",
+        "char": true,
+        "jump": "c65"
+      },
+      {
+        "id": "c565",
+        "name": "真壁",
+        "text": "ね、凛さん、見たところ。",
+        "jump": "c83"
+      },
+      {
+        "id": "c566",
+        "name": "真壁",
+        "text": "、凛さん、助手くん。",
+        "jump": "c88"
+      },
+      {
+        "id": "c567",
+        "name": "凛",
+        "text": "、頼むわね、本気で。",
+        "face": "serious",
+        "char": true,
+        "jump": "c106"
+      },
+      {
+        "id": "c568",
+        "name": "凛",
+        "text": "の、悠太、悪いけど。",
+        "face": "serious",
+        "char": true,
+        "jump": "c152"
+      },
+      {
+        "id": "c569",
+        "name": "凛",
+        "text": "、悠太、分かるでしょう。",
+        "face": "serious",
+        "char": true,
+        "jump": "c169"
+      },
+      {
+        "id": "c570",
+        "name": "凛",
+        "text": "、全部を、ずっと。",
+        "face": "surprise",
+        "char": true,
+        "jump": "c192"
       }
     ]
   },
