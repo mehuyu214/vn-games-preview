@@ -22230,7 +22230,8 @@ const GAMES = [
       {
         "id": "e27",
         "name": "ベルタ",
-        "text": "お茶をお持ちしました。判定、良い香りです。"
+        "text": "お茶をお持ちしました。",
+        "jump": "e320"
       },
       {
         "id": "e28",
@@ -22278,9 +22279,10 @@ const GAMES = [
       {
         "id": "e35",
         "name": "セレナ",
-        "text": "あら、先生。いらしてたの？　驚きましたわ。",
+        "text": "あら、先生。いらしてた",
         "face": "surprise",
-        "char": true
+        "char": true,
+        "jump": "e321"
       },
       {
         "id": "e36",
@@ -22291,9 +22293,10 @@ const GAMES = [
       {
         "id": "e37",
         "name": "セレナ",
-        "text": "まぐれですわ。音読だけ、昔から得意でして。",
+        "text": "まぐれですわ。",
         "face": "shy",
-        "char": true
+        "char": true,
+        "jump": "e322"
       },
       {
         "id": "e38",
@@ -22336,9 +22339,10 @@ const GAMES = [
       {
         "id": "e44",
         "name": "セレナ",
-        "text": "では、秘密にしてくださいな。お願いですわ。",
+        "text": "では、秘密にしてくださいな。",
         "face": "wink",
-        "char": true
+        "char": true,
+        "jump": "e323"
       },
       {
         "id": "e45",
@@ -22384,9 +22388,10 @@ const GAMES = [
       {
         "id": "e51",
         "name": "セレナ",
-        "text": "なぜ、と聞きますのね。まっすぐな方ですわ。",
+        "text": "なぜ、と聞きますのね。",
         "face": "surprise",
-        "char": true
+        "char": true,
+        "jump": "e324"
       },
       {
         "id": "e52",
@@ -22397,9 +22402,10 @@ const GAMES = [
       {
         "id": "e53",
         "name": "セレナ",
-        "text": "……良い先生ですわね、本当に。困りますわ。",
+        "text": "……良い先生ですわね、",
         "face": "smile",
-        "char": true
+        "char": true,
+        "jump": "e325"
       },
       {
         "id": "e54",
@@ -22422,9 +22428,9 @@ const GAMES = [
       },
       {
         "id": "e57",
-        "jump": "e64",
+        "jump": "e326",
         "name": "悠太",
-        "text": "（俺の手で？　どういう意味なんだ、それは）"
+        "text": "（俺の手で？　"
       },
       {
         "id": "e58",
@@ -22434,9 +22440,10 @@ const GAMES = [
       {
         "id": "e59",
         "name": "セレナ",
-        "text": "あら、優しい嘘ですわね。ありがとう、先生。",
+        "text": "あら、優しい嘘ですわね。",
         "face": "smile",
-        "char": true
+        "char": true,
+        "jump": "e327"
       },
       {
         "id": "e60",
@@ -24068,6 +24075,66 @@ const GAMES = [
         "name": "悠太",
         "text": "今、確かに笑った）",
         "jump": "e27"
+      },
+      {
+        "id": "e320",
+        "name": "ベルタ",
+        "text": "判定、良い香りです。",
+        "jump": "e28"
+      },
+      {
+        "id": "e321",
+        "name": "セレナ",
+        "text": "の？　驚きましたわ。",
+        "face": "surprise",
+        "char": true,
+        "jump": "e36"
+      },
+      {
+        "id": "e322",
+        "name": "セレナ",
+        "text": "音読だけ、昔から得意でして。",
+        "face": "shy",
+        "char": true,
+        "jump": "e38"
+      },
+      {
+        "id": "e323",
+        "name": "セレナ",
+        "text": "お願いですわ。",
+        "face": "wink",
+        "char": true,
+        "jump": "e45"
+      },
+      {
+        "id": "e324",
+        "name": "セレナ",
+        "text": "まっすぐな方ですわ。",
+        "face": "surprise",
+        "char": true,
+        "jump": "e52"
+      },
+      {
+        "id": "e325",
+        "name": "セレナ",
+        "text": "本当に。困りますわ。",
+        "face": "smile",
+        "char": true,
+        "jump": "e54"
+      },
+      {
+        "id": "e326",
+        "name": "悠太",
+        "text": "どういう意味なんだ、それは）",
+        "jump": "e64"
+      },
+      {
+        "id": "e327",
+        "name": "セレナ",
+        "text": "ありがとう、先生。",
+        "face": "smile",
+        "char": true,
+        "jump": "e60"
       }
     ]
   }
